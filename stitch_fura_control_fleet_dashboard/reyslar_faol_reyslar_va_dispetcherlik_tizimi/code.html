@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+
+<html class="dark h-full" lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FURA CONTROL - Logistika boshqaruv tizimi</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary": "#380094",
+            "on-tertiary-fixed": "#21005e",
+            "surface-bright": "#2e3a4d",
+            "on-primary": "#003060",
+            "error-container": "#93000a",
+            "on-surface-variant": "#c0c7d6",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#d5e3ff",
+            "background": "#071426",
+            "inverse-primary": "#005eb1",
+            "secondary-fixed": "#60fea5",
+            "primary-fixed-dim": "#a6c8ff",
+            "surface-container": "#142032",
+            "surface-tint": "#a6c8ff",
+            "on-secondary-fixed-variant": "#00522d",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#030e20",
+            "surface-container-low": "#0f1c2e",
+            "surface-container-highest": "#293549",
+            "inverse-on-surface": "#253144",
+            "on-background": "#d7e3fc",
+            "secondary": "#40e48d",
+            "secondary-fixed-dim": "#3be18b",
+            "tertiary-fixed": "#e8ddff",
+            "on-primary-fixed-variant": "#004787",
+            "primary-container": "#2d91ff",
+            "on-tertiary-container": "#300083",
+            "tertiary-fixed-dim": "#cebdff",
+            "tertiary-container": "#9b7aff",
+            "on-secondary": "#00391d",
+            "outline-variant": "#404753",
+            "on-secondary-container": "#004c29",
+            "surface-variant": "#293549",
+            "primary": "#a6c8ff",
+            "on-primary-container": "#002a54",
+            "inverse-surface": "#d7e3fc",
+            "surface-dim": "#071426",
+            "on-tertiary-fixed-variant": "#5114c5",
+            "on-secondary-fixed": "#00210f",
+            "on-error": "#690005",
+            "outline": "#8a919f",
+            "on-surface": "#d7e3fc",
+            "tertiary": "#cebdff",
+            "surface-container-high": "#1e2a3d",
+            "surface": "#071426",
+            "secondary-container": "#00c774",
+            "on-primary-fixed": "#001c3b"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem"
+          },
+          fontFamily: {
+            "table-header": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "kpi-stat": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "table-header": ["11px", { "lineHeight": "16px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "kpi-stat": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "800" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }]
+          }
+        }
+      }
+    };
+  </script>
+<style data-purpose="custom-styling">
+    @layer base {
+      html {
+        color-scheme: dark;
+      }
+      body {
+        overscroll-behavior: none;
+        min-height: 100vh;
+        background-color: #071426;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f1c2e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #293549;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2d91ff;
+    }
+    .truck-sidebar-bg {
+      background: linear-gradient(180deg, rgba(15,28,46,0) 0%, rgba(15,28,46,0.92) 75%, #0f1c2e 100%),
+                  url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=600&q=80') center bottom/cover no-repeat;
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-surface antialiased">
+<!-- BEGIN: LeftSidebar -->
+<aside class="fixed top-0 bottom-0 left-0 w-64 z-30 bg-surface-container-low border-r border-outline-variant/30 flex flex-col justify-between overflow-hidden shadow-2xl" data-purpose="sidebar">
+<div class="p-space-md flex flex-col h-full overflow-y-auto">
+<!-- Logo -->
+<div class="flex items-center gap-space-sm px-space-xs py-space-sm mb-space-md">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-inverse-primary to-primary-container flex items-center justify-center shadow-lg shadow-primary-container/25 flex-shrink-0">
+<span class="material-symbols-outlined text-white text-2xl">local_shipping</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-white leading-none tracking-tight">FURA CONTROL</h1>
+<p class="font-label-sm text-on-surface-variant/80 mt-1 uppercase tracking-wider">Logistika tizimi</p>
+</div>
+</div>
+<!-- Main Navigation Menu -->
+<nav class="space-y-1.5 mt-space-xs" data-active-classes="bg-primary-container text-white font-semibold shadow-md shadow-primary-container/30" id="sidebar-nav">
+<!-- 1. Bosh sahifa -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="bosh-sahifa" href="#">
+          Bosh sahifa
+        </a>
+<!-- 2. Furalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="furalar" href="#">
+          Furalar
+        </a>
+<!-- 3. Yuklar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="yuklar" href="#">
+          Yuklar
+        </a>
+<!-- 4. Haydovchilar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="haydovchilar" href="#">
+          Haydovchilar
+        </a>
+<!-- 5. Reyslar -->
+<a aria-current="page" class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg transition-colors bg-primary-container text-white font-semibold shadow-md shadow-primary-container/30" data-path="reyslar" href="#">
+          Reyslar
+        </a>
+<!-- 6. Kalendar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="kalendar" href="#">
+          Kalendar
+        </a>
+<!-- 7. Arxiv -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="arxiv" href="#">
+          Arxiv
+        </a>
+<!-- 8. Hisobotlar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="hisobotlar" href="#">
+          Hisobotlar
+        </a>
+<!-- 9. Sozlamalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="sozlamalar" href="#">
+          Sozlamalar
+        </a>
+</nav>
+</div>
+<!-- Sidebar Bottom Graphic Card -->
+<div class="h-40 w-full truck-sidebar-bg flex flex-col justify-end p-space-md border-t border-outline-variant/20">
+<div class="p-space-sm rounded-lg bg-surface-container/90 backdrop-blur-sm border border-outline-variant/30 text-on-surface-variant">
+<p class="font-label-md text-white flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+          Avtopark nazorati
+        </p>
+<p class="font-label-sm text-on-surface-variant/80 mt-0.5">GPS &amp; Telematika faol</p>
+</div>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: TopHeader -->
+<header class="fixed top-0 right-0 left-64 z-20 h-16 bg-surface-container-low/90 backdrop-blur-md border-b border-outline-variant/30 px-space-lg flex items-center justify-between gap-space-md" data-purpose="top-navigation">
+<!-- Global Search Input with Shortcut -->
+<div class="relative w-96 max-w-lg">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant font-body-sm rounded-lg pl-9 pr-16 py-2 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="global-search" placeholder="Qidirish: fura, yuk, haydovchi, reys..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<span class="font-label-sm bg-surface-container text-on-surface-variant px-1.5 py-0.5 rounded border border-outline-variant/40">Ctrl + K</span>
+</div>
+</div>
+<!-- Header Controls -->
+<div class="flex items-center gap-space-md">
+<!-- Notifications Bell -->
+<button class="relative p-2 text-on-surface-variant hover:text-white bg-surface-container rounded-lg border border-outline-variant/30 hover:bg-surface-container-high transition-colors" title="Bildirishnomalar">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute -top-1 -right-1 bg-error-container text-white font-label-sm w-4 h-4 rounded-full flex items-center justify-center border-2 border-surface-container-low">3</span>
+</button>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-2.5 bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-white font-label-sm">
+          J
+        </div>
+<div class="text-left leading-tight">
+<div class="font-label-md text-white">Jasurbek</div>
+<div class="font-label-sm text-on-surface-variant/80">Bosh dispetcher</div>
+</div>
+<span class="material-symbols-outlined text-base text-on-surface-variant ml-0.5">expand_more</span>
+</div>
+<!-- Current System Date Pill -->
+<div class="hidden md:flex items-center gap-2 bg-surface-container border border-outline-variant/30 text-on-surface px-3 py-1.5 rounded-lg font-label-sm">
+<span class="material-symbols-outlined text-primary-container text-base">calendar_today</span>
+<span>16-noyabr, 2026 (Dushanba)</span>
+</div>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainContentWrapper -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="p-space-lg">
+<div class="flex flex-col w-full space-y-space-lg">
+<!-- TOP HEADER & CONTROLS -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs text-primary font-label-sm uppercase tracking-wider mb-1">
+<span class="inline-block w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+        Dispetcherlik nazorat punkti • Jonli telemetriya
+      </div>
+<h1 class="font-headline-lg text-on-surface tracking-tight">Reyslar boshqaruvi</h1>
+<p class="font-body-md text-on-surface-variant">Faol marshrutlar, dispetcherlik nazorati va reyslar jadvali</p>
+</div>
+<!-- Top Action Buttons -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md flex items-center gap-2 shadow-sm transition-all duration-200">
+<span class="material-symbols-outlined text-primary text-lg">download</span>
+        Reys hisobotini yuklash
+      </button>
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md flex items-center gap-2 shadow-sm transition-all duration-200">
+<span class="material-symbols-outlined text-secondary text-lg">map</span>
+        Marshrut xaritasi
+      </button>
+<button class="px-space-md py-2.5 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md flex items-center gap-2 shadow-lg shadow-primary-container/25 transition-all duration-200 transform hover:-translate-y-0.5" onclick="document.getElementById('new-trip-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+        + Yangi reys ochish
+      </button>
+</div>
+</div>
+<!-- KPI SUMMARY ROW -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- KPI 1: Faol reyslar -->
+<div class="relative bg-surface-container rounded-xl p-space-md overflow-hidden shadow-md group hover:bg-surface-container-high transition-colors duration-200">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Faol reyslar</p>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-stat text-on-surface">12</span>
+<span class="font-label-sm text-on-surface-variant">ta fura safarda</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-2xl">local_shipping</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between font-label-sm">
+<span class="text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +3 ta bu hafta
+        </span>
+<span class="text-on-surface-variant">Umumiy flot: 86% band</span>
+</div>
+<!-- Ambient Graphic Watermark -->
+<span class="material-symbols-outlined absolute -right-3 -bottom-4 text-7xl text-surface-container-highest/20 pointer-events-none select-none">rv_hookup</span>
+</div>
+<!-- KPI 2: O'z vaqtida -->
+<div class="relative bg-surface-container rounded-xl p-space-md overflow-hidden shadow-md group hover:bg-surface-container-high transition-colors duration-200">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider">O'z vaqtida harakatda</p>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-stat text-secondary">10</span>
+<span class="font-label-sm text-on-surface-variant">ta reys (83.3%)</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary shadow-inner">
+<span class="material-symbols-outlined text-2xl">verified</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between font-label-sm">
+<span class="text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span> Grafikka mos
+        </span>
+<span class="text-on-surface-variant">Kutilgan yetkazish: OK</span>
+</div>
+<span class="material-symbols-outlined absolute -right-3 -bottom-4 text-7xl text-surface-container-highest/20 pointer-events-none select-none">timer</span>
+</div>
+<!-- KPI 3: Kechikish ehtimoli -->
+<div class="relative bg-surface-container rounded-xl p-space-md overflow-hidden shadow-md group hover:bg-surface-container-high transition-colors duration-200">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Kechikish ehtimoli</p>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-stat text-error">2</span>
+<span class="font-label-sm text-on-surface-variant">ta marshrut</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-error shadow-inner">
+<span class="material-symbols-outlined text-2xl">warning</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between font-label-sm">
+<span class="text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> Chegara navbati sabab
+        </span>
+<span class="text-on-surface-variant">RS-104 • RS-109</span>
+</div>
+<span class="material-symbols-outlined absolute -right-3 -bottom-4 text-7xl text-surface-container-highest/20 pointer-events-none select-none">fmd_bad</span>
+</div>
+<!-- KPI 4: Oylik yakunlangan -->
+<div class="relative bg-surface-container rounded-xl p-space-md overflow-hidden shadow-md group hover:bg-surface-container-high transition-colors duration-200">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Oylik yakunlangan</p>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-stat text-tertiary">46</span>
+<span class="font-label-sm text-on-surface-variant">ta to'liq yetkazildi</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary shadow-inner">
+<span class="material-symbols-outlined text-2xl">task_alt</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between font-label-sm">
+<span class="text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> +18% o'tgan oyga nisbatan
+        </span>
+<span class="text-on-surface-variant">972,400 km</span>
+</div>
+<span class="material-symbols-outlined absolute -right-3 -bottom-4 text-7xl text-surface-container-highest/20 pointer-events-none select-none">flag</span>
+</div>
+</div>
+<!-- DISPATCHER ANNOUNCEMENT & BORDER ALERT CALLOUT -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col md:flex-row md:items-center justify-between gap-space-md relative overflow-hidden">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-error-container/30 text-error flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-2xl animate-pulse">crisis_alert</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-on-surface">Chegara nazorat punkti ogohlantirishi:</span>
+<span class="px-2 py-0.5 rounded text-table-header bg-error/20 text-error uppercase font-semibold">Tirbandlik</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-0.5">
+          Qozog'iston — Rossiya (Mashtakovo • Sagarchin) bojxona o'tish punktlarida o'rtacha navbat: 
+          <strong class="text-on-surface">~4.5 soat</strong>. Tizim Novosibirsk va Moskva yo'nalishidagi haydovchilarga muqobil tavsiya yo'llarini yubordi.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0 self-start md:self-auto">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">alt_route</span>
+        Aylanma yo'lni ko'rish
+      </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-white font-label-sm transition-colors">
+        Yopish
+      </button>
+</div>
+</div>
+<!-- FILTER & SEARCH BAR + STATUS TABS -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+<!-- Top Row: Search and Quick Filters -->
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1 max-w-2xl">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant font-body-sm rounded-lg pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" id="trip-search" placeholder="Reys raqami (#RS-...), shahar, fura raqami yoki haydovchi ismi..." type="text"/>
+</div>
+<!-- Dropdown Filter Controls -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="relative">
+<select class="bg-surface-container-lowest text-on-surface font-label-sm rounded-lg px-3 py-2 pr-8 focus:outline-none focus:ring-1 focus:ring-primary-container cursor-pointer appearance-none">
+<option>Barcha transport turlari</option>
+<option>Tentli yarim tirkama (92m³)</option>
+<option>Refrijerator (-20°C / +12°C)</option>
+<option>Izotermik konteyner</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-base">unfold_more</span>
+</div>
+<div class="relative">
+<select class="bg-surface-container-lowest text-on-surface font-label-sm rounded-lg px-3 py-2 pr-8 focus:outline-none focus:ring-1 focus:ring-primary-container cursor-pointer appearance-none">
+<option>Barcha yo'nalishlar</option>
+<option>Rossiya federatsiyasi (RF)</option>
+<option>Qozog'iston (KZ)</option>
+<option>Belarus (BY)</option>
+<option>Turkiya &amp; Kavkaz</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-base">unfold_more</span>
+</div>
+<button class="p-2 bg-surface-container-lowest hover:bg-surface-container-high text-on-surface-variant hover:text-white rounded-lg transition-colors" title="Batafsil parametrlar">
+<span class="material-symbols-outlined text-lg">tune</span>
+</button>
+</div>
+</div>
+<!-- Status Tabs Segmented Nav -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+<button class="px-4 py-2 rounded-lg bg-primary-container text-white font-label-md whitespace-nowrap shadow-sm flex items-center gap-2">
+<span>Barcha reyslar</span>
+<span class="px-1.5 py-0.5 rounded-full bg-white/20 text-table-header font-bold">58</span>
+</button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md whitespace-nowrap transition-colors flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span>Yo'lda (Faol)</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-table-header font-bold text-primary">12</span>
+</button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md whitespace-nowrap transition-colors flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span>Yuklanmoqda</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-table-header font-bold text-tertiary">3</span>
+</button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md whitespace-nowrap transition-colors flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>Bojxona / Chegara</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-table-header font-bold text-error">2</span>
+</button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md whitespace-nowrap transition-colors flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span>Yakunlangan</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-table-header font-bold text-secondary">41</span>
+</button>
+</div>
+</div>
+<!-- REYSLAR MAIN DISPATCH LIST (CARDS) -->
+<div class="space-y-space-md" id="trips-container">
+<!-- TRIP CARD 1: Kechikmoqda (Border issue) -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all duration-200 relative overflow-hidden">
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<!-- Column 1: Trip ID, Route & Truck Details -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md flex-1">
+<div class="w-14 h-14 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center text-primary flex-shrink-0 shadow-inner">
+<span class="font-table-header uppercase text-on-surface-variant">REYS</span>
+<span class="font-headline-sm font-bold text-primary-container leading-none mt-0.5">104</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-on-surface font-bold">#RS-2026-104</span>
+<span class="px-2.5 py-1 rounded-md text-table-header bg-error/15 text-error flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+                Kechikmoqda (Chegara)
+              </span>
+<span class="px-2 py-0.5 rounded text-label-sm bg-surface-container-lowest text-on-surface-variant font-medium">
+                CMR #998241
+              </span>
+</div>
+<!-- Route Origin to Dest -->
+<div class="flex items-center gap-2 text-on-surface font-label-lg mt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm">trip_origin</span>
+                Toshkent (O'zbekiston)
+              </span>
+<span class="material-symbols-outlined text-on-surface-variant text-base">trending_flat</span>
+<span class="flex items-center gap-1 font-bold text-white">
+<span class="material-symbols-outlined text-primary-container text-sm">location_on</span>
+                Moskva (Rossiya)
+              </span>
+<span class="text-on-surface-variant text-body-sm font-normal ml-2">3,380 km</span>
+</div>
+<!-- Truck Plate and Driver -->
+<div class="flex items-center gap-space-md text-body-sm text-on-surface-variant flex-wrap pt-0.5">
+<span class="flex items-center gap-1.5 text-on-surface font-medium">
+<span class="material-symbols-outlined text-base text-primary">local_shipping</span>
+                01 A 123 UA / 01 445 AA (TENT 92m³)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-secondary">person</span>
+                Rashidov D. (+998 90 123-45-67)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-tertiary">inventory_2</span>
+                21.4 t • To'qimachilik mahsulotlari
+              </span>
+</div>
+</div>
+</div>
+<!-- Column 2: Progress & Border Status -->
+<div class="xl:w-80 flex flex-col justify-center space-y-2 bg-surface-container-lowest/60 p-space-sm rounded-lg">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">near_me</span>
+              GPS: Samara o'tish nuqtasi
+            </span>
+<span class="font-bold text-primary-container">65% (2,197 km)</span>
+</div>
+<!-- Progress bar -->
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary-container to-secondary-container h-full rounded-full" style="width: 65%"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span>Yuklangan: 11-noyabr</span>
+<span class="text-error font-semibold">Tushirish rejasi: 19-noyabr (+8s)</span>
+</div>
+<div class="flex items-center gap-1 text-table-header uppercase text-error-container bg-error-container/20 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-xs">hourglass_bottom</span>
+            Bojxona tekshiruvida: Mashtakovo (Navbatda 4 soat)
+          </div>
+</div>
+<!-- Column 3: Telemetry & Actions -->
+<div class="flex xl:flex-col items-center justify-between xl:justify-center gap-2 flex-shrink-0">
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-primary text-base">csv</span>
+            Telemetriya
+          </button>
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-bright text-on-surface-variant hover:text-white font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+            Batafsil
+          </button>
+</div>
+</div>
+</div>
+<!-- TRIP CARD 2: Yo'lda (Grafikda) -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all duration-200 relative overflow-hidden">
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<!-- Column 1: Trip ID, Route & Truck Details -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md flex-1">
+<div class="w-14 h-14 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center text-primary flex-shrink-0 shadow-inner">
+<span class="font-table-header uppercase text-on-surface-variant">REYS</span>
+<span class="font-headline-sm font-bold text-primary-container leading-none mt-0.5">105</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-on-surface font-bold">#RS-2026-105</span>
+<span class="px-2.5 py-1 rounded-md text-table-header bg-primary-container/15 text-primary flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                Yo'lda (Grafik bo'yicha)
+              </span>
+<span class="px-2 py-0.5 rounded text-label-sm bg-surface-container-lowest text-on-surface-variant font-medium">
+                CMR #998310
+              </span>
+</div>
+<!-- Route Origin to Dest -->
+<div class="flex items-center gap-2 text-on-surface font-label-lg mt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm">trip_origin</span>
+                Farg'ona (O'zbekiston)
+              </span>
+<span class="material-symbols-outlined text-on-surface-variant text-base">trending_flat</span>
+<span class="flex items-center gap-1 font-bold text-white">
+<span class="material-symbols-outlined text-primary-container text-sm">location_on</span>
+                Novosibirsk (Rossiya)
+              </span>
+<span class="text-on-surface-variant text-body-sm font-normal ml-2">2,850 km</span>
+</div>
+<!-- Truck Plate and Driver -->
+<div class="flex items-center gap-space-md text-body-sm text-on-surface-variant flex-wrap pt-0.5">
+<span class="flex items-center gap-1.5 text-on-surface font-medium">
+<span class="material-symbols-outlined text-base text-primary">local_shipping</span>
+                40 B 789 CA / 40 882 AA (REF -18°C)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-secondary">person</span>
+                Karimov Akmal (+998 93 456-78-90)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-tertiary">ac_unit</span>
+                19.8 t • Meva-sabzavot (Gilos)
+              </span>
+</div>
+</div>
+</div>
+<!-- Column 2: Progress & Border Status -->
+<div class="xl:w-80 flex flex-col justify-center space-y-2 bg-surface-container-lowest/60 p-space-sm rounded-lg">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-secondary">sensors</span>
+              GPS: Pavlodar aylanmasi (78 km/s)
+            </span>
+<span class="font-bold text-secondary">82% (2,337 km)</span>
+</div>
+<!-- Progress bar -->
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary-container via-secondary-container to-secondary h-full rounded-full" style="width: 82%"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span>Yuklangan: 13-noyabr</span>
+<span class="text-secondary font-semibold">Tushirish rejasi: 17-noyabr (14:00)</span>
+</div>
+<div class="flex items-center gap-1 text-table-header uppercase text-secondary bg-secondary-container/20 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-xs">verified</span>
+            Bojxonadan o'tgan: Qulanda nazorati (Muvaffaqiyatli)
+          </div>
+</div>
+<!-- Column 3: Telemetry & Actions -->
+<div class="flex xl:flex-col items-center justify-between xl:justify-center gap-2 flex-shrink-0">
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-primary text-base">csv</span>
+            Telemetriya
+          </button>
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-bright text-on-surface-variant hover:text-white font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+            Batafsil
+          </button>
+</div>
+</div>
+</div>
+<!-- TRIP CARD 3: Toshkent -> Olmaota (Yo'lda) -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all duration-200 relative overflow-hidden">
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<!-- Column 1: Trip ID, Route & Truck Details -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md flex-1">
+<div class="w-14 h-14 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center text-primary flex-shrink-0 shadow-inner">
+<span class="font-table-header uppercase text-on-surface-variant">REYS</span>
+<span class="font-headline-sm font-bold text-primary-container leading-none mt-0.5">106</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-on-surface font-bold">#RS-2026-106</span>
+<span class="px-2.5 py-1 rounded-md text-table-header bg-primary-container/15 text-primary flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                Yo'lda (Muntazam)
+              </span>
+<span class="px-2 py-0.5 rounded text-label-sm bg-surface-container-lowest text-on-surface-variant font-medium">
+                CMR #998399
+              </span>
+</div>
+<!-- Route Origin to Dest -->
+<div class="flex items-center gap-2 text-on-surface font-label-lg mt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm">trip_origin</span>
+                Toshkent (O'zbekiston)
+              </span>
+<span class="material-symbols-outlined text-on-surface-variant text-base">trending_flat</span>
+<span class="flex items-center gap-1 font-bold text-white">
+<span class="material-symbols-outlined text-primary-container text-sm">location_on</span>
+                Olmaota (Qozog'iston)
+              </span>
+<span class="text-on-surface-variant text-body-sm font-normal ml-2">810 km</span>
+</div>
+<!-- Truck Plate and Driver -->
+<div class="flex items-center gap-space-md text-body-sm text-on-surface-variant flex-wrap pt-0.5">
+<span class="flex items-center gap-1.5 text-on-surface font-medium">
+<span class="material-symbols-outlined text-base text-primary">local_shipping</span>
+                10 Z 999 BA / 10 112 BA (TENT)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-secondary">person</span>
+                Nazarov Bobur (+998 97 789-01-23)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-tertiary">inventory_2</span>
+                18.0 t • Maishiy texnika (Artel)
+              </span>
+</div>
+</div>
+</div>
+<!-- Column 2: Progress & Border Status -->
+<div class="xl:w-80 flex flex-col justify-center space-y-2 bg-surface-container-lowest/60 p-space-sm rounded-lg">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">near_me</span>
+              GPS: Taraz kirish qismi (82 km/s)
+            </span>
+<span class="font-bold text-primary-container">42% (340 km)</span>
+</div>
+<!-- Progress bar -->
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 42%"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span>Yuklangan: Bugun 06:00</span>
+<span class="text-on-surface font-semibold">Tushirish: 17-noyabr (Ertaga)</span>
+</div>
+<div class="flex items-center gap-1 text-table-header uppercase text-secondary bg-secondary-container/20 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-xs">done_all</span>
+            Bojxonadan o'tgan: Yallama (Tezlashtirilgan)
+          </div>
+</div>
+<!-- Column 3: Telemetry & Actions -->
+<div class="flex xl:flex-col items-center justify-between xl:justify-center gap-2 flex-shrink-0">
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-primary text-base">csv</span>
+            Telemetriya
+          </button>
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-bright text-on-surface-variant hover:text-white font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+            Batafsil
+          </button>
+</div>
+</div>
+</div>
+<!-- TRIP CARD 4: Samarqand -> Minsk (Yuklanmoqda) -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all duration-200 relative overflow-hidden">
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<!-- Column 1: Trip ID, Route & Truck Details -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md flex-1">
+<div class="w-14 h-14 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center text-primary flex-shrink-0 shadow-inner">
+<span class="font-table-header uppercase text-on-surface-variant">REYS</span>
+<span class="font-headline-sm font-bold text-tertiary-container leading-none mt-0.5">107</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-on-surface font-bold">#RS-2026-107</span>
+<span class="px-2.5 py-1 rounded-md text-table-header bg-tertiary-container/15 text-tertiary flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                Yuklanmoqda (Ombor terminali)
+              </span>
+<span class="px-2 py-0.5 rounded text-label-sm bg-surface-container-lowest text-on-surface-variant font-medium">
+                CMR #998450
+              </span>
+</div>
+<!-- Route Origin to Dest -->
+<div class="flex items-center gap-2 text-on-surface font-label-lg mt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm">trip_origin</span>
+                Samarqand (O'zbekiston)
+              </span>
+<span class="material-symbols-outlined text-on-surface-variant text-base">trending_flat</span>
+<span class="flex items-center gap-1 font-bold text-white">
+<span class="material-symbols-outlined text-primary-container text-sm">location_on</span>
+                Minsk (Belarus)
+              </span>
+<span class="text-on-surface-variant text-body-sm font-normal ml-2">4,120 km</span>
+</div>
+<!-- Truck Plate and Driver -->
+<div class="flex items-center gap-space-md text-body-sm text-on-surface-variant flex-wrap pt-0.5">
+<span class="flex items-center gap-1.5 text-on-surface font-medium">
+<span class="material-symbols-outlined text-base text-primary">local_shipping</span>
+                30 H 456 AA / 30 771 AA (TENT 105m³)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-secondary">person</span>
+                Xalilov Sherzod (+998 91 333-22-11)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-tertiary">inventory_2</span>
+                22.0 t • Iplar va polimer mahsulotlari
+              </span>
+</div>
+</div>
+</div>
+<!-- Column 2: Progress & Border Status -->
+<div class="xl:w-80 flex flex-col justify-center space-y-2 bg-surface-container-lowest/60 p-space-sm rounded-lg">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-tertiary">warehouse</span>
+              Terminal: Samarqand Logistika Markazi
+            </span>
+<span class="font-bold text-tertiary">Yuklash: 75%</span>
+</div>
+<!-- Progress bar -->
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 25%"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span>Boshlanish: Bugun 18:00</span>
+<span class="text-on-surface font-semibold">Tushirish rejasi: 24-noyabr</span>
+</div>
+<div class="flex items-center gap-1 text-table-header uppercase text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">
+<span class="material-symbols-outlined text-xs">pending</span>
+            Hujjatlar rasmiylashtirilmoqda (TIR Carnet)
+          </div>
+</div>
+<!-- Column 3: Telemetry & Actions -->
+<div class="flex xl:flex-col items-center justify-between xl:justify-center gap-2 flex-shrink-0">
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-primary text-base">fact_check</span>
+            Hujjatlar
+          </button>
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-bright text-on-surface-variant hover:text-white font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+            Batafsil
+          </button>
+</div>
+</div>
+</div>
+<!-- TRIP CARD 5: Buxoro -> Qozon (Yakunlandi) -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all duration-200 relative overflow-hidden opacity-90">
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<!-- Column 1: Trip ID, Route & Truck Details -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md flex-1">
+<div class="w-14 h-14 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center text-on-surface-variant flex-shrink-0 shadow-inner">
+<span class="font-table-header uppercase text-on-surface-variant">REYS</span>
+<span class="font-headline-sm font-bold text-secondary leading-none mt-0.5">103</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-on-surface font-bold">#RS-2026-103</span>
+<span class="px-2.5 py-1 rounded-md text-table-header bg-secondary/15 text-secondary flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Muvaffaqiyatli yakunlandi
+              </span>
+<span class="px-2 py-0.5 rounded text-label-sm bg-surface-container-lowest text-on-surface-variant font-medium">
+                CMR #998188
+              </span>
+</div>
+<!-- Route Origin to Dest -->
+<div class="flex items-center gap-2 text-on-surface font-label-lg mt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm">trip_origin</span>
+                Buxoro (O'zbekiston)
+              </span>
+<span class="material-symbols-outlined text-on-surface-variant text-base">trending_flat</span>
+<span class="flex items-center gap-1 font-bold text-white">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                Qozon (Tatariston, RF)
+              </span>
+<span class="text-on-surface-variant text-body-sm font-normal ml-2">2,620 km</span>
+</div>
+<!-- Truck Plate and Driver -->
+<div class="flex items-center gap-space-md text-body-sm text-on-surface-variant flex-wrap pt-0.5">
+<span class="flex items-center gap-1.5 text-on-surface font-medium">
+<span class="material-symbols-outlined text-base text-primary">local_shipping</span>
+                80 D 321 EA / 80 500 EA (TENT)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-secondary">person</span>
+                Qosimov Jamshid (+998 90 987-65-43)
+              </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-tertiary">inventory_2</span>
+                20.5 t • Gilam va tekstil
+              </span>
+</div>
+</div>
+</div>
+<!-- Column 2: Progress & Border Status -->
+<div class="xl:w-80 flex flex-col justify-center space-y-2 bg-surface-container-lowest/60 p-space-sm rounded-lg">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">task_alt</span>
+              To'liq yetkazib berildi
+            </span>
+<span class="font-bold text-secondary">100% (2,620 km)</span>
+</div>
+<!-- Progress bar -->
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full" style="width: 100%"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span>Yuklangan: 08-noyabr</span>
+<span class="text-secondary font-semibold">Tushirildi: 15-noyabr (11:30)</span>
+</div>
+<div class="flex items-center gap-1 text-table-header uppercase text-secondary bg-secondary-container/20 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-xs">receipt_long</span>
+            Hisob-faktura yopildi • To'lov kutilyapti
+          </div>
+</div>
+<!-- Column 3: Telemetry & Actions -->
+<div class="flex xl:flex-col items-center justify-between xl:justify-center gap-2 flex-shrink-0">
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-secondary text-base">receipt</span>
+            Akt &amp; Hujjat
+          </button>
+<button class="w-full px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-bright text-on-surface-variant hover:text-white font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base">archive</span>
+            Arxivga olish
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- PAGINATION CONTROLS -->
+<div class="bg-surface-container rounded-xl px-space-md py-3 shadow-md flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-label-sm">
+<div class="flex items-center gap-2">
+<span>Jami 58 ta reysdan 1-5 ko'rsatilmoqda</span>
+<span class="text-outline-variant">•</span>
+<select class="bg-surface-container-lowest text-on-surface font-label-sm rounded px-2 py-1 focus:outline-none">
+<option>Har sahifada 5 ta</option>
+<option>Har sahifada 10 ta</option>
+<option>Har sahifada 25 ta</option>
+</select>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded bg-surface-container-lowest text-on-surface-variant hover:text-white transition-colors" disabled="">
+<span class="material-symbols-outlined text-base">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded bg-primary-container text-white font-bold">1</button>
+<button class="px-3 py-1 rounded bg-surface-container-lowest hover:bg-surface-container-high text-on-surface transition-colors">2</button>
+<button class="px-3 py-1 rounded bg-surface-container-lowest hover:bg-surface-container-high text-on-surface transition-colors">3</button>
+<span class="px-1 text-on-surface-variant">...</span>
+<button class="px-3 py-1 rounded bg-surface-container-lowest hover:bg-surface-container-high text-on-surface transition-colors">12</button>
+<button class="p-1.5 rounded bg-surface-container-lowest hover:bg-surface-container-high text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- NEW TRIP MODAL (DISPATCH REGISTRATION DIALOG) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center p-space-md bg-background/80 backdrop-blur-md" id="new-trip-modal">
+<div class="bg-surface-container-low border-t-2 border-primary-container rounded-2xl w-full max-w-3xl shadow-2xl p-space-lg space-y-space-md relative max-h-[921px] overflow-y-auto">
+<!-- Modal Header -->
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest/50">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">add_road</span>
+</div>
+<div>
+<h2 class="font-headline-md text-on-surface">Yangi reys ro'yxatdan o'tkazish</h2>
+<p class="font-body-sm text-on-surface-variant">Avtotransport vositasi va haydovchini marshrutga biriktirish</p>
+</div>
+</div>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors" onclick="document.getElementById('new-trip-modal').classList.add('hidden')">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+<!-- Modal Body Form -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md font-body-sm">
+<!-- Reys raqami & Yo'nalish -->
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant">Reys raqami (Avtomatik)</label>
+<input class="w-full bg-surface-container text-on-surface-variant rounded-lg px-3 py-2 font-mono font-bold focus:outline-none" readonly="" type="text" value="#RS-2026-108"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant">CMR Hujjat raqami</label>
+<input class="w-full bg-surface-container-lowest text-on-surface rounded-lg px-3 py-2 focus:ring-1 focus:ring-primary-container focus:outline-none" placeholder="Masalan: CMR-998501" type="text"/>
+</div>
+<!-- Marshrut Chiqish va Manzil -->
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant">Chiqish shahri (Yuklash)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest text-on-surface rounded-lg pl-9 pr-3 py-2 focus:ring-1 focus:ring-primary-container focus:outline-none" placeholder="Toshkent, Sergeli logistika markazi" type="text"/>
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-secondary text-sm">trip_origin</span>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant">Yetkazish manzili (Tushirish)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest text-on-surface rounded-lg pl-9 pr-3 py-2 focus:ring-1 focus:ring-primary-container focus:outline-none" placeholder="Moskva, 'Severniy' ombor majmuasi" type="text"/>
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-primary-container text-sm">location_on</span>
+</div>
+</div>
+<!-- Transport va Haydovchi -->
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant">Biriktirilgan Fura (Bo'sh avtopark)</label>
+<select class="w-full bg-surface-container-lowest text-on-surface rounded-lg px-3 py-2 focus:ring-1 focus:ring-primary-container focus:outline-none">
+<option>01 A 777 BA / 01 888 AA • DAF XF (Bo'sh)</option>
+<option>10 Z 555 AA / 10 999 AA • MAN TGX (Bo'sh)</option>
+<option>30 H 123 CA / 30 456 AA • Volvo FH16 (Bo'sh)</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant">Mas'ul haydovchi</label>
+<select class="w-full bg-surface-container-lowest text-on-surface rounded-lg px-3 py-2 focus:ring-1 focus:ring-primary-container focus:outline-none">
+<option>Yo'ldoshev Sanjar (Xalqaro toifa • Faol)</option>
+<option>Alimov Rustam (Xalqaro toifa • Faol)</option>
+<option>G'aniyev Farhod (Xalqaro toifa • Faol)</option>
+</select>
+</div>
+<!-- Yuk xususiyatlari -->
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant">Yuk turi va hajmi (Tonna / m³)</label>
+<input class="w-full bg-surface-container-lowest text-on-surface rounded-lg px-3 py-2 focus:ring-1 focus:ring-primary-container focus:outline-none" placeholder="21.5 t • To'qimachilik kalavalari" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant">Rejalashtirilgan tushirish sanasi</label>
+<input class="w-full bg-surface-container-lowest text-on-surface rounded-lg px-3 py-2 focus:ring-1 focus:ring-primary-container focus:outline-none" type="date" value="2026-11-23"/>
+</div>
+</div>
+<!-- Border Crossing Notes in Modal -->
+<div class="p-space-sm bg-surface-container rounded-lg flex items-start gap-2 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-base mt-0.5">info</span>
+<span>Reys ochilgach, haydovchining mobil ilovasiga yo'l xaritasi va elektron CMR yuboriladi. GPS kuzatuv datchigi avtomatik faollashadi.</span>
+</div>
+<!-- Modal Footer -->
+<div class="flex items-center justify-end gap-space-sm pt-space-sm border-t border-surface-container-highest/50">
+<button class="px-space-md py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md transition-colors" onclick="document.getElementById('new-trip-modal').classList.add('hidden')">
+          Bekor qilish
+        </button>
+<button class="px-space-md py-2 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md shadow-md shadow-primary-container/25 transition-all" onclick="document.getElementById('new-trip-modal').classList.add('hidden')">
+          Reysni tasdiqlash va boshlash
+        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- END: MainContentWrapper -->
+<script data-purpose="shell-keyboard-interactions">
+    // Global keyboard shortcut Ctrl+K
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const search = document.getElementById('global-search');
+        if (search) search.focus();
+      }
+    });
+  </script>
+</body></html>

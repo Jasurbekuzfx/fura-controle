@@ -1,0 +1,1742 @@
+<!DOCTYPE html><html class="dark h-full" lang="uz"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FURA CONTROL - Logistika boshqaruv tizimi</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary": "#380094",
+            "on-tertiary-fixed": "#21005e",
+            "surface-bright": "#2e3a4d",
+            "on-primary": "#003060",
+            "error-container": "#93000a",
+            "on-surface-variant": "#c0c7d6",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#d5e3ff",
+            "background": "#071426",
+            "inverse-primary": "#005eb1",
+            "secondary-fixed": "#60fea5",
+            "primary-fixed-dim": "#a6c8ff",
+            "surface-container": "#142032",
+            "surface-tint": "#a6c8ff",
+            "on-secondary-fixed-variant": "#00522d",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#030e20",
+            "surface-container-low": "#0f1c2e",
+            "surface-container-highest": "#293549",
+            "inverse-on-surface": "#253144",
+            "on-background": "#d7e3fc",
+            "secondary": "#40e48d",
+            "secondary-fixed-dim": "#3be18b",
+            "tertiary-fixed": "#e8ddff",
+            "on-primary-fixed-variant": "#004787",
+            "primary-container": "#2d91ff",
+            "on-tertiary-container": "#300083",
+            "tertiary-fixed-dim": "#cebdff",
+            "tertiary-container": "#9b7aff",
+            "on-secondary": "#00391d",
+            "outline-variant": "#404753",
+            "on-secondary-container": "#004c29",
+            "surface-variant": "#293549",
+            "primary": "#a6c8ff",
+            "on-primary-container": "#002a54",
+            "inverse-surface": "#d7e3fc",
+            "surface-dim": "#071426",
+            "on-tertiary-fixed-variant": "#5114c5",
+            "on-secondary-fixed": "#00210f",
+            "on-error": "#690005",
+            "outline": "#8a919f",
+            "on-surface": "#d7e3fc",
+            "tertiary": "#cebdff",
+            "surface-container-high": "#1e2a3d",
+            "surface": "#071426",
+            "secondary-container": "#00c774",
+            "on-primary-fixed": "#001c3b"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem"
+          },
+          fontFamily: {
+            "table-header": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "kpi-stat": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"]
+          }
+        }
+      }
+    };
+  </script>
+<style data-purpose="custom-styling">
+    @layer base {
+      html {
+        color-scheme: dark;
+      }
+      body {
+        overscroll-behavior: none;
+        min-height: 100vh;
+        background-color: #071426;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f1c2e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #293549;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2d91ff;
+    }
+    .full-sidebar-theme {
+      background: linear-gradient(180deg, rgba(7, 20, 38, 0.94) 0%, rgba(11, 27, 50, 0.88) 40%, rgba(7, 20, 38, 0.82) 80%, rgba(4, 13, 26, 0.96) 100%),
+                  url('https://lh3.googleusercontent.com/aida-public/AB6AXuAL-BgiIUdmmUOj-6CeBEeKvp6MbZQ2wkqjZKkFywfJiWcNKF7VqeN390Y0Zhw2ZLMiTmG-bVPYFeus5k7lssViRAv2Y4sLAt6E8VUp3wcMxyaVogBv-S_FlkoOmh8x9WCX2bA8XnqyPQ09KHTdLMnY8C-ngYZbdh-wLzc_qMNG6dpADFt5xJek2phNfeb8JacMYZ3A06LpZx2YInHd9tqDKwmarVpWmqG3W7qDOqA') 50% 70% / cover no-repeat;
+    }
+    .modal-backdrop-blur {
+      backdrop-filter: blur(8px);
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.8) sepia(100%) saturate(300%) hue-rotate(180deg);
+      cursor: pointer;
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type">
+</head>
+<body class="min-h-full bg-background font-body-md text-on-surface antialiased">
+<!-- Toast Notification Container -->
+<div class="fixed top-5 right-5 z-50 transition-all duration-300 transform translate-y-[-120%] opacity-0 pointer-events-none" id="toastNotification">
+<div class="flex items-center gap-3 px-4 py-3 bg-surface-container-high/95 backdrop-blur-md border border-secondary/40 text-on-surface rounded-xl shadow-2xl shadow-black/50">
+<div class="w-8 h-8 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center shrink-0" id="toastIconWrap">
+<span class="material-symbols-outlined text-xl" id="toastIcon">check_circle</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-sm text-white" id="toastTitle">Muvaffaqiyatli!</h4>
+<p class="font-body-sm text-on-surface-variant text-xs" id="toastMessage">Yangi hisobot muvaffaqiyatli tayyorlandi!</p>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-white ml-2 rounded" onclick="hideToast()">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+</div>
+<!-- BEGIN: LeftSidebar -->
+<aside class="fixed top-0 bottom-0 left-0 w-64 z-30 full-sidebar-theme border-r border-outline-variant/30 flex flex-col justify-between overflow-hidden shadow-2xl backdrop-blur-[2px]" data-purpose="sidebar">
+<div class="p-space-md flex flex-col h-full overflow-y-auto z-10">
+<!-- Logo -->
+<div class="flex items-center gap-space-sm px-space-xs py-space-sm mb-space-md bg-surface-container-lowest/60 backdrop-blur-md rounded-xl border border-outline-variant/30">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-inverse-primary to-primary-container flex items-center justify-center shadow-lg shadow-primary-container/25 flex-shrink-0">
+<span class="material-symbols-outlined text-white text-2xl">local_shipping</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-white leading-none tracking-tight font-bold">FURA CONTROL</h1>
+<p class="font-label-sm text-on-surface-variant/80 mt-1 uppercase tracking-wider text-[10px]" data-i18n="system_subtitle">Logistika tizimi</p>
+</div>
+</div>
+<!-- Main Navigation Menu -->
+<nav class="space-y-1.5 mt-space-xs" id="sidebar-nav">
+<!-- 1. Bosh sahifa -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_home" data-path="bosh-sahifa" href="#">
+  Bosh sahifa
+</a>
+<!-- 2. Furalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_trucks" data-path="furalar" href="#">
+  Furalar
+</a>
+<!-- 3. Yuklar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_cargo" data-path="yuklar" href="#">
+  Yuklar
+</a>
+<!-- 4. Haydovchilar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_drivers" data-path="haydovchilar" href="#">
+  Haydovchilar
+</a>
+<!-- 5. Reyslar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_trips" data-path="reyslar" href="#">
+  Reyslar
+</a>
+<!-- 6. Kalendar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_calendar" data-path="kalendar" href="#">
+  Kalendar
+</a>
+<!-- 7. Arxiv -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_archive" data-path="arxiv" href="#">
+  Arxiv
+</a>
+<!-- 8. Hisobotlar (Active) -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-white bg-primary-container font-semibold shadow-md shadow-primary-container/30 backdrop-blur-sm transition-colors font-label-md" data-i18n="nav_reports" data-path="hisobotlar" href="#">
+  Hisobotlar
+</a>
+<!-- 9. Sozlamalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_settings" data-path="sozlamalar" href="#">
+  Sozlamalar
+</a>
+</nav>
+<!-- Sidebar Footer telemetry widget -->
+<div class="mt-auto pt-4">
+<div class="p-3 rounded-lg bg-surface-container-lowest/70 backdrop-blur-md border border-outline-variant/30 text-on-surface-variant">
+<p class="font-label-md text-white flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span data-i18n="sidebar_fleet_monitoring">Avtopark nazorati</span>
+</p>
+<p class="font-label-sm text-on-surface-variant/80 mt-0.5 text-[11px]" data-i18n="sidebar_gps_active">GPS &amp; Telematika 24/7 faol</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: TopHeader -->
+<header class="fixed top-0 right-0 left-64 z-20 h-16 bg-surface-container-low/90 backdrop-blur-md border-b border-outline-variant/30 px-space-lg flex items-center justify-between gap-space-md" data-purpose="top-navigation">
+<!-- Global Search Input with Shortcut -->
+<div class="relative w-80 lg:w-96 max-w-lg">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant font-body-sm rounded-lg pl-9 pr-16 py-2 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" data-i18n-ph="search_placeholder" id="global-search" placeholder="Qidirish: fura, yuk, haydovchi, reys..." type="text">
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<span class="font-label-sm bg-surface-container text-on-surface-variant px-1.5 py-0.5 rounded border border-outline-variant/40">Ctrl + K</span>
+</div>
+</div>
+<!-- Header Controls -->
+<div class="flex items-center gap-space-md">
+<!-- Language Switcher Pill (UZ / RU) -->
+<div class="flex items-center bg-surface-container border border-outline-variant/40 p-1 rounded-xl shadow-inner gap-1" id="languageSwitcher">
+<button class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-primary-container text-white shadow-sm" id="lang-uz-btn" onclick="setLanguage('uz')">
+  UZ
+</button>
+<button class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-on-surface-variant hover:text-white" id="lang-ru-btn" onclick="setLanguage('ru')">
+  RU
+</button>
+</div>
+<!-- Notifications Bell -->
+<button class="relative p-2 text-on-surface-variant hover:text-white bg-surface-container rounded-lg border border-outline-variant/30 hover:bg-surface-container-high transition-colors" title="Bildirishnomalar">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute -top-1 -right-1 bg-error-container text-white font-label-sm w-4 h-4 rounded-full flex items-center justify-center border-2 border-surface-container-low text-[10px]">3</span>
+</button>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-2.5 bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-white font-label-sm font-bold">
+  J
+</div>
+<div class="text-left leading-tight hidden sm:block">
+<div class="font-label-md text-white">Jasurbek</div>
+<div class="font-label-sm text-on-surface-variant/80 text-[11px]" data-i18n="user_role">Bosh dispetcher</div>
+</div>
+<span class="material-symbols-outlined text-base text-on-surface-variant ml-0.5">expand_more</span>
+</div>
+<!-- Current System Date Pill -->
+<div class="hidden md:flex items-center gap-2 bg-surface-container border border-outline-variant/30 text-on-surface px-3 py-1.5 rounded-lg font-label-sm">
+<span class="material-symbols-outlined text-primary-container text-base">calendar_today</span>
+<span id="currentHeaderDate">16-noyabr, 2026 (Dushanba)</span>
+</div>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainContentWrapper -->
+<main class="pl-64 pt-16 min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive View State Controller -->
+<div class="px-margin py-space-lg flex flex-col gap-space-lg max-w-[1680px] mx-auto w-full">
+<!-- Section 1: Breadcrumb, Header & Action Bar -->
+<section class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-md" data-purpose="report-header">
+<div class="flex flex-col gap-space-xs">
+<!-- Breadcrumb with Monospace Telemetry Details -->
+<div class="flex items-center gap-2 font-label-sm text-on-surface-variant uppercase tracking-wider text-[11px]">
+<span data-i18n="bc_logistics">Logistika</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span data-i18n="bc_monitoring">Tahlil va monitoring</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-bold" data-i18n="bc_reports">Hisobotlar</span>
+<span class="ml-2 px-1.5 py-0.5 rounded bg-surface-container-high text-primary-fixed text-[10px] tracking-normal font-mono">v4.8-LIVE</span>
+</div>
+<!-- Title & Subtitle -->
+<div class="mt-1">
+<h1 class="font-headline-xl text-white tracking-tight" data-i18n="page_title">HISOBOTLAR VA ANALITIKA</h1>
+<p class="font-body-md text-on-surface-variant mt-1 max-w-3xl" data-i18n="page_subtitle">
+  Avtopark faoliyati, reyslar unumdorligi va yoqilg‘i sarfi bo‘yicha batafsil statistik hisobotlar
+</p>
+</div>
+</div>
+<!-- Action Group -->
+<div class="flex flex-wrap items-center gap-space-sm" data-purpose="dashboard-controls">
+<!-- Date Range Filter Pill -->
+<div class="relative">
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md shadow-sm transition-all" id="dateRangeBtn" onclick="toggleDateMenu()">
+<span class="material-symbols-outlined text-primary-container text-lg">calendar_month</span>
+<span id="selectedDateLabel">So‘nggi 30 kun (Okt - Noyabr 2026)</span>
+<span class="material-symbols-outlined text-base text-on-surface-variant">expand_more</span>
+</button>
+<!-- Floating Date Menu Dropdown -->
+<div class="hidden absolute right-0 mt-2 w-64 bg-surface-container-high border border-outline-variant/30 rounded-xl shadow-2xl z-30 p-2 space-y-1" id="dateMenuDropdown">
+<button class="w-full text-left px-3 py-2 rounded-lg text-white font-label-md hover:bg-surface-container flex items-center justify-between" onclick="selectDateRange('So‘nggi 7 kun', this, 7)">
+<span data-i18n="opt_last_7">So‘nggi 7 kun</span>
+<span class="material-symbols-outlined text-xs text-secondary opacity-0">check</span>
+</button>
+<button class="w-full text-left px-3 py-2 rounded-lg text-white font-label-md bg-surface-container flex items-center justify-between" onclick="selectDateRange('So‘nggi 30 kun (Okt - Noyabr 2026)', this, 30)">
+<span data-i18n="opt_last_30">So‘nggi 30 kun</span>
+<span class="material-symbols-outlined text-xs text-secondary opacity-100">check</span>
+</button>
+<button class="w-full text-left px-3 py-2 rounded-lg text-white font-label-md hover:bg-surface-container flex items-center justify-between" onclick="selectDateRange('Joriy chorak (Q4 2026)', this, 90)">
+<span data-i18n="opt_cur_quarter">Joriy chorak (Q4)</span>
+<span class="material-symbols-outlined text-xs text-secondary opacity-0">check</span>
+</button>
+<button class="w-full text-left px-3 py-2 rounded-lg text-white font-label-md hover:bg-surface-container flex items-center justify-between" onclick="selectDateRange('Yil boshidan (2026)', this, 320)">
+<span data-i18n="opt_ytd">Yil boshidan</span>
+<span class="material-symbols-outlined text-xs text-secondary opacity-0">check</span>
+</button>
+</div>
+</div>
+<!-- Filter Toggle Button -->
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md shadow-sm transition-all" onclick="toggleTelemetryBar()">
+<span class="material-symbols-outlined text-lg">tune</span>
+<span data-i18n="btn_filters">Filtrlar</span>
+</button>
+<!-- PDF Export Button -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container border border-outline-variant/40 hover:bg-surface-container-high text-white font-label-md shadow-md transition-all active:scale-95 group" id="btnPdfExport" onclick="openExportModal('PDF')">
+<span class="material-symbols-outlined text-error text-xl group-hover:scale-110 transition-transform">picture_as_pdf</span>
+<span data-i18n="btn_pdf_export">PDF hisobot yuklash</span>
+</button>
+<!-- Excel Export Button -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md shadow-lg shadow-primary-container/25 transition-all hover:scale-[1.02] active:scale-95 group" id="btnExcelExport" onclick="openExportModal('XLSX')">
+<span class="material-symbols-outlined text-secondary-fixed text-xl group-hover:scale-110 transition-transform">table_chart</span>
+<span data-i18n="btn_excel_export">Excel (XLSX) eksport</span>
+</button><button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container border border-outline-variant/40 hover:bg-surface-container-high text-white font-label-md shadow-md transition-all active:scale-95 group" id="btnCsvExport" onclick="openExportModal('CSV')"><span class="material-symbols-outlined text-tertiary-fixed-dim text-xl group-hover:scale-110 transition-transform">article</span><span data-i18n="btn_csv_export">CSV eksport</span></button>
+</div>
+</section>
+<!-- Section 2: Top KPI Metrics (4 Bento Cards with Glowing Accent Highlights) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md" data-purpose="kpi-metrics-grid">
+<!-- Card 1: Jami yakunlangan reyslar -->
+<div class="relative bg-surface-container rounded-2xl p-5 overflow-hidden shadow-lg group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<span class="material-symbols-outlined absolute -bottom-5 -right-3 text-7xl text-white/[0.04] pointer-events-none select-none">local_shipping</span>
+<div class="flex items-center justify-between mb-4">
+<div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-2xl">check_circle</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm bg-secondary/15 text-secondary font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+  +14.2%
+</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[11px]" data-i18n="kpi_trips_label">Jami yakunlangan reyslar</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h2 class="font-kpi-stat text-white font-black text-3xl" id="counterReys">184</h2>
+<span class="font-label-lg text-primary font-semibold" data-i18n="unit_trips">ta reys</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-2 text-xs" data-i18n="kpi_trips_sub">O‘tgan oyga nisbatan +23 ta reys ko‘p</p>
+</div>
+</div>
+<!-- Card 2: Yetkazilgan jami yuk -->
+<div class="relative bg-surface-container rounded-2xl p-5 overflow-hidden shadow-lg group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-secondary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<span class="material-symbols-outlined absolute -bottom-5 -right-3 text-7xl text-white/[0.04] pointer-events-none select-none">inventory_2</span>
+<div class="flex items-center justify-between mb-4">
+<div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-secondary shadow-inner">
+<span class="material-symbols-outlined text-2xl">forklift</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm bg-secondary/15 text-secondary font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+  +8.5%
+</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[11px]" data-i18n="kpi_cargo_label">Yetkazilgan jami yuk</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h2 class="font-kpi-stat text-white font-black text-3xl">4,280</h2>
+<span class="font-label-lg text-secondary font-semibold" data-i18n="unit_tons">tonna</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-2 text-xs" data-i18n="kpi_cargo_sub">O‘rtacha har bir reysga 23.2 t tovar</p>
+</div>
+</div>
+<!-- Card 3: Bosib o‘tilgan umumiy masofa -->
+<div class="relative bg-surface-container rounded-2xl p-5 overflow-hidden shadow-lg group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-tertiary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<span class="material-symbols-outlined absolute -bottom-5 -right-3 text-7xl text-white/[0.04] pointer-events-none select-none">route</span>
+<div class="flex items-center justify-between mb-4">
+<div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-tertiary shadow-inner">
+<span class="material-symbols-outlined text-2xl">distance</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm bg-primary-container/20 text-primary-container font-bold">
+<span class="material-symbols-outlined text-sm">navigation</span>
+<span data-i18n="status_active">Aktiv</span>
+</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[11px]" data-i18n="kpi_distance_label">Bosib o‘tilgan umumiy masofa</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h2 class="font-kpi-stat text-white font-black text-3xl">412,650</h2>
+<span class="font-label-lg text-tertiary font-semibold">km</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-2 text-xs" data-i18n="kpi_distance_sub">O‘rtacha 17,190 km / fura hisobida</p>
+</div>
+</div>
+<!-- Card 4: O‘z vaqtidalik ko‘rsatkichi (SLA) -->
+<div class="relative bg-surface-container rounded-2xl p-5 overflow-hidden shadow-lg group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-secondary/15 rounded-full blur-2xl pointer-events-none"></div>
+<span class="material-symbols-outlined absolute -bottom-5 -right-3 text-7xl text-white/[0.04] pointer-events-none select-none">timer</span>
+<div class="flex items-center justify-between mb-4">
+<div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-secondary-fixed shadow-inner">
+<span class="material-symbols-outlined text-2xl">schedule</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm bg-secondary/15 text-secondary font-bold">
+<span class="material-symbols-outlined text-sm">verified</span>
+  SLA A'lo
+</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[11px]" data-i18n="kpi_sla_label">O‘rtacha yetkazish tezligi</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h2 class="font-kpi-stat text-white font-black text-3xl">98.6%</h2>
+<span class="font-label-lg text-secondary-fixed font-semibold" data-i18n="sla_on_time">o‘z vaqtida</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-2 text-xs" data-i18n="kpi_sla_sub">Faqat 3 ta kechikish (bojxona navbati)</p>
+</div>
+</div>
+</section>
+<!-- Collapsible Advanced Filters Drawer -->
+<div class="hidden bg-surface-container-low rounded-xl p-4 shadow-xl flex-wrap items-center justify-between gap-4 transition-all" id="telemetryFilterBar">
+<div class="flex flex-wrap items-center gap-4 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant uppercase text-xs" data-i18n="filter_route">Filtr:</span>
+<select class="bg-surface-container text-white text-xs font-label-md rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option data-i18n="opt_all_routes">Barcha yo‘nalishlar (MDH &amp; Yevropa)</option>
+<option>Toshkent — Moskva</option>
+<option>Samarqand — Olmaota</option>
+<option>Andijon — Sankt-Peterburg</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant uppercase text-xs" data-i18n="filter_truck_type">Fura turi:</span>
+<select class="bg-surface-container text-white text-xs font-label-md rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option data-i18n="opt_all_truck_types">Barcha turlar (TENT, REF, MEGA)</option>
+<option>Standart Tent (92 m³)</option>
+<option>Refrijerator (-20°C)</option>
+<option>Mega Tirkama (105 m³)</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant uppercase text-xs" data-i18n="filter_driver_group">Haydovchi guruhi:</span>
+<select class="bg-surface-container text-white text-xs font-label-md rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option data-i18n="opt_all_drivers">Barcha haydovchilar (1-toifa)</option>
+<option>Xalqaro reys ekipajlari</option>
+<option>Mahalliy logistika haydovchilari</option>
+</select>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-sm hover:text-white" data-i18n="btn_close" onclick="toggleTelemetryBar()">
+  Yopish
+</button>
+</div>
+<!-- Section 3: Dual Analytic Visualization Bento (Bar Chart + Fleet Utilization) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Chart Left Container (8 Cols): Oylik reyslar va yuk tashish statistikasi -->
+<div class="lg:col-span-8 bg-surface-container rounded-2xl p-6 shadow-xl flex flex-col justify-between" data-purpose="monthly-analytics-chart">
+<div>
+<!-- Header and Legend -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></span>
+<h3 class="font-headline-md text-white" data-i18n="chart_title">Oylik reyslar va yuk tashish statistikasi</h3>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-0.5 text-xs" data-i18n="chart_subtitle">So‘nggi 7 oylik yuk tashish ko‘rsatkichlari dinamikasi</p>
+</div>
+<!-- Interactive Legends -->
+<div class="flex items-center gap-4 text-xs font-label-md">
+<div class="flex items-center gap-2">
+<span class="w-3.5 h-3.5 rounded bg-primary-container shadow-sm"></span>
+<span class="text-on-surface" data-i18n="legend_trips">Reyslar soni (ta)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface" data-i18n="legend_cargo">Yuk hajmi (ming t)</span>
+</div>
+</div>
+</div>
+<!-- Inline Custom SVG Dynamic Visualization -->
+<div class="relative w-full h-72 mt-4 flex flex-col justify-end">
+<!-- Background Grid Marks -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">200 reys / 5.0k t</div>
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">150 reys / 3.7k t</div>
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">100 reys / 2.5k t</div>
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">50 reys / 1.2k t</div>
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">0</div>
+</div>
+<!-- SVG Data Layer (Curved Trend Line Overlay) -->
+<svg class="absolute inset-0 w-full h-full z-10 overflow-visible" preserveAspectRatio="none" viewBox="0 0 700 240">
+<defs>
+<linearGradient id="cargoGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#40e48d" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#40e48d" stop-opacity="0.0"></stop>
+</linearGradient>
+<filter height="140%" id="glowSecondary" width="140%" x="-20%" y="-20%">
+<feGaussianBlur result="blur" stdDeviation="3"></feGaussianBlur>
+<feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+</filter>
+</defs>
+<path d="M 50 135 L 140 120 L 230 102 L 320 84 L 410 65 L 500 56 L 620 48 L 620 230 L 50 230 Z" fill="url(#cargoGradient)"></path>
+<path d="M 50 135 L 140 120 L 230 102 L 320 84 L 410 65 L 500 56 L 620 48" fill="none" filter="url(#glowSecondary)" stroke="#40e48d" stroke-linecap="round" stroke-width="3"></path>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="50" cy="135" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="140" cy="120" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="230" cy="102" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="320" cy="84" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="410" cy="65" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="500" cy="56" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="620" cy="48" fill="#ffffff" r="5" stroke="#40e48d" stroke-width="3"></circle>
+</svg>
+<!-- HTML Bar Chart Columns Alignment -->
+<div class="relative z-0 w-full h-full flex items-end justify-between px-6 pt-6 pb-2">
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">120</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 120px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white" data-i18n="month_may">May</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">135</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 135px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white" data-i18n="month_jun">Iyun</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">148</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 148px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white" data-i18n="month_jul">Iyul</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">162</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 162px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white" data-i18n="month_aug">Avg</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">175</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 175px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white" data-i18n="month_sep">Sen</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">180</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 180px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white" data-i18n="month_oct">Okt</span>
+</div>
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="bg-primary-container text-white px-2 py-0.5 rounded text-[11px] font-extrabold shadow-md shadow-primary-container/40">184</div>
+<div class="w-8 rounded-t-lg bg-gradient-to-t from-primary-container to-primary transition-all shadow-lg shadow-primary-container/30" style="height: 184px;"></div>
+<span class="font-label-sm text-primary font-bold text-[11px]" data-i18n="month_nov_cur">Noy (Joriy)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Metric Summary Breakdown Ribbon below chart -->
+<div class="mt-6 pt-4 border-t border-outline-variant/30 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+<div class="w-9 h-9 rounded-lg bg-primary-container/20 text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">hub</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-sm text-on-surface-variant uppercase text-[10px]" data-i18n="ribbon_top_route">Eng serqatnov marshrut</div>
+<div class="font-headline-sm text-sm text-white truncate font-bold" data-i18n="ribbon_route_val">Toshkent — Moskva yo‘nalishi</div>
+<div class="font-body-sm text-[11px] text-secondary" data-i18n="ribbon_route_sub">38% umumiy xalqaro reyslar ulushi</div>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+<div class="w-9 h-9 rounded-lg bg-tertiary-container/20 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">avg_pace</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-sm text-on-surface-variant uppercase text-[10px]" data-i18n="ribbon_avg_duration">O‘rtacha safar muddati</div>
+<div class="font-headline-sm text-sm text-white truncate font-bold" data-i18n="ribbon_duration_val">6.4 kun / reys davomiyligi</div>
+<div class="font-body-sm text-[11px] text-primary" data-i18n="ribbon_duration_sub">Normal me'yordan 14 soat tezroq</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Chart Right Container (4 Cols): Furalardan foydalanish koeffitsiyenti -->
+<div class="lg:col-span-4 bg-surface-container rounded-2xl p-6 shadow-xl flex flex-col justify-between" data-purpose="fleet-utilization-donut">
+<div>
+<!-- Header -->
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-white" data-i18n="donut_title">Avtoparkdan foydalanish</h3>
+<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-secondary/20 text-secondary" data-i18n="donut_badge">24 ta fura</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-1 text-xs" data-i18n="donut_subtitle">Joriy operatsion holat taqsimoti</p>
+<!-- Circular Donut Visual Representation -->
+<div class="relative w-48 h-48 mx-auto my-6 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewBox="0 0 160 160">
+<circle cx="80" cy="80" fill="none" r="64" stroke="#0f1c2e" stroke-width="18"></circle>
+<circle cx="80" cy="80" fill="none" r="64" stroke="#2d91ff" stroke-dasharray="233.2 402.1" stroke-dashoffset="0" stroke-linecap="round" stroke-width="18"></circle>
+<circle cx="80" cy="80" fill="none" r="64" stroke="#40e48d" stroke-dasharray="100.5 402.1" stroke-dashoffset="-237" stroke-linecap="round" stroke-width="18"></circle>
+<circle cx="80" cy="80" fill="none" r="64" stroke="#ffb4ab" stroke-dasharray="40.2 402.1" stroke-dashoffset="-340" stroke-linecap="round" stroke-width="18"></circle>
+<circle cx="80" cy="80" fill="none" r="64" stroke="#93000a" stroke-dasharray="28.1 402.1" stroke-dashoffset="-382" stroke-linecap="round" stroke-width="18"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-headline-lg text-white font-extrabold text-2xl">88.4%</span>
+<span class="font-label-sm text-secondary uppercase tracking-wider text-[10px]" data-i18n="donut_score_label">Unumdorlik</span>
+</div>
+</div>
+<!-- Breakdown List with glowing status pills -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-primary-container shadow-sm shadow-primary-container"></span>
+<span class="font-label-md text-white text-xs" data-i18n="status_on_road">Yo‘lda / Faol reysda</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant text-[11px]" data-i18n="count_14_trucks">14 ta</span>
+<span class="font-label-md text-primary font-bold text-xs">58%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-secondary shadow-sm shadow-secondary"></span>
+<span class="font-label-md text-white text-xs" data-i18n="status_idle">Bo‘sh / Rezervda</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant text-[11px]" data-i18n="count_6_trucks">6 ta</span>
+<span class="font-label-md text-secondary font-bold text-xs">25%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-tertiary-container shadow-sm shadow-tertiary-container"></span>
+<span class="font-label-md text-white text-xs" data-i18n="status_loading">Yuklanmoqda / Omborda</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant text-[11px]" data-i18n="count_2_trucks">2 ta</span>
+<span class="font-label-md text-tertiary font-bold text-xs">10%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-error shadow-sm shadow-error"></span>
+<span class="font-label-md text-white text-xs" data-i18n="status_repair">Texnik ko‘rik / Servisda</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant text-[11px]" data-i18n="count_2_trucks">2 ta</span>
+<span class="font-label-md text-error font-bold text-xs">7%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Efficiency Card Footnote -->
+<div class="mt-4 p-3 bg-secondary/10 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-2xl">verified_user</span>
+<div class="text-xs">
+<p class="font-label-md text-white font-bold" data-i18n="donut_footnote_title">Avtopark holati: A'lo darajada</p>
+<p class="font-body-sm text-on-surface-variant text-[11px]" data-i18n="donut_footnote_sub">Texnik shaylik koeffitsiyenti normadan 3.2% yuqori</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Auxiliary Operational Insight Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-space-md" data-purpose="efficiency-insights">
+<!-- Fuel & Environmental Card -->
+<div class="bg-surface-container rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider text-xs" data-i18n="aux_fuel_title">Yoqilg‘i monitoringi</span>
+<span class="material-symbols-outlined text-primary-container text-xl">local_gas_station</span>
+</div>
+<h4 class="font-headline-sm text-white">31.05 litr / 100 km</h4>
+<p class="font-body-sm text-on-surface-variant mt-1 text-xs" data-i18n="aux_fuel_sub">Avtopark bo‘yicha o‘rtacha yoqilg‘i sarfi ko‘rsatkichi</p>
+<div class="mt-4">
+<div class="flex justify-between font-label-sm text-[11px] mb-1">
+<span class="text-secondary font-bold" data-i18n="aux_fuel_eco">Tejamkorlik rejimi</span>
+<span class="text-white">Norma: 33.0 l</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-low overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 82%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs text-on-surface-variant">
+<span data-i18n="aux_fuel_saved">Oylik tejalgan yoqilg‘i:</span>
+<span class="text-secondary font-bold font-mono">+1,850 litr</span>
+</div>
+</div>
+<!-- Turnaround Time Card -->
+<div class="bg-surface-container rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider text-xs" data-i18n="aux_customs_title">Bojxona &amp; Terminal vaqti</span>
+<span class="material-symbols-outlined text-tertiary text-xl">timelapse</span>
+</div>
+<h4 class="font-headline-sm text-white" data-i18n="aux_customs_val">4 soat 20 daqiqa</h4>
+<p class="font-body-sm text-on-surface-variant mt-1 text-xs" data-i18n="aux_customs_sub">O‘rtacha chegara postlari va bojxona tozalash vaqti</p>
+<div class="mt-4">
+<div class="flex justify-between font-label-sm text-[11px] mb-1">
+<span class="text-primary font-bold" data-i18n="aux_customs_decl">Elektron deklaratsiyalash</span>
+<span class="text-white" data-i18n="aux_customs_auto">94% avtomatlashgan</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-low overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 94%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs text-on-surface-variant">
+<span data-i18n="aux_customs_red">O‘tgan oydan qisqarish:</span>
+<span class="text-primary font-bold font-mono" data-i18n="aux_customs_red_val">-1.8 soat</span>
+</div>
+</div>
+<!-- Safety & Maintenance Score Card -->
+<div class="bg-surface-container rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider text-xs" data-i18n="aux_safety_title">Xavfsiz haydash indeksi</span>
+<span class="material-symbols-outlined text-secondary text-xl">shield</span>
+</div>
+<h4 class="font-headline-sm text-white" data-i18n="aux_safety_val">99.1 ball / 100</h4>
+<p class="font-body-sm text-on-surface-variant mt-1 text-xs" data-i18n="aux_safety_sub">Tezlik me'yori, keskin tormozlanishlar va dam olish qoidalari</p>
+<div class="mt-4">
+<div class="flex justify-between font-label-sm text-[11px] mb-1">
+<span class="text-secondary font-bold" data-i18n="aux_safety_sensors">Telematika datchiklari</span>
+<span class="text-white" data-i18n="aux_safety_zero">Nol hodisa</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-low overflow-hidden">
+<div class="h-full bg-secondary-fixed rounded-full" style="width: 99%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs text-on-surface-variant">
+<span data-i18n="aux_safety_ins">Sug‘urta chegirmasi:</span>
+<span class="text-secondary font-bold font-mono">-15% bonus</span>
+</div>
+</div>
+</section>
+<!-- Section 5: Data Table: Top 5 Eng Samarali Furalar Kesimidagi Unumdorlik -->
+<section class="bg-surface-container rounded-2xl p-6 shadow-2xl overflow-hidden" data-purpose="fleet-performance-table">
+<!-- Table Header & Controls -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-2xl">leaderboard</span>
+<h3 class="font-headline-md text-white" data-i18n="table_title">Furalar kesimidagi unumdorlik hisoboti</h3>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-0.5" data-i18n="table_subtitle">Top-samarador transport vositalari reytingi va texnik parametrlari</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-surface-container-high text-primary-fixed" data-i18n="table_total_badge">Jami: 24 ta fura</span>
+<button class="p-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-white transition-colors" onclick="refreshTableData()" title="Jadvalni yangilash">
+<span class="material-symbols-outlined text-base">refresh</span>
+</button>
+</div>
+</div>
+<!-- Modern Responsive Data Table Wrapper -->
+<div class="overflow-x-auto rounded-xl">
+<table class="w-full text-left border-collapse" id="reportsPerformanceTable">
+<thead>
+<tr class="bg-surface-container-lowest text-on-surface-variant font-table-header uppercase tracking-wider text-[11px]">
+<th class="py-3 px-4 rounded-l-lg" data-i18n="th_rank_truck">Reyting &amp; Fura</th>
+<th class="py-3 px-4" data-i18n="th_driver">Biriktirilgan haydovchi</th>
+<th class="py-3 px-4 text-center" data-i18n="th_completed_trips">Bajarilgan reyslar</th>
+<th class="py-3 px-4 text-right" data-i18n="th_distance">Bosib o‘tilgan masofa</th>
+<th class="py-3 px-4 text-right" data-i18n="th_fuel_eco">Yoqilg‘i tejamkorligi</th>
+<th class="py-3 px-4" data-i18n="th_score">Unumdorlik reytingi</th>
+<th class="py-3 px-4 rounded-r-lg text-right" data-i18n="th_actions">Amallar</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/40 text-sm">
+<!-- Row 1: 01 A 123 UA (Top 1) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-secondary/20 text-secondary font-black text-xs flex items-center justify-center">1</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+  01 A 123 UA
+</div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">Volvo FH16 (540 HP)</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-xs">SR</div>
+<div>
+<div class="font-label-md text-white">Sobir Rahimov</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 90 123 45 67</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container" data-i18n="row_trips_16">
+  16 ta reys
+</span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+  42,100 km
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+  30.8 l/100km
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 96%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">96%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" data-i18n="btn_details" onclick="openTruckTelemetry('01 A 123 UA')">
+  Batafsil
+</button>
+</td>
+</tr>
+<!-- Row 2: 40 B 456 UA (Top 2) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-black text-xs flex items-center justify-center">2</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+  40 B 456 UA
+</div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">Scania R500 V8</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-bold text-xs">JM</div>
+<div>
+<div class="font-label-md text-white">Jasurbek M.</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 93 456 78 90</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container" data-i18n="row_trips_14">
+  14 ta reys
+</span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+  38,400 km
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+  31.4 l/100km
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 94%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">94%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" data-i18n="btn_details" onclick="openTruckTelemetry('40 B 456 UA')">
+  Batafsil
+</button>
+</td>
+</tr>
+<!-- Row 3: 30 C 789 UA (Top 3) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-white font-black text-xs flex items-center justify-center">3</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+  30 C 789 UA
+</div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">Mercedes Actros 1845</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-tertiary/20 text-tertiary flex items-center justify-center font-bold text-xs">FA</div>
+<div>
+<div class="font-label-md text-white">Farhod Aliyev</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 94 987 65 43</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container" data-i18n="row_trips_13">
+  13 ta reys
+</span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+  35,900 km
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+  29.9 l/100km
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 92%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">92%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" data-i18n="btn_details" onclick="openTruckTelemetry('30 C 789 UA')">
+  Batafsil
+</button>
+</td>
+</tr>
+<!-- Row 4: 50 D 321 UA (Top 4) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-white font-black text-xs flex items-center justify-center">4</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+  50 D 321 UA
+</div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">MAN TGX 18.500</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-xs">AQ</div>
+<div>
+<div class="font-label-md text-white">Alisher Qodirov</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 97 555 44 33</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container" data-i18n="row_trips_12">
+  12 ta reys
+</span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+  33,200 km
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+  32.1 l/100km
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 89%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">89%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" data-i18n="btn_details" onclick="openTruckTelemetry('50 D 321 UA')">
+  Batafsil
+</button>
+</td>
+</tr>
+<!-- Row 5: 10 E 654 UA (Top 5) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-white font-black text-xs flex items-center justify-center">5</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+  10 E 654 UA
+</div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">DAF XF 480 Super Space</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-bold text-xs">BU</div>
+<div>
+<div class="font-label-md text-white">Bobur Usmonov</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 91 888 12 34</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container" data-i18n="row_trips_11">
+  11 ta reys
+</span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+  31,850 km
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+  30.4 l/100km
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 87%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">87%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" data-i18n="btn_details" onclick="openTruckTelemetry('10 E 654 UA')">
+  Batafsil
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer Table Summary Bar -->
+<div class="mt-4 pt-4 border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between text-xs text-on-surface-variant gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">info</span>
+<span data-i18n="table_info_note">Unumdorlik indeksi: GPS marshrut vaqti, yuk hajmi koeffitsiyenti va yoqilg‘i tejamkorligi asosida hisoblanadi.</span>
+</div>
+<div class="flex items-center gap-4">
+<span data-i18n="table_last_update">Oxirgi avtomatik yangilanish: Bugun, 18:45</span>
+<button class="text-primary hover:underline font-label-md text-xs" data-i18n="btn_download_all_24" onclick="exportReport('XLSX-TOP')">Barcha 24 furani yuklab olish</button><span class="text-outline-variant/40">•</span><button class="text-tertiary-fixed-dim hover:underline font-label-md text-xs" data-i18n="btn_download_csv_24" onclick="openExportModal('CSV')">CSV yuklab olish</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- END: MainContentWrapper -->
+<!-- BEGIN: Export Confirmation Modal Backdrop & Dialog WITH ADVANCED DATE PICKER & VALIDATION -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-background/85 modal-backdrop-blur p-4 overflow-y-auto" id="exportReportModal">
+<div class="relative w-full max-w-xl bg-surface-container border border-outline-variant/50 rounded-2xl shadow-2xl overflow-hidden transition-all transform duration-300 scale-95 opacity-0 my-auto" id="exportModalDialogCard">
+<!-- Modal Header -->
+<div class="px-6 py-5 bg-surface-container-low border-b border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary-container flex items-center justify-center" id="exportHeaderIconWrap">
+<span class="material-symbols-outlined text-2xl" id="exportHeaderIcon">file_download</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-lg text-white font-bold" data-i18n="modal_export_title">Hisobotni eksport qilish</h3>
+<p class="font-body-sm text-xs text-on-surface-variant" data-i18n="modal_export_subtitle">Analitik ma'lumotlarni fayl ko'rinishida yuklab olish</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high flex items-center justify-center transition-colors" onclick="closeExportModal()" title="Yopish">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-6 space-y-4">
+<!-- Selected Format Highlight Pill -->
+<div class="p-3.5 bg-surface-container-lowest rounded-xl border border-outline-variant/40 space-y-3 shadow-inner"><div class="flex items-center justify-between"><span class="font-label-sm text-white font-bold text-xs flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-base">description</span><span data-i18n="modal_format_select">Eksport formati:</span></span><div class="flex items-center gap-1.5 bg-surface-container p-1 rounded-lg border border-outline-variant/30" id="formatPillsContainer"><button type="button" id="formatPillPdf" onclick="switchExportFormat('PDF')" class="px-2.5 py-1 rounded-md text-xs font-bold transition-all text-on-surface-variant hover:text-white">PDF</button><button type="button" id="formatPillXlsx" onclick="switchExportFormat('XLSX')" class="px-2.5 py-1 rounded-md text-xs font-bold transition-all bg-primary-container text-white shadow-sm">Excel (XLSX)</button><button type="button" id="formatPillCsv" onclick="switchExportFormat('CSV')" class="px-2.5 py-1 rounded-md text-xs font-bold transition-all text-on-surface-variant hover:text-white">CSV</button></div></div><div class="flex items-center justify-between pt-2 border-t border-outline-variant/20"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" id="exportFormatBadgeBg"><span class="material-symbols-outlined text-2xl" id="exportFormatBadgeIcon">table_chart</span></div><div><div class="font-label-md text-white font-bold" id="exportFormatName">Microsoft Excel (.xlsx)</div><div class="font-body-sm text-xs text-on-surface-variant" id="exportFormatMime">Tablitsa va dinamik hisobot fayli</div></div></div><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-secondary" id="exportSizeBadge">~2.4 MB</span></div></div>
+<!-- FEATURE 1: REPORT EXPORT DATE PICKER -->
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/40 space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-white font-bold flex items-center gap-1.5 text-xs">
+<span class="material-symbols-outlined text-primary text-base">date_range</span>
+<span data-i18n="export_period_selection">Hisobot davrini tanlash:</span>
+</span>
+<!-- Quick Presets -->
+<div class="flex items-center gap-1.5">
+<button class="px-2 py-1 rounded text-[11px] font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-white transition-colors border border-outline-variant/30" data-i18n="preset_7_days" onclick="applyExportPreset(7)" type="button">
+  So‘nggi 7 kun
+</button>
+<button class="px-2 py-1 rounded text-[11px] font-semibold bg-primary-container/20 text-primary border border-primary-container/40 hover:bg-primary-container/30 transition-colors" data-i18n="preset_30_days" onclick="applyExportPreset(30)" type="button">
+  So‘nggi 30 kun
+</button>
+<button class="px-2 py-1 rounded text-[11px] font-semibold bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-white transition-colors border border-outline-variant/30" data-i18n="preset_this_month" onclick="applyExportPreset('month')" type="button">
+  Shu oy
+</button>
+</div>
+</div>
+<!-- Start & End Date Inputs -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<label class="block font-label-sm text-[11px] text-on-surface-variant mb-1" data-i18n="lbl_start_date">Boshlanish sanasi</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-primary text-base pointer-events-none">calendar_today</span>
+<input class="w-full bg-surface-container-lowest text-white text-xs font-mono font-medium rounded-lg pl-9 pr-3 py-2 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" id="exportStartDate" onchange="validateExportDates()" type="date">
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-[11px] text-on-surface-variant mb-1" data-i18n="lbl_end_date">Tugash sanasi</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-primary text-base pointer-events-none">event_available</span>
+<input class="w-full bg-surface-container-lowest text-white text-xs font-mono font-medium rounded-lg pl-9 pr-3 py-2 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" id="exportEndDate" onchange="validateExportDates()" type="date">
+</div>
+</div>
+</div>
+<!-- Validation Error Notice -->
+<div class="hidden flex items-center gap-2 p-2.5 rounded-lg bg-error-container/20 border border-error/40 text-error text-xs" id="dateValidationErr">
+<span class="material-symbols-outlined text-base shrink-0">error</span>
+<span data-i18n="err_invalid_dates" id="dateValidationErrMsg">Tugash sanasi boshlanish sanasidan oldin bo‘lishi mumkin emas!</span>
+</div>
+<!-- Dynamic Range Preview Tag -->
+<div class="flex items-center justify-between text-[11px] px-3 py-2 rounded-lg bg-surface-container-lowest/80 border border-outline-variant/30">
+<span class="text-on-surface-variant" data-i18n="lbl_selected_range">Tanlangan oraliq:</span>
+<span class="font-mono font-bold text-secondary flex items-center gap-1.5" id="dateRangePreviewBadge">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+<span id="dateRangePreviewText">17.10.2026 — 16.11.2026 • 31 kunlik qamrov</span>
+</span>
+</div>
+</div>
+<!-- Parameters Summary Grid -->
+<div class="p-3.5 bg-surface-container-low rounded-xl border border-outline-variant/30 space-y-2 text-xs">
+<div class="flex items-center justify-between py-1 border-b border-outline-variant/20">
+<span class="text-on-surface-variant flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-secondary">local_shipping</span> <span data-i18n="param_scope">Qamrov:</span></span>
+<span class="font-semibold text-white" data-i18n="param_scope_val">Barcha 24 ta furalar unumdorligi va yoqilg‘i monitoringi</span>
+</div>
+<div class="flex items-center justify-between py-1">
+<span class="text-on-surface-variant flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-tertiary">analytics</span> <span data-i18n="param_sections">Qo‘shimcha bo‘limlar:</span></span>
+<span class="font-semibold text-white" data-i18n="param_sections_val">Yoqilg‘i, reyslar, haydovchilar reytingi</span>
+</div>
+</div>
+<!-- Checkbox Option -->
+<label class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-lowest/60 border border-outline-variant/30 cursor-pointer hover:bg-surface-container-low transition-colors">
+<input checked="" class="rounded bg-surface-container border-outline-variant text-primary-container focus:ring-primary-container w-4 h-4 cursor-pointer" id="includeCustomsCheck" type="checkbox">
+<div class="text-xs leading-tight">
+<span class="text-white font-medium block" data-i18n="chk_customs_label">Bojxona va kechikishlar statistikasini kiritish</span>
+<span class="text-on-surface-variant text-[11px]" data-i18n="chk_customs_sub">Chegara o'tish punktlari va kutilmagan to'xtashlar hisoboti</span>
+</div>
+</label>
+</div>
+<!-- Modal Footer Actions -->
+<div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant/30 flex items-center justify-end gap-3">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md transition-colors text-xs font-semibold" data-i18n="btn_cancel" onclick="closeExportModal()" type="button">
+  Bekor qilish
+</button>
+<button class="px-5 py-2.5 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md flex items-center gap-2 shadow-lg shadow-primary-container/30 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none text-xs font-bold" id="confirmDownloadBtn" onclick="confirmExportDownload()" type="button">
+<span class="material-symbols-outlined text-lg" id="btnDownloadIcon">download</span>
+<span data-i18n="btn_start_download" id="btnDownloadText">Yuklab olishni boshlash</span>
+</button>
+</div>
+</div>
+</div>
+<!-- END: Export Confirmation Modal -->
+<script>
+  // ==========================================
+  // CLIENT-SIDE I18N DICTIONARY (UZ & RU)
+  // ==========================================
+  let currentLanguage = 'uz';
+
+  const i18nDictionary = {
+    uz: {
+      system_subtitle: "Logistika tizimi",
+      nav_home: "Bosh sahifa",
+      nav_trucks: "Furalar",
+      nav_cargo: "Yuklar",
+      nav_drivers: "Haydovchilar",
+      nav_trips: "Reyslar",
+      nav_calendar: "Kalendar",
+      nav_archive: "Arxiv",
+      nav_reports: "Hisobotlar",
+      nav_settings: "Sozlamalar",
+      sidebar_fleet_monitoring: "Avtopark nazorati",
+      sidebar_gps_active: "GPS & Telematika 24/7 faol",
+      search_placeholder: "Qidirish: fura, yuk, haydovchi, reys...",
+      user_role: "Bosh dispetcher",
+      header_date: "16-noyabr, 2026 (Dushanba)",
+      bc_logistics: "Logistika",
+      bc_monitoring: "Tahlil va monitoring",
+      bc_reports: "Hisobotlar",
+      page_title: "HISOBOTLAR VA ANALITIKA",
+      page_subtitle: "Avtopark faoliyati, reyslar unumdorligi va yoqilg‘i sarfi bo‘yicha batafsil statistik hisobotlar",
+      opt_last_7: "So‘nggi 7 kun",
+      opt_last_30: "So‘nggi 30 kun",
+      opt_cur_quarter: "Joriy chorak (Q4)",
+      opt_ytd: "Yil boshidan",
+      btn_filters: "Filtrlar",
+      btn_pdf_export: "PDF hisobot yuklash",
+      btn_excel_export: "Excel (XLSX) eksport",
+      kpi_trips_label: "Jami yakunlangan reyslar",
+      kpi_trips_sub: "O‘tgan oyga nisbatan +23 ta reys ko‘p",
+      unit_trips: "ta reys",
+      kpi_cargo_label: "Yetkazilgan jami yuk",
+      unit_tons: "tonna",
+      kpi_cargo_sub: "O‘rtacha har bir reysga 23.2 t tovar",
+      kpi_distance_label: "Bosib o‘tilgan umumiy masofa",
+      kpi_distance_sub: "O‘rtacha 17,190 km / fura hisobida",
+      status_active: "Aktiv",
+      kpi_sla_label: "O‘rtacha yetkazish tezligi",
+      sla_on_time: "o‘z vaqtida",
+      kpi_sla_sub: "Faqat 3 ta kechikish (bojxona navbati)",
+      filter_route: "Filtr:",
+      opt_all_routes: "Barcha yo‘nalishlar (MDH & Yevropa)",
+      filter_truck_type: "Fura turi:",
+      opt_all_truck_types: "Barcha turlar (TENT, REF, MEGA)",
+      filter_driver_group: "Haydovchi guruhi:",
+      opt_all_drivers: "Barcha haydovchilar (1-toifa)",
+      btn_close: "Yopish",
+      chart_title: "Oylik reyslar va yuk tashish statistikasi",
+      chart_subtitle: "So‘nggi 7 oylik yuk tashish ko‘rsatkichlari dinamikasi",
+      legend_trips: "Reyslar soni (ta)",
+      legend_cargo: "Yuk hajmi (ming t)",
+      month_may: "May",
+      month_jun: "Iyun",
+      month_jul: "Iyul",
+      month_aug: "Avg",
+      month_sep: "Sen",
+      month_oct: "Okt",
+      month_nov_cur: "Noy (Joriy)",
+      ribbon_top_route: "Eng serqatnov marshrut",
+      ribbon_route_val: "Toshkent — Moskva yo‘nalishi",
+      ribbon_route_sub: "38% umumiy xalqaro reyslar ulushi",
+      ribbon_avg_duration: "O‘rtacha safar muddati",
+      ribbon_duration_val: "6.4 kun / reys davomiyligi",
+      ribbon_duration_sub: "Normal me'yordan 14 soat tezroq",
+      donut_title: "Avtoparkdan foydalanish",
+      donut_badge: "24 ta fura",
+      donut_subtitle: "Joriy operatsion holat taqsimoti",
+      donut_score_label: "Unumdorlik",
+      status_on_road: "Yo‘lda / Faol reysda",
+      status_idle: "Bo‘sh / Rezervda",
+      status_loading: "Yuklanmoqda / Omborda",
+      status_repair: "Texnik ko‘rik / Servisda",
+      count_14_trucks: "14 ta",
+      count_6_trucks: "6 ta",
+      count_2_trucks: "2 ta",
+      donut_footnote_title: "Avtopark holati: A'lo darajada",
+      donut_footnote_sub: "Texnik shaylik koeffitsiyenti normadan 3.2% yuqori",
+      aux_fuel_title: "Yoqilg‘i monitoringi",
+      aux_fuel_sub: "Avtopark bo‘yicha o‘rtacha yoqilg‘i sarfi ko‘rsatkichi",
+      aux_fuel_eco: "Tejamkorlik rejimi",
+      aux_fuel_saved: "Oylik tejalgan yoqilg‘i:",
+      aux_customs_title: "Bojxona & Terminal vaqti",
+      aux_customs_val: "4 soat 20 daqiqa",
+      aux_customs_sub: "O‘rtacha chegara postlari va bojxona tozalash vaqti",
+      aux_customs_decl: "Elektron deklaratsiyalash",
+      aux_customs_auto: "94% avtomatlashgan",
+      aux_customs_red: "O‘tgan oydan qisqarish:",
+      aux_customs_red_val: "-1.8 soat",
+      aux_safety_title: "Xavfsiz haydash indeksi",
+      aux_safety_val: "99.1 ball / 100",
+      aux_safety_sub: "Tezlik me'yori, keskin tormozlanishlar va dam olish qoidalari",
+      aux_safety_sensors: "Telematika datchiklari",
+      aux_safety_zero: "Nol hodisa",
+      aux_safety_ins: "Sug‘urta chegirmasi:",
+      table_title: "Furalar kesimidagi unumdorlik hisoboti",
+      table_subtitle: "Top-samarador transport vositalari reytingi va texnik parametrlari",
+      table_total_badge: "Jami: 24 ta fura",
+      th_rank_truck: "Reyting & Fura",
+      th_driver: "Biriktirilgan haydovchi",
+      th_completed_trips: "Bajarilgan reyslar",
+      th_distance: "Bosib o‘tilgan masofa",
+      th_fuel_eco: "Yoqilg‘i tejamkorligi",
+      th_score: "Unumdorlik reytingi",
+      th_actions: "Amallar",
+      row_trips_16: "16 ta reys",
+      row_trips_14: "14 ta reys",
+      row_trips_13: "13 ta reys",
+      row_trips_12: "12 ta reys",
+      row_trips_11: "11 ta reys",
+      btn_details: "Batafsil",
+      table_info_note: "Unumdorlik indeksi: GPS marshrut vaqti, yuk hajmi koeffitsiyenti va yoqilg‘i tejamkorligi asosida hisoblanadi.",
+      table_last_update: "Oxirgi avtomatik yangilanish: Bugun, 18:45",
+      btn_download_all_24: "Barcha 24 furani yuklab olish",
+      modal_export_title: "Hisobotni eksport qilish",
+      modal_export_subtitle: "Analitik ma'lumotlarni fayl ko'rinishida yuklab olish",
+      export_period_selection: "Hisobot davrini tanlash:",
+      preset_7_days: "So‘nggi 7 kun",
+      preset_30_days: "So‘nggi 30 kun",
+      preset_this_month: "Shu oy",
+      lbl_start_date: "Boshlanish sanasi",
+      lbl_end_date: "Tugash sanasi",
+      err_invalid_dates: "Tugash sanasi boshlanish sanasidan oldin bo‘lishi mumkin emas!",
+      lbl_selected_range: "Tanlangan oraliq:",
+      param_scope: "Qamrov:",
+      param_scope_val: "Barcha 24 ta furalar unumdorligi va yoqilg‘i monitoringi",
+      param_sections: "Qo‘shimcha bo‘limlar:",
+      param_sections_val: "Yoqilg‘i, reyslar, haydovchilar reytingi",
+      chk_customs_label: "Bojxona va kechikishlar statistikasini kiritish",
+      chk_customs_sub: "Chegara o'tish punktlari va kutilmagan to'xtashlar hisoboti",
+      btn_cancel: "Bekor qilish",
+      btn_start_download: "Yuklab olishni boshlash",
+      btn_generating: "Tayyorlanmoqda...",
+      toast_success_title: "Muvaffaqiyatli!",
+      toast_pdf_success: "PDF hisobot muvaffaqiyatli yuklab olindi!",
+      toast_excel_success: "Excel (XLSX) hisobot muvaffaqiyatli yuklab olindi!"
+    },
+    ru: {
+      system_subtitle: "Система логистики",
+      nav_home: "Главная",
+      nav_trucks: "Фуры",
+      nav_cargo: "Грузы",
+      nav_drivers: "Водители",
+      nav_trips: "Рейсы",
+      nav_calendar: "Календарь",
+      nav_archive: "Архив",
+      nav_reports: "Отчеты",
+      nav_settings: "Настройки",
+      sidebar_fleet_monitoring: "Мониторинг автопарка",
+      sidebar_gps_active: "GPS & Телематика 24/7 активны",
+      search_placeholder: "Поиск: фура, груз, водитель, рейс...",
+      user_role: "Главный диспетчер",
+      header_date: "16 ноября, 2026 (Понедельник)",
+      bc_logistics: "Логистика",
+      bc_monitoring: "Анализ и мониторинг",
+      bc_reports: "Отчеты",
+      page_title: "ОТЧЕТЫ И АНАЛИТИКА",
+      page_subtitle: "Подробные статистические отчеты о работе автопарка, эффективности рейсов и расходе топлива",
+      opt_last_7: "Последние 7 дней",
+      opt_last_30: "Последние 30 дней",
+      opt_cur_quarter: "Текущий квартал (Q4)",
+      opt_ytd: "С начала года",
+      btn_filters: "Фильтры",
+      btn_pdf_export: "Скачать PDF отчет",
+      btn_excel_export: "Экспорт в Excel (XLSX)",
+      kpi_trips_label: "Всего завершенных рейсов",
+      kpi_trips_sub: "На +23 рейса больше по сравнению с прошлым месяцем",
+      unit_trips: "рейсов",
+      kpi_cargo_label: "Всего доставлено груза",
+      unit_tons: "тонн",
+      kpi_cargo_sub: "В среднем 23.2 т груза на каждый рейс",
+      kpi_distance_label: "Общий пройденный пробег",
+      kpi_distance_sub: "В среднем 17,190 км на одну фуру",
+      status_active: "Активен",
+      kpi_sla_label: "Средняя пунктуальность доставки",
+      sla_on_time: "вовремя",
+      kpi_sla_sub: "Всего 3 задержки (очереди на таможне)",
+      filter_route: "Фильтр:",
+      opt_all_routes: "Все направления (СНГ & Европа)",
+      filter_truck_type: "Тип фуры:",
+      opt_all_truck_types: "Все типы (ТЕНТ, РЕФ, МЕГА)",
+      filter_driver_group: "Группа водителей:",
+      opt_all_drivers: "Все водители (1-я категория)",
+      btn_close: "Закрыть",
+      chart_title: "Статистика рейсов и грузоперевозок по месяцам",
+      chart_subtitle: "Динамика ключевых показателей перевозок за последние 7 месяцев",
+      legend_trips: "Количество рейсов (ед.)",
+      legend_cargo: "Объем груза (тыс. т)",
+      month_may: "Май",
+      month_jun: "Июн",
+      month_jul: "Июл",
+      month_aug: "Авг",
+      month_sep: "Сен",
+      month_oct: "Окт",
+      month_nov_cur: "Ноя (Тек.)",
+      ribbon_top_route: "Самый загруженный маршрут",
+      ribbon_route_val: "Направление Ташкент — Москва",
+      ribbon_route_sub: "38% от общего объема международных рейсов",
+      ribbon_avg_duration: "Среднее время в пути",
+      ribbon_duration_val: "6.4 дня / длительность рейса",
+      ribbon_duration_sub: "На 14 часов быстрее стандартной нормы",
+      donut_title: "Использование автопарка",
+      donut_badge: "24 фуры",
+      donut_subtitle: "Текущее распределение рабочего статуса",
+      donut_score_label: "Эффективность",
+      status_on_road: "В пути / В активном рейсе",
+      status_idle: "Свободен / В резерве",
+      status_loading: "Погрузка / На складе",
+      status_repair: "ТО / На сервисе",
+      count_14_trucks: "14 ед.",
+      count_6_trucks: "6 ед.",
+      count_2_trucks: "2 ед.",
+      donut_footnote_title: "Состояние парка: Отличное",
+      donut_footnote_sub: "Коэффициент техготовности выше нормы на 3.2%",
+      aux_fuel_title: "Мониторинг топлива",
+      aux_fuel_sub: "Средний показатель расхода топлива по всему автопарку",
+      aux_fuel_eco: "Режим экономии",
+      aux_fuel_saved: "Сэкономлено за месяц:",
+      aux_customs_title: "Время на таможне и терминале",
+      aux_customs_val: "4 часа 20 минут",
+      aux_customs_sub: "Среднее время прохождения границ и таможенной очистки",
+      aux_customs_decl: "Электронное декларирование",
+      aux_customs_auto: "94% автоматизировано",
+      aux_customs_red: "Сокращение с прошлого месяца:",
+      aux_customs_red_val: "-1.8 часа",
+      aux_safety_title: "Индекс безопасности вождения",
+      aux_safety_val: "99.1 балла / 100",
+      aux_safety_sub: "Соблюдение скорости, отсутствие резких торможений и режим отдыха",
+      aux_safety_sensors: "Датчики телематики",
+      aux_safety_zero: "Ноль инцидентов",
+      aux_safety_ins: "Скидка на страховку:",
+      table_title: "Отчет по эффективности в разрезе фур",
+      table_subtitle: "Рейтинг наиболее эффективных транспортных средств и параметры",
+      table_total_badge: "Всего: 24 фуры",
+      th_rank_truck: "Рейтинг & Фура",
+      th_driver: "Закрепленный водитель",
+      th_completed_trips: "Завершенные рейсы",
+      th_distance: "Пройденное расстояние",
+      th_fuel_eco: "Экономия топлива",
+      th_score: "Рейтинг эффективности",
+      th_actions: "Действия",
+      row_trips_16: "16 рейсов",
+      row_trips_14: "14 рейсов",
+      row_trips_13: "13 рейсов",
+      row_trips_12: "12 рейсов",
+      row_trips_11: "11 рейсов",
+      btn_details: "Подробнее",
+      table_info_note: "Индекс эффективности рассчитывается на основе времени по GPS, загрузки и экономии топлива.",
+      table_last_update: "Последнее автообновление: Сегодня, 18:45",
+      btn_download_all_24: "Выгрузить все 24 фуры",
+      modal_export_title: "Экспорт аналитического отчета",
+      modal_export_subtitle: "Выгрузка сводных данных в виде файла",
+      export_period_selection: "Выбор периода для отчета:",
+      preset_7_days: "За 7 дней",
+      preset_30_days: "За 30 дней",
+      preset_this_month: "Этот месяц",
+      lbl_start_date: "Дата начала",
+      lbl_end_date: "Дата окончания",
+      err_invalid_dates: "Дата окончания не может быть раньше даты начала!",
+      lbl_selected_range: "Выбранный период:",
+      param_scope: "Охват:",
+      param_scope_val: "Эффективность и расход топлива всех 24 фур",
+      param_sections: "Дополнительные разделы:",
+      param_sections_val: "Топливо, рейсы, рейтинг водителей",
+      chk_customs_label: "Включить статистику таможни и задержек",
+      chk_customs_sub: "Отчет по контрольно-пропускным пунктам и внеплановым простоям",
+      btn_cancel: "Отмена",
+      btn_start_download: "Начать скачивание",
+      btn_generating: "Формирование файла...",
+      toast_success_title: "Успешно!",
+      toast_pdf_success: "PDF отчет успешно сформирован и скачан!",
+      toast_excel_success: "Excel (XLSX) отчет успешно выгружен!"
+    }
+  };
+
+  function setLanguage(lang) {
+    currentLanguage = lang;
+    const uzBtn = document.getElementById('lang-uz-btn');
+    const ruBtn = document.getElementById('lang-ru-btn');
+
+    if (lang === 'ru') {
+      ruBtn.className = "px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-primary-container text-white shadow-sm";
+      uzBtn.className = "px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-on-surface-variant hover:text-white";
+      document.documentElement.lang = "ru";
+    } else {
+      uzBtn.className = "px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-primary-container text-white shadow-sm";
+      ruBtn.className = "px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-on-surface-variant hover:text-white";
+      document.documentElement.lang = "uz";
+    }
+
+    // Apply translations across all data-i18n elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18nDictionary[lang] && i18nDictionary[lang][key]) {
+        el.innerText = i18nDictionary[lang][key];
+      }
+    });
+
+    // Translate placeholders
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const key = el.getAttribute('data-i18n-ph');
+      if (i18nDictionary[lang] && i18nDictionary[lang][key]) {
+        el.placeholder = i18nDictionary[lang][key];
+      }
+    });
+
+    // Update Header Date
+    const headerDate = document.getElementById('currentHeaderDate');
+    if (headerDate) {
+      headerDate.innerText = lang === 'ru' ? '16 ноября, 2026 (Понедельник)' : '16-noyabr, 2026 (Dushanba)';
+    }
+
+    // Update dynamic preview if modal open
+    updateDateRangePreview();
+  }
+
+  // ==========================================
+  // FEATURE 1: REPORT EXPORT DATE PICKER LOGIC
+  // ==========================================
+  let currentExportFormat = 'XLSX';
+
+  function initDefaultExportDates() {
+    const end = new Date(2026, 10, 16); // 16 Nov 2026
+    const start = new Date(2026, 9, 17); // 17 Oct 2026 (30 days)
+
+    const formatYMD = (d) => {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    const sEl = document.getElementById('exportStartDate');
+    const eEl = document.getElementById('exportEndDate');
+    if (sEl && eEl) {
+      sEl.value = formatYMD(start);
+      eEl.value = formatYMD(end);
+    }
+    updateDateRangePreview();
+  }
+
+  function applyExportPreset(preset) {
+    const end = new Date(2026, 10, 16);
+    let start = new Date(2026, 10, 16);
+
+    if (preset === 7) {
+      start.setDate(end.getDate() - 7);
+    } else if (preset === 30) {
+      start.setDate(end.getDate() - 30);
+    } else if (preset === 'month') {
+      start = new Date(2026, 10, 1);
+    }
+
+    const formatYMD = (d) => {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    document.getElementById('exportStartDate').value = formatYMD(start);
+    document.getElementById('exportEndDate').value = formatYMD(end);
+    validateExportDates();
+  }
+
+  function validateExportDates() {
+    const startVal = document.getElementById('exportStartDate').value;
+    const endVal = document.getElementById('exportEndDate').value;
+    const errorBox = document.getElementById('dateValidationErr');
+    const downloadBtn = document.getElementById('confirmDownloadBtn');
+    const previewBadge = document.getElementById('dateRangePreviewBadge');
+
+    if (!startVal || !endVal) {
+      errorBox.classList.remove('hidden');
+      downloadBtn.disabled = true;
+      return false;
+    }
+
+    const dStart = new Date(startVal);
+    const dEnd = new Date(endVal);
+
+    if (dEnd < dStart) {
+      errorBox.classList.remove('hidden');
+      downloadBtn.disabled = true;
+      previewBadge.classList.remove('text-secondary');
+      previewBadge.classList.add('text-error');
+      document.getElementById('dateRangePreviewText').innerText = currentLanguage === 'ru' 
+        ? "Некорректный интервал дат" 
+        : "Noto‘g‘ri sana oralig‘i tanlandi";
+      return false;
+    } else {
+      errorBox.classList.add('hidden');
+      downloadBtn.disabled = false;
+      previewBadge.classList.remove('text-error');
+      previewBadge.classList.add('text-secondary');
+      updateDateRangePreview();
+      return true;
+    }
+  }
+
+  function updateDateRangePreview() {
+    const startVal = document.getElementById('exportStartDate').value;
+    const endVal = document.getElementById('exportEndDate').value;
+    if (!startVal || !endVal) return;
+
+    const dStart = new Date(startVal);
+    const dEnd = new Date(endVal);
+    if (dEnd < dStart) return;
+
+    const diffTime = Math.abs(dEnd - dStart);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+    const formatDMY = (d) => {
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day}.${month}.${year}`;
+    };
+
+    const daysText = currentLanguage === 'ru' ? `${diffDays} дн. охват` : `${diffDays} kunlik qamrov`;
+    document.getElementById('dateRangePreviewText').innerText = `${formatDMY(dStart)} — ${formatDMY(dEnd)} • ${daysText}`;
+  }
+
+  function openExportModal(format) {
+    currentExportFormat = format;
+    const modal = document.getElementById('exportReportModal');
+    const card = document.getElementById('exportModalDialogCard');
+    const headerIcon = document.getElementById('exportHeaderIcon');
+    const headerWrap = document.getElementById('exportHeaderIconWrap');
+    const nameEl = document.getElementById('exportFormatName');
+    const mimeEl = document.getElementById('exportFormatMime');
+    const badgeBg = document.getElementById('exportFormatBadgeBg');
+    const badgeIcon = document.getElementById('exportFormatBadgeIcon');
+    const sizeEl = document.getElementById('exportSizeBadge');
+
+    initDefaultExportDates();
+
+    if (format === 'PDF') {
+      nameEl.innerText = 'PDF Hisobot formati (.pdf)';
+      mimeEl.innerText = currentLanguage === 'ru' 
+        ? 'Форматированный документ для печати и презентаций' 
+        : 'Chop etish va taqdimotlar uchun formatlangan hujjat';
+      badgeBg.className = 'w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-error-container/20 text-error';
+      badgeIcon.innerText = 'picture_as_pdf';
+      headerWrap.className = 'w-10 h-10 rounded-xl bg-error-container/20 text-error flex items-center justify-center';
+      headerIcon.innerText = 'picture_as_pdf';
+      sizeEl.innerText = '~3.8 MB';
+    } else {
+      nameEl.innerText = 'Microsoft Excel (.xlsx)';
+      mimeEl.innerText = currentLanguage === 'ru' 
+        ? 'Подробные данные, формулы и фильтруемые таблицы' 
+        : 'Batafsil ma\'lumotlar, formulalar va filtrlangan jadvallar';
+      badgeBg.className = 'w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-secondary/20 text-secondary';
+      badgeIcon.innerText = 'table_chart';
+      headerWrap.className = 'w-10 h-10 rounded-xl bg-primary-container/20 text-primary-container flex items-center justify-center';
+      headerIcon.innerText = 'table_chart';
+      sizeEl.innerText = '~2.4 MB';
+    }
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+      card.classList.remove('scale-95', 'opacity-0');
+      card.classList.add('scale-100', 'opacity-100');
+    }, 10);
+  }
+
+  function closeExportModal() {
+    const modal = document.getElementById('exportReportModal');
+    const card = document.getElementById('exportModalDialogCard');
+    if (!card || !modal) return;
+    card.classList.remove('scale-100', 'opacity-100');
+    card.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }, 200);
+  }
+
+  function confirmExportDownload() {
+    if (!validateExportDates()) return;
+
+    const btn = document.getElementById('confirmDownloadBtn');
+    const btnText = document.getElementById('btnDownloadText');
+    const btnIcon = document.getElementById('btnDownloadIcon');
+    
+    // Progress state
+    btn.disabled = true;
+    btnIcon.classList.add('animate-spin');
+    btnIcon.innerText = 'hourglass_top';
+    btnText.innerText = i18nDictionary[currentLanguage].btn_generating;
+
+    setTimeout(() => {
+      btn.disabled = false;
+      btnIcon.classList.remove('animate-spin');
+      btnIcon.innerText = 'download';
+      btnText.innerText = i18nDictionary[currentLanguage].btn_start_download;
+
+      const filename = currentExportFormat === 'PDF' ? 'Fura_Report_Q4_2026.pdf' : 'Fura_Report_Q4_2026.xlsx';
+      closeExportModal();
+
+      const successMsg = currentExportFormat === 'PDF' 
+        ? i18nDictionary[currentLanguage].toast_pdf_success 
+        : i18nDictionary[currentLanguage].toast_excel_success;
+
+      showToast(i18nDictionary[currentLanguage].toast_success_title, `${successMsg} (${filename})`);
+    }, 900);
+  }
+
+  // Backdrop click listener
+  const exportModal = document.getElementById('exportReportModal');
+  if (exportModal) {
+    exportModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeExportModal();
+      }
+    });
+  }
+
+  // Toast Functionality
+  let toastTimer = null;
+  function showToast(title, msg) {
+    const toast = document.getElementById('toastNotification');
+    document.getElementById('toastTitle').innerText = title;
+    document.getElementById('toastMessage').innerText = msg;
+    
+    toast.classList.remove('translate-y-[-120%]', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      hideToast();
+    }, 3800);
+  }
+
+  function hideToast() {
+    const toast = document.getElementById('toastNotification');
+    toast.classList.remove('translate-y-0', 'opacity-100');
+    toast.classList.add('translate-y-[-120%]', 'opacity-0', 'pointer-events-none');
+  }
+
+  // Date Range Dropdown Toggle in Top Bar
+  function toggleDateMenu() {
+    const menu = document.getElementById('dateMenuDropdown');
+    menu.classList.toggle('hidden');
+  }
+
+  function selectDateRange(label, el, days) {
+    document.getElementById('selectedDateLabel').innerText = label;
+    const items = document.querySelectorAll('#dateMenuDropdown button');
+    items.forEach(btn => {
+      btn.classList.remove('bg-surface-container');
+      const check = btn.querySelector('.material-symbols-outlined');
+      if (check) check.classList.add('opacity-0');
+    });
+    el.classList.add('bg-surface-container');
+    const check = el.querySelector('.material-symbols-outlined');
+    if (check) check.classList.remove('opacity-0');
+    
+    toggleDateMenu();
+    showToast(currentLanguage === 'ru' ? "Период обновлен" : "Davr yangilandi", `${label}`);
+  }
+
+  // Filter Drawer Toggle
+  function toggleTelemetryBar() {
+    const bar = document.getElementById('telemetryFilterBar');
+    bar.classList.toggle('hidden');
+    bar.classList.toggle('flex');
+  }
+
+  function exportReport(format) {
+    openExportModal(format.includes('PDF') ? 'PDF' : 'XLSX');
+  }
+
+  function refreshTableData() {
+    showToast(currentLanguage === 'ru' ? "Обновлено" : "Yangilandi", currentLanguage === 'ru' ? "Показатели фур успешно актуализированы!" : "Furalar kesimidagi statistik ko‘rsatkichlar yangilandi!");
+  }
+
+  function openTruckTelemetry(plate) {
+    showToast("Fura telematikasi", `${plate} bo‘yicha to‘liq hisobot va marshrut ochilmoqda.`);
+  }
+
+  // Keyboard shortcut Ctrl+K
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      const search = document.getElementById('global-search');
+      if (search) search.focus();
+    }
+    if (e.key === 'Escape') {
+      closeExportModal();
+    }
+  });
+
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    initDefaultExportDates();
+  });
+</script>
+
+
+</body></html>

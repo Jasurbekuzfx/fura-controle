@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Vehicle {
+  id              Int       @id @default(autoincrement())
+  plateNumber     String    @unique
+  model           String
+  vehicleType     String    @default("TENT") // TENT, REF, MEGA, KONT
+  driverId        Int?      @unique
+  driver          Driver?   @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  phone           String    @default("")
+  capacityTons    Float     @default(22)
+  volumeM3        Float     @default(92)
+  currentLocation String    @default("")
+  destination     String    @default("")
+  status          String    @default("AVAILABLE") // AVAILABLE, ON_ROUTE, LOADING, BUSY, UNDER_REPAIR
+  notes           String    @default("")
+  isDeleted       Boolean   @default(false)
+  deletedAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  cargos Cargo[]
+  trips  Trip[]
+
+  @@index([status])
+  @@index([vehicleType])
+  @@index([isDeleted])
+}
+
+model Driver {
+  id                Int      @id @default(autoincrement())
+  fullName          String
+  phone             String
+  licenseNumber     String   @unique
+  licenseCategories String   @default("B,C,E") // B, C, D, E comma-separated
+  experienceYears   Int      @default(1)
+  status            String   @default("AVAILABLE") // AVAILABLE, ON_ROUTE, RESTING, ON_LEAVE
+  notes             String   @default("")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  vehicle Vehicle?
+  cargos  Cargo[]
+  trips   Trip[]
+
+  @@index([status])
+}
+
+model Cargo {
+  id                 Int      @id @default(autoincrement())
+  code               String   @unique
+  name               String
+  cargoType          String   @default("Quruq yuk")
+  loadingAddress     String
+  destinationAddress String
+  weightTons         Float
+  volumeM3           Float    @default(82)
+  loadingDate        DateTime
+  unloadingDate      DateTime
+  price              Float    @default(0)
+  customerName       String
+  customerPhone      String   @default("")
+  vehicleId          Int?
+  vehicle            Vehicle? @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  driverId           Int?
+  driver             Driver?  @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  status             String   @default("PENDING") // PENDING, LOADING, IN_TRANSIT, DELIVERED, CANCELLED
+  notes              String   @default("")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  trips Trip[]
+
+  @@index([status])
+  @@index([loadingDate])
+  @@index([unloadingDate])
+}
+
+model Trip {
+  id            Int       @id @default(autoincrement())
+  tripCode      String    @unique
+  vehicleId     Int
+  vehicle       Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Restrict)
+  driverId      Int
+  driver        Driver    @relation(fields: [driverId], references: [id], onDelete: Restrict)
+  cargoId       Int?
+  cargo         Cargo?    @relation(fields: [cargoId], references: [id], onDelete: SetNull)
+  origin        String
+  destination   String
+  loadingDate   DateTime
+  unloadingDate DateTime
+  freightPrice  Float     @default(0)
+  distanceKm    Float     @default(0)
+  status        String    @default("PLANNED") // PLANNED, LOADING, ON_ROUTE, COMPLETED, CANCELLED
+  progressPct   Int       @default(0)
+  notes         String    @default("")
+  completedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([status])
+  @@index([vehicleId])
+  @@index([loadingDate])
+  @@index([unloadingDate])
+}
+
+model ApplicationSettings {
+  id               Int      @id @default(1)
+  ownerName        String   @default("Jasurbek")
+  companyName      String   @default("FURA CONTROL")
+  roleTitle        String   @default("Bosh dispetcher")
+  phone            String   @default("+998 90 123 45 67")
+  email            String   @default("dispatch@furacontrol.uz")
+  language         String   @default("uz") // uz, ru
+  dateFormat       String   @default("DD.MM.YYYY")
+  currency         String   @default("USD") // USD, UZS, RUB
+  sidebarCompact   Boolean  @default(false)
+  showSimulatedGps Boolean  @default(true)
+  updatedAt        DateTime @updatedAt
+}

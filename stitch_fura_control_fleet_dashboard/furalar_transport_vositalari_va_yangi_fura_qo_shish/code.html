@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+
+<html class="dark h-full" lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FURA CONTROL - Logistika boshqaruv tizimi</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary": "#380094",
+            "on-tertiary-fixed": "#21005e",
+            "surface-bright": "#2e3a4d",
+            "on-primary": "#003060",
+            "error-container": "#93000a",
+            "on-surface-variant": "#c0c7d6",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#d5e3ff",
+            "background": "#071426",
+            "inverse-primary": "#005eb1",
+            "secondary-fixed": "#60fea5",
+            "primary-fixed-dim": "#a6c8ff",
+            "surface-container": "#142032",
+            "surface-tint": "#a6c8ff",
+            "on-secondary-fixed-variant": "#00522d",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#030e20",
+            "surface-container-low": "#0f1c2e",
+            "surface-container-highest": "#293549",
+            "inverse-on-surface": "#253144",
+            "on-background": "#d7e3fc",
+            "secondary": "#40e48d",
+            "secondary-fixed-dim": "#3be18b",
+            "tertiary-fixed": "#e8ddff",
+            "on-primary-fixed-variant": "#004787",
+            "primary-container": "#2d91ff",
+            "on-tertiary-container": "#300083",
+            "tertiary-fixed-dim": "#cebdff",
+            "tertiary-container": "#9b7aff",
+            "on-secondary": "#00391d",
+            "outline-variant": "#404753",
+            "on-secondary-container": "#004c29",
+            "surface-variant": "#293549",
+            "primary": "#a6c8ff",
+            "on-primary-container": "#002a54",
+            "inverse-surface": "#d7e3fc",
+            "surface-dim": "#071426",
+            "on-tertiary-fixed-variant": "#5114c5",
+            "on-secondary-fixed": "#00210f",
+            "on-error": "#690005",
+            "outline": "#8a919f",
+            "on-surface": "#d7e3fc",
+            "tertiary": "#cebdff",
+            "surface-container-high": "#1e2a3d",
+            "surface": "#071426",
+            "secondary-container": "#00c774",
+            "on-primary-fixed": "#001c3b"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem"
+          },
+          fontFamily: {
+            "table-header": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "kpi-stat": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "table-header": ["11px", { "lineHeight": "16px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "kpi-stat": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "800" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }]
+          }
+        }
+      }
+    };
+  </script>
+<style data-purpose="custom-styling">
+    @layer base {
+      html {
+        color-scheme: dark;
+      }
+      body {
+        overscroll-behavior: none;
+        min-height: 100vh;
+        background-color: #071426;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f1c2e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #293549;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2d91ff;
+    }
+    .full-sidebar-theme {
+      background: linear-gradient(180deg, rgba(7, 20, 38, 0.94) 0%, rgba(11, 27, 50, 0.88) 40%, rgba(7, 20, 38, 0.82) 80%, rgba(4, 13, 26, 0.96) 100%),
+                  url('https://lh3.googleusercontent.com/aida-public/AB6AXuAL-BgiIUdmmUOj-6CeBEeKvp6MbZQ2wkqjZKkFywfJiWcNKF7VqeN390Y0Zhw2ZLMiTmG-bVPYFeus5k7lssViRAv2Y4sLAt6E8VUp3wcMxyaVogBv-S_FlkoOmh8x9WCX2bA8XnqyPQ09KHTdLMnY8C-ngYZbdh-wLzc_qMNG6dpADFt5xJek2phNfeb8JacMYZ3A06LpZx2YInHd9tqDKwmarVpWmqG3W7qDOqA') 50% 70% / cover no-repeat;
+    }
+    .modal-backdrop-blur {
+      backdrop-filter: blur(8px);
+    }
+    .truck-type-card.selected {
+      border-color: #2d91ff;
+      background-color: rgba(45, 145, 255, 0.12);
+      box-shadow: 0 0 0 1px #2d91ff;
+    }
+    .truck-type-card.selected .radio-circle {
+      border-color: #2d91ff;
+      background-color: #2d91ff;
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-surface antialiased">
+<!-- Toast Notification Container -->
+<div class="fixed top-5 right-5 z-50 transition-all duration-300 transform translate-y-[-120%] opacity-0 pointer-events-none" id="toastNotification">
+<div class="flex items-center gap-3 px-4 py-3 bg-surface-container-high/95 backdrop-blur-md border border-secondary/40 text-on-surface rounded-xl shadow-2xl shadow-black/50">
+<div class="w-8 h-8 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-sm text-white" id="toastTitle">Muvaffaqiyatli!</h4>
+<p class="font-body-sm text-on-surface-variant text-xs" id="toastMessage">Yangi fura muvaffaqiyatli qo‘shildi!</p>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-white ml-2 rounded" onclick="hideToast()">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+</div>
+<!-- BEGIN: LeftSidebar -->
+<aside class="fixed top-0 bottom-0 left-0 w-64 z-30 full-sidebar-theme border-r border-outline-variant/30 flex flex-col justify-between overflow-hidden shadow-2xl backdrop-blur-[2px]" data-purpose="sidebar">
+<div class="p-space-md flex flex-col h-full overflow-y-auto z-10">
+<!-- Logo -->
+<div class="flex items-center gap-space-sm px-space-xs py-space-sm mb-space-md bg-surface-container-lowest/60 backdrop-blur-md rounded-xl border border-outline-variant/30">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-inverse-primary to-primary-container flex items-center justify-center shadow-lg shadow-primary-container/25 flex-shrink-0">
+<span class="material-symbols-outlined text-white text-2xl">local_shipping</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-white leading-none tracking-tight font-bold">FURA CONTROL</h1>
+<p class="font-label-sm text-on-surface-variant/80 mt-1 uppercase tracking-wider text-[10px]">Logistika tizimi</p>
+</div>
+</div>
+<!-- Main Navigation Menu -->
+<nav class="space-y-1.5 mt-space-xs" data-active-classes="bg-primary-container text-white font-semibold shadow-md shadow-primary-container/30" id="sidebar-nav">
+<!-- 1. Bosh sahifa -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="bosh-sahifa" href="#">
+          Bosh sahifa
+        </a>
+<!-- 2. Furalar -->
+<a aria-current="page" class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg transition-colors bg-primary-container text-white font-semibold shadow-md shadow-primary-container/30" data-path="furalar" href="#">
+          Furalar
+        </a>
+<!-- 3. Yuklar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="yuklar" href="#">
+          Yuklar
+        </a>
+<!-- 4. Haydovchilar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="haydovchilar" href="#">
+          Haydovchilar
+        </a>
+<!-- 5. Reyslar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="reyslar" href="#">
+          Reyslar
+        </a>
+<!-- 6. Kalendar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="kalendar" href="#">
+          Kalendar
+        </a>
+<!-- 7. Arxiv -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="arxiv" href="#">
+          Arxiv
+        </a>
+<!-- 8. Hisobotlar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="hisobotlar" href="#">
+          Hisobotlar
+        </a>
+<!-- 9. Sozlamalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="sozlamalar" href="#">
+          Sozlamalar
+        </a>
+</nav>
+<!-- Sidebar Footer telemetry widget (neat integrated glass card) -->
+<div class="mt-auto pt-4">
+<div class="p-3 rounded-lg bg-surface-container-lowest/70 backdrop-blur-md border border-outline-variant/30 text-on-surface-variant">
+<p class="font-label-md text-white flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+      Avtopark nazorati
+    </p>
+<p class="font-label-sm text-on-surface-variant/80 mt-0.5 text-[11px]">GPS &amp; Telematika 24/7 faol</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: TopHeader -->
+<header class="fixed top-0 right-0 left-64 z-20 h-16 bg-surface-container-low/90 backdrop-blur-md border-b border-outline-variant/30 px-space-lg flex items-center justify-between gap-space-md" data-purpose="top-navigation">
+<!-- Global Search Input with Shortcut -->
+<div class="relative w-96 max-w-lg">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant font-body-sm rounded-lg pl-9 pr-16 py-2 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="global-search" placeholder="Qidirish: fura, yuk, haydovchi, reys..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<span class="font-label-sm bg-surface-container text-on-surface-variant px-1.5 py-0.5 rounded border border-outline-variant/40">Ctrl + K</span>
+</div>
+</div>
+<!-- Header Controls -->
+<div class="flex items-center gap-space-md">
+<!-- Notifications Bell -->
+<button class="relative p-2 text-on-surface-variant hover:text-white bg-surface-container rounded-lg border border-outline-variant/30 hover:bg-surface-container-high transition-colors" title="Bildirishnomalar">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute -top-1 -right-1 bg-error-container text-white font-label-sm w-4 h-4 rounded-full flex items-center justify-center border-2 border-surface-container-low">3</span>
+</button>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-2.5 bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-white font-label-sm">
+          J
+        </div>
+<div class="text-left leading-tight">
+<div class="font-label-md text-white">Jasurbek</div>
+<div class="font-label-sm text-on-surface-variant/80">Bosh dispetcher</div>
+</div>
+<span class="material-symbols-outlined text-base text-on-surface-variant ml-0.5">expand_more</span>
+</div>
+<!-- Current System Date Pill -->
+<div class="hidden md:flex items-center gap-2 bg-surface-container border border-outline-variant/30 text-on-surface px-3 py-1.5 rounded-lg font-label-sm">
+<span class="material-symbols-outlined text-primary-container text-base">calendar_today</span>
+<span>16-noyabr, 2026 (Dushanba)</span>
+</div>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainContentWrapper -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="p-space-lg">
+<div class="flex flex-col w-full">
+<!-- Operational Breadcrumb & Top Bar -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm uppercase tracking-wider mb-1">
+<span>Logistika</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary-container">Avtopark parki</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-on-surface">Furalar ro'yxati</span>
+</div>
+<h2 class="font-headline-xl text-on-surface tracking-tight">Furalar boshqaruvi</h2>
+<p class="font-body-md text-on-surface-variant mt-0.5">Avtoparkdagi barcha transport vositalari nazorati, telematika va texnik holati</p>
+</div>
+<!-- Actions Group -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="h-10 px-4 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md flex items-center gap-2 shadow-sm transition-all" onclick="toggleFilterDrawer()">
+<span class="material-symbols-outlined text-lg text-primary">filter_list</span>
+<span>Filtrlar</span>
+<span class="w-5 h-5 rounded-full bg-surface-variant text-on-surface-variant text-[10px] flex items-center justify-center font-bold">3</span>
+</button>
+<button class="h-10 px-4 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md flex items-center gap-2 shadow-sm transition-all">
+<span class="material-symbols-outlined text-lg text-secondary">file_download</span>
+<span>Eksport (Excel/PDF)</span>
+</button>
+<button class="h-10 px-5 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md flex items-center gap-2 shadow-lg shadow-primary-container/30 transition-all hover:scale-[1.02] active:scale-[0.98]" id="open-add-truck-btn" onclick="openAddTruckModal()">
+<span class="material-symbols-outlined text-xl">add_circle</span>
+<span>Yangi fura qo'shish</span>
+</button>
+</div>
+</div>
+<!-- Metric / Telemetry KPI Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg">
+<!-- 1. Jami furalar -->
+<div class="relative bg-surface-container p-5 rounded-xl shadow-md overflow-hidden group">
+<div class="flex items-center justify-between">
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-2xl">local_shipping</span>
+</div>
+<span class="font-label-sm uppercase tracking-wider text-secondary px-2 py-0.5 rounded bg-secondary/10 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> 100% aktiv
+        </span>
+</div>
+<div class="mt-4">
+<p class="font-label-sm uppercase tracking-wider text-on-surface-variant">Jami furalar soni</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-stat text-on-surface" id="totalTrucksStat">24</span>
+<span class="font-body-md text-on-surface-variant">birlik transport</span>
+</div>
+</div>
+<!-- Decorative Truck Silhouette SVG watermark -->
+<svg class="absolute -right-4 -bottom-3 w-32 h-20 text-on-surface/[0.04] pointer-events-none transition-transform group-hover:scale-105" fill="currentColor" viewbox="0 0 100 50">
+<path d="M10 38h5a5 5 0 0 1 10 0h24a5 5 0 0 1 10 0h12a4 4 0 0 0 4-4V18H60v-6H15a4 4 0 0 0-4 4v22zm65-16h11l6 8v6h-17v-14zM20 42a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm39 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+</svg>
+</div>
+<!-- 2. Yo'lda -->
+<div class="relative bg-surface-container p-5 rounded-xl shadow-md overflow-hidden group">
+<div class="flex items-center justify-between">
+<div class="w-11 h-11 rounded-lg bg-primary-container/15 flex items-center justify-center text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-2xl">alt_route</span>
+</div>
+<span class="font-label-sm uppercase tracking-wider text-primary px-2 py-0.5 rounded bg-primary-container/10 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span> Reyda
+        </span>
+</div>
+<div class="mt-4">
+<p class="font-label-sm uppercase tracking-wider text-on-surface-variant">Yo'lda (Faol reys)</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-stat text-primary-container">14</span>
+<span class="font-body-md text-on-surface-variant">ta (58.3%)</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 58%"></div>
+</div>
+</div>
+<!-- 3. Bo'sh / Tayyor -->
+<div class="relative bg-surface-container p-5 rounded-xl shadow-md overflow-hidden group">
+<div class="flex items-center justify-between">
+<div class="w-11 h-11 rounded-lg bg-secondary/15 flex items-center justify-center text-secondary shadow-inner">
+<span class="material-symbols-outlined text-2xl">check_circle</span>
+</div>
+<span class="font-label-sm uppercase tracking-wider text-secondary px-2 py-0.5 rounded bg-secondary/10">
+          Rezervda
+        </span>
+</div>
+<div class="mt-4">
+<p class="font-label-sm uppercase tracking-wider text-on-surface-variant">Bo'sh / Tayyor</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-stat text-secondary" id="idleTrucksStat">6</span>
+<span class="font-body-md text-on-surface-variant">ta erkin mashina</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 25%"></div>
+</div>
+</div>
+<!-- 4. Ta'mirda / Texnik ko'rikda -->
+<div class="relative bg-surface-container p-5 rounded-xl shadow-md overflow-hidden group">
+<div class="flex items-center justify-between">
+<div class="w-11 h-11 rounded-lg bg-error-container/20 flex items-center justify-center text-error shadow-inner">
+<span class="material-symbols-outlined text-2xl">build_circle</span>
+</div>
+<span class="font-label-sm uppercase tracking-wider text-error px-2 py-0.5 rounded bg-error-container/30">
+          Xizmat ko'rsatish
+        </span>
+</div>
+<div class="mt-4">
+<p class="font-label-sm uppercase tracking-wider text-on-surface-variant">Ta'mirda / Servisda</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-stat text-error">4</span>
+<span class="font-body-md text-on-surface-variant">ta rejalashtirilgan</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 16%"></div>
+</div>
+</div>
+</div>
+<!-- Realtime Telemetry Map Preview Strip -->
+<div class="relative w-full rounded-xl overflow-hidden bg-surface-container mb-space-lg shadow-lg">
+<div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity" data-location="Tashkent, Uzbekistan highway logistics hub" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCUIKII5naTquuDlZnOf9UG2LWgn9-B0W0vuSTpR9TM4qlbsAeijDodq7ShlY1xk5BlD_RvCEBp_kwt7OPjGinrm08mD3-j8WZ4VcLh1A4rGOiE6NaFAnos4ahAM1EkiVMpDSATlC_wY_HsWp6d3oy7R2G62R4mWLx_xVa2aSh3j36iyDCGrHNOim6jX-ukJy6AvgE_dm5jQsy5Ucgus3etfCCZJianjPY90zxS5_A')"></div>
+<div class="relative p-5 bg-gradient-to-r from-surface-container via-surface-container/90 to-transparent flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl">radar</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-md text-white">Jonli telematika oqimi: O'zbekiston, Qozog'iston, RF yo'nalishlari</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-secondary/20 text-secondary uppercase">24/24 Online</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-0.5">Avtopark bo'yicha o'rtacha tezlik: <strong class="text-on-surface font-semibold">68 km/soat</strong> | O'rtacha yoqilg'i sarfi: <strong class="text-on-surface font-semibold">31.4 l/100km</strong></p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-body-sm text-on-surface-variant hidden lg:inline">Yangilandi: 1 daqiqa oldin</span>
+<button class="h-9 px-3.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base text-primary">map</span>
+          Xaritada ko'rish
+        </button>
+</div>
+</div>
+</div>
+<!-- Filter & Search Toolbar -->
+<div class="bg-surface-container p-4 rounded-xl shadow-md mb-space-md flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-sm">
+<!-- Search Bar -->
+<div class="relative flex-1 min-w-[280px]">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant font-body-md rounded-lg pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-container" id="truckSearchInput" onkeyup="filterTruckTable()" placeholder="Qidirish: Davlat raqami, haydovchi, model yoki shahar..." type="text"/>
+</div>
+<!-- Quick Dropdowns Filter Pills -->
+<div class="flex flex-wrap items-center gap-2">
+<!-- Fura turi filter -->
+<div class="relative">
+<select class="bg-surface-container-lowest text-on-surface font-label-md rounded-lg pl-3 pr-8 py-2.5 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-container" id="filterType" onchange="filterTruckTable()">
+<option value="ALL">Fura turi: Barchasi</option>
+<option value="TENT">TENT (92m³)</option>
+<option value="REF">REF / Sovutgichli</option>
+<option value="MEGA">MEGA (105m³)</option>
+<option value="KONTEYNER">Konteynerovoz</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-on-surface-variant pointer-events-none text-base">expand_more</span>
+</div>
+<!-- Holati filter -->
+<div class="relative">
+<select class="bg-surface-container-lowest text-on-surface font-label-md rounded-lg pl-3 pr-8 py-2.5 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-container" id="filterStatus" onchange="filterTruckTable()">
+<option value="ALL">Holati: Barchasi</option>
+<option value="Yo'lda">Yo'lda (In Transit)</option>
+<option value="Bo'sh">Bo'sh (Erkin)</option>
+<option value="Yuklanmoqda">Yuklanmoqda</option>
+<option value="Ta'mirda">Ta'mirda (Servis)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-on-surface-variant pointer-events-none text-base">expand_more</span>
+</div>
+<!-- Yoqilg'i / Standart -->
+<div class="relative">
+<select class="bg-surface-container-lowest text-on-surface font-label-md rounded-lg pl-3 pr-8 py-2.5 appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-container">
+<option value="ALL">Ekologik: Euro-6 / Euro-5</option>
+<option value="E6">Euro-6</option>
+<option value="E5">Euro-5</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-on-surface-variant pointer-events-none text-base">expand_more</span>
+</div>
+<!-- Reset Filters Button -->
+<button class="p-2.5 text-on-surface-variant hover:text-white bg-surface-container-lowest hover:bg-surface-container-high rounded-lg transition-colors" onclick="resetFilters()" title="Filtrlarni tozalash">
+<span class="material-symbols-outlined text-lg">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- Main Grid + Quick Telemetry Split View -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Fleet Table Area (8 cols on XL or 12) -->
+<div class="xl:col-span-8 flex flex-col bg-surface-container rounded-xl shadow-xl overflow-hidden">
+<!-- Table Header Bar -->
+<div class="px-5 py-3.5 bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-on-surface">Avtotransport vositalari</span>
+<span class="bg-surface-variant text-on-surface font-label-sm px-2 py-0.5 rounded-full" id="truckCountBadge">6 ta ko'rsatilmoqda</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm">
+<span class="material-symbols-outlined text-base">sort</span>
+<span>Saralash: Yangi qo'shilganlar</span>
+</div>
+</div>
+<!-- Table Scroll Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left" id="fleetTable">
+<thead>
+<tr class="bg-surface-container-lowest text-on-surface-variant font-table-header uppercase tracking-wider text-[11px]">
+<th class="py-3 px-4">Davlat raqami</th>
+<th class="py-3 px-4">Rusumi / Rusum</th>
+<th class="py-3 px-4">Biriktirilgan haydovchi</th>
+<th class="py-3 px-4">Turi &amp; Sig'imi</th>
+<th class="py-3 px-4">Hozirgi joylashuv</th>
+<th class="py-3 px-4">Holati</th>
+<th class="py-3 px-4">Texnik ko'rik</th>
+<th class="py-3 px-4 text-right">Amallar</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/40 text-on-surface font-body-md" id="fleetTableBody">
+<!-- Row 1: Volvo FH16 - Yo'lda -->
+<tr class="hover:bg-surface-container-high/60 transition-colors cursor-pointer group" onclick="selectTruck('01 A 123 UA', 'Volvo FH16 Globetrotter', 'Sobir Rahimov', '+998 90 123 45 67', 'TENT (92 m³)', '22 t', 'Samara yo\'lida (M5 magistral)', 'Yo\'lda', '78%', '342,150 km', '2026-10-15', '2026-12-01', '82 km/soat', '53.2001° N, 50.1544° E')">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider shadow-inner">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                  01 A 123 UA
+                </div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">local_shipping</span>
+<div>
+<div class="font-headline-sm text-sm text-white">Volvo FH16 540</div>
+<div class="font-label-sm text-on-surface-variant">2022 y. • Euro-6</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-bright flex items-center justify-center text-xs font-bold text-on-surface">SR</div>
+<div>
+<div class="font-label-md text-white">Sobir Rahimov</div>
+<div class="font-label-sm text-on-surface-variant">+998 90 123-45-67</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">TENT 92 m³</div>
+<div class="font-label-sm text-on-surface-variant">Yuk: 22.0 t</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-sm">navigation</span>
+<span class="font-label-md text-white">Samara yo'lida (M5)</span>
+</div>
+<div class="font-label-sm text-on-surface-variant">82 km/s • Moskvaga 740 km</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary-container/15 text-primary-container">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+                  Yo'lda
+                </span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">2026-10-15</div>
+<div class="font-label-sm text-secondary">Sug'urta: Faol</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Marshrutni ko'rish">
+<span class="material-symbols-outlined text-base">route</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Tahrirlash">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-surface-container rounded" title="O'chirish">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Scania R500 - Yuklanmoqda -->
+<tr class="hover:bg-surface-container-high/60 transition-colors cursor-pointer group" onclick="selectTruck('40 B 456 UA', 'Scania R500 V8 Streamline', 'Jasurbek Mahmudov', '+998 93 456 78 90', 'REF (-20°C / +12°C)', '20 t', 'Toshkent Sergeli Terminal', 'Yuklanmoqda', '92%', '188,400 km', '2026-11-20', '2027-01-15', '0 km/soat', '41.2213° N, 69.2144° E')">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider shadow-inner">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                  40 B 456 UA
+                </div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg">local_shipping</span>
+<div>
+<div class="font-headline-sm text-sm text-white">Scania R500 V8</div>
+<div class="font-label-sm text-on-surface-variant">2023 y. • Euro-6</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-bright flex items-center justify-center text-xs font-bold text-on-surface">JM</div>
+<div>
+<div class="font-label-md text-white">Jasurbek Mahmudov</div>
+<div class="font-label-sm text-on-surface-variant">+998 93 456-78-90</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">REF (-20°C)</div>
+<div class="font-label-sm text-on-surface-variant">Yuk: 20.0 t</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-secondary-container">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="font-label-md text-white">Toshkent, Sergeli ombor</span>
+</div>
+<div class="font-label-sm text-on-surface-variant">Dock #4 • Yuk ortilmoqda</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-400">
+<span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                  Yuklanmoqda
+                </span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">2026-11-20</div>
+<div class="font-label-sm text-secondary">Sug'urta: Faol</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Marshrutni ko'rish">
+<span class="material-symbols-outlined text-base">route</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Tahrirlash">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-surface-container rounded" title="O'chirish">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Mercedes-Benz Actros - Bo'sh -->
+<tr class="hover:bg-surface-container-high/60 transition-colors cursor-pointer group" onclick="selectTruck('30 C 789 UA', 'Mercedes-Benz Actros 1845', 'Farhod Aliyev', '+998 91 999 11 22', 'MEGA (105 m³)', '24 t', 'Chimkent Logistika Parki', 'Bo\'sh', '64%', '421,900 km', '2026-09-30', '2027-03-10', '0 km/soat', '42.3417° N, 69.5901° E')">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider shadow-inner">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                  30 C 789 UA
+                </div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">local_shipping</span>
+<div>
+<div class="font-headline-sm text-sm text-white">Mercedes Actros 1845</div>
+<div class="font-label-sm text-on-surface-variant">2021 y. • Euro-6</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-bright flex items-center justify-center text-xs font-bold text-on-surface">FA</div>
+<div>
+<div class="font-label-md text-white">Farhod Aliyev</div>
+<div class="font-label-sm text-on-surface-variant">+998 91 999-11-22</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">MEGA 105 m³</div>
+<div class="font-label-sm text-on-surface-variant">Yuk: 24.0 t</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">pin_drop</span>
+<span class="font-label-md text-white">Chimkent (KAZ)</span>
+</div>
+<div class="font-label-sm text-on-surface-variant">Reys kutmoqda • Rezerv</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                  Bo'sh
+                </span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">2026-09-30</div>
+<div class="font-label-sm text-secondary">Sug'urta: Faol</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Buyurtma biriktirish">
+<span class="material-symbols-outlined text-base">assignment_turned_in</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Tahrirlash">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-surface-container rounded" title="O'chirish">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: MAN TGX - Ta'mirda -->
+<tr class="hover:bg-surface-container-high/60 transition-colors cursor-pointer group" onclick="selectTruck('50 D 321 UA', 'MAN TGX 18.480 EfficientLine', 'Alisher Qodirov', '+998 97 765 43 21', 'TENT (92 m³)', '22 t', 'Buxoro Servis Markazi', 'Ta\'mirda', '35%', '510,320 km', '2026-08-14', '2026-11-28', '0 km/soat', '39.7747° N, 64.4286° E')">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider shadow-inner">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                  50 D 321 UA
+                </div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-lg">local_shipping</span>
+<div>
+<div class="font-headline-sm text-sm text-white">MAN TGX 18.480</div>
+<div class="font-label-sm text-on-surface-variant">2020 y. • Euro-5</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-bright flex items-center justify-center text-xs font-bold text-on-surface">AQ</div>
+<div>
+<div class="font-label-md text-white">Alisher Qodirov</div>
+<div class="font-label-sm text-on-surface-variant">+998 97 765-43-21</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">TENT 92 m³</div>
+<div class="font-label-sm text-on-surface-variant">Yuk: 22.0 t</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-error">
+<span class="material-symbols-outlined text-sm">build</span>
+<span class="font-label-md text-white">Buxoro Servis Markazi</span>
+</div>
+<div class="font-label-sm text-on-surface-variant">Tormoz tizimi ta'miri</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-error-container/20 text-error">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                  Ta'mirda
+                </span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-error">Muddat yaqin</div>
+<div class="font-label-sm text-error">2026-11-28</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Servis kartochkasi">
+<span class="material-symbols-outlined text-base">fact_check</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Tahrirlash">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-surface-container rounded" title="O'chirish">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: DAF XF - Yo'lda -->
+<tr class="hover:bg-surface-container-high/60 transition-colors cursor-pointer group" onclick="selectTruck('01 E 987 UA', 'DAF XF 480 Super Space', 'Nodir Bekmurodov', '+998 90 555 88 44', 'Konteynerovoz (40ft)', '26 t', 'Moskva M4 Trassa', 'Yo\'lda', '85%', '279,800 km', '2027-02-10', '2027-02-25', '76 km/soat', '55.7558° N, 37.6173° E')">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider shadow-inner">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                  01 E 987 UA
+                </div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">local_shipping</span>
+<div>
+<div class="font-headline-sm text-sm text-white">DAF XF 480 Space</div>
+<div class="font-label-sm text-on-surface-variant">2022 y. • Euro-6</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-bright flex items-center justify-center text-xs font-bold text-on-surface">NB</div>
+<div>
+<div class="font-label-md text-white">Nodir Bekmurodov</div>
+<div class="font-label-sm text-on-surface-variant">+998 90 555-88-44</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">Konteynerovoz 40ft</div>
+<div class="font-label-sm text-on-surface-variant">Yuk: 26.0 t</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-sm">navigation</span>
+<span class="font-label-md text-white">Moskva M4 Trassa</span>
+</div>
+<div class="font-label-sm text-on-surface-variant">76 km/s • Manzilga 120 km</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary-container/15 text-primary-container">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+                  Yo'lda
+                </span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">2027-02-10</div>
+<div class="font-label-sm text-secondary">Sug'urta: Faol</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Marshrutni ko'rish">
+<span class="material-symbols-outlined text-base">route</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Tahrirlash">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-surface-container rounded" title="O'chirish">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Volvo FH500 - Bo'sh -->
+<tr class="hover:bg-surface-container-high/60 transition-colors cursor-pointer group" onclick="selectTruck('80 F 654 UA', 'Volvo FH 500 I-Save', 'Rustam Usmonov', '+998 94 333 22 11', 'TENT (92 m³)', '22 t', 'Toshkent Markaziy Baza', 'Bo\'sh', '95%', '142,600 km', '2026-12-18', '2027-04-05', '0 km/soat', '41.2995° N, 69.2401° E')">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider shadow-inner">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                  80 F 654 UA
+                </div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">local_shipping</span>
+<div>
+<div class="font-headline-sm text-sm text-white">Volvo FH 500 I-Save</div>
+<div class="font-label-sm text-on-surface-variant">2023 y. • Euro-6</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-bright flex items-center justify-center text-xs font-bold text-on-surface">RU</div>
+<div>
+<div class="font-label-md text-white">Rustam Usmonov</div>
+<div class="font-label-sm text-on-surface-variant">+998 94 333-22-11</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">TENT 92 m³</div>
+<div class="font-label-sm text-on-surface-variant">Yuk: 22.0 t</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-sm">home_pin</span>
+<span class="font-label-md text-white">Toshkent Markaziy Baza</span>
+</div>
+<div class="font-label-sm text-on-surface-variant">Yuvilgan • Navbatda</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                  Bo'sh
+                </span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-label-md text-white">2026-12-18</div>
+<div class="font-label-sm text-secondary">Sug'urta: Faol</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Buyurtma biriktirish">
+<span class="material-symbols-outlined text-base">assignment_turned_in</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Tahrirlash">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-surface-container rounded" title="O'chirish">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="px-5 py-3.5 bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-3">
+<span class="font-body-sm text-on-surface-variant" id="tablePaginationCount">24 tadan 1-6 oralig'idagi furalar</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-base">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary-container text-white font-label-sm flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm flex items-center justify-center">3</button>
+<button class="w-8 h-8 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm flex items-center justify-center">4</button>
+<button class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Vehicle Telemetry Preview Card (4 cols on XL) -->
+<div class="xl:col-span-4 flex flex-col bg-surface-container rounded-xl shadow-xl p-5 sticky top-20">
+<!-- Card Header -->
+<div class="flex items-start justify-between pb-4 border-b border-surface-container-high/40">
+<div>
+<span class="font-label-sm uppercase tracking-wider text-primary-container flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+            Tanlangan fura telematikasi
+          </span>
+<h3 class="font-headline-lg text-white mt-1" id="panelPlate">01 A 123 UA</h3>
+<p class="font-label-md text-on-surface-variant" id="panelModel">Volvo FH16 Globetrotter 540</p>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary-container/20 text-primary-container" id="panelStatusBadge">
+          Yo'lda
+        </span>
+</div>
+<!-- Truck Photo / Map Snippet -->
+<div class="relative w-full h-44 rounded-lg overflow-hidden my-4 bg-surface-container-lowest">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A modern dark Volvo heavy transport semi truck parked at a modern logistics terminal at twilight, crisp cinematic lighting, dark maritime navy reflections and neon blue telemetry aura" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVBBRkVtcPXGkMfJIrBiMOuEZelD_sxeTwEw-ilsab1Ea31TYmEMTcTLmXFsR9iiuPJMyhLm1LF8Gv5PgX53xC73ChdLvwaYUGrKp-4wxE9Ygquba1h5czBigWVMP5AIKlaMG3LtZyAVG2_G8PZCqu7VV6co0ic4xoPubnv33D_HUXQMvYB8YK2T3I6IzubAJ26sBZR2ECreYLFCmre52pvSXYrt-5mc1kkzUhr6s')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1.5 rounded">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">speed</span>
+<span id="panelSpeed">82 km/soat</span>
+</span>
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary">explore</span>
+<span class="font-mono text-[11px]" id="panelCoords">53.2001° N, 50.1544° E</span>
+</span>
+</div>
+</div>
+<!-- Driver Quick Card -->
+<div class="p-3 bg-surface-container-low rounded-lg mb-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-sm">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<div class="font-headline-sm text-sm text-white" id="panelDriver">Sobir Rahimov</div>
+<div class="font-label-sm text-on-surface-variant" id="panelPhone">+998 90 123 45 67</div>
+</div>
+</div>
+<button class="w-9 h-9 rounded-lg bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" title="Haydovchiga qo'ng'iroq qilish">
+<span class="material-symbols-outlined text-base">call</span>
+</button>
+</div>
+<!-- Telemetry Gauge Grid -->
+<div class="grid grid-cols-2 gap-3 mb-4">
+<!-- Yoqilg'i darajasi -->
+<div class="p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm mb-1.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-amber-400">local_gas_station</span>
+              Yoqilg'i baki
+            </span>
+<span class="font-bold text-white" id="panelFuel">78%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-amber-500 to-secondary h-full rounded-full transition-all duration-500" id="panelFuelBar" style="width: 78%"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-on-surface-variant mt-1">
+<span>Qoldiq: ~620 litr</span>
+<span>Sig'im: 800L</span>
+</div>
+</div>
+<!-- Odometer & Yurgan yo'li -->
+<div class="p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm mb-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">speed</span>
+              Odometer
+            </span>
+</div>
+<div class="font-headline-sm text-white mt-0.5" id="panelOdo">342,150 km</div>
+<div class="text-[10px] text-secondary mt-1 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">schedule</span> Keyingi TO: 7,850 km
+          </div>
+</div>
+</div>
+<!-- Specs & Technical Inspections -->
+<div class="space-y-2 text-sm bg-surface-container-low p-3.5 rounded-lg mb-5">
+<div class="flex items-center justify-between py-1 border-b border-surface-container-high/30">
+<span class="font-body-sm text-on-surface-variant">Fura turi / korpus:</span>
+<span class="font-label-md text-white" id="panelBodyType">TENT (92 m³)</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-surface-container-high/30">
+<span class="font-body-sm text-on-surface-variant">Yuk ko'tarish hajmi:</span>
+<span class="font-label-md text-white" id="panelCapacity">22 tonna</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-surface-container-high/30">
+<span class="font-body-sm text-on-surface-variant">Texnik ko'rik muddati:</span>
+<span class="font-label-md text-secondary" id="panelInspection">2026-10-15</span>
+</div>
+<div class="flex items-center justify-between py-1">
+<span class="font-body-sm text-on-surface-variant">Sug'urta (KASKO/OSAGO):</span>
+<span class="font-label-md text-white" id="panelInsurance">2026-12-01 gacha faol</span>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="grid grid-cols-2 gap-2 mt-auto">
+<button class="h-10 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md flex items-center justify-center gap-1.5 shadow-md shadow-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-base">map</span>
+          GPS Marshrut
+        </button>
+<button class="h-10 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base">build</span>
+          Texnik xizmat
+        </button>
+</div>
+</div>
+</div>
+</div>
+</div></main>
+<!-- END: MainContentWrapper -->
+<!-- BEGIN: Add Truck Modal Backdrop & Dialog -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-background/80 modal-backdrop-blur p-4 overflow-y-auto" id="addTruckModal">
+<div class="relative w-full max-w-2xl bg-surface-container border border-outline-variant/50 rounded-2xl shadow-2xl overflow-hidden transition-all transform duration-300 scale-95 opacity-0 my-auto" id="modalDialogCard">
+<!-- Modal Header -->
+<div class="px-6 py-5 bg-surface-container-low border-b border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">add_box</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-lg text-white">Yangi fura qo'shish</h3>
+<p class="font-body-sm text-xs text-on-surface-variant">Avtopark tizimiga yangi transport vositasini ro'yxatdan o'tkazish</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high flex items-center justify-center transition-colors" id="close-modal-btn" onclick="closeAddTruckModal()">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Modal Form Body -->
+<form class="p-6 space-y-5" id="addTruckForm" onsubmit="handleTruckSubmit(event)">
+<!-- Row 1: Davlat raqami & Model -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">
+            Davlat raqami <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-3 top-2.5 font-bold font-mono text-[10px] bg-primary-container text-white px-1.5 py-0.5 rounded">UZ</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-mono font-bold placeholder-on-surface-variant text-sm rounded-lg pl-12 pr-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors uppercase" id="inputPlate" placeholder="masalan: 01 A 772 UA" required="" type="text"/>
+</div>
+<p class="font-label-sm text-[11px] text-error hidden mt-1" id="plateError">Davlat raqamini kiritish shart</p>
+</div>
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">
+            Rusumi va modeli <span class="text-error">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputModel" placeholder="masalan: Volvo FH 540 Globetrotter" required="" type="text"/>
+</div>
+</div>
+<!-- Row 2: Driver & Phone -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">
+            Biriktirilgan haydovchi <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-base">person</span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg pl-9 pr-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputDriver" placeholder="Ism va familiya" required="" type="text"/>
+</div>
+<p class="font-label-sm text-[11px] text-error hidden mt-1" id="driverError">Haydovchi ismini kiriting</p>
+</div>
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Telefon raqami</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-base">call</span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg pl-9 pr-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputPhone" placeholder="+998 90 000 00 00" type="text" value="+998 "/>
+</div>
+</div>
+</div>
+<!-- Truck Type Selection Cards -->
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-2">Fura turi (korpus turi)</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="truckTypeSelector">
+<!-- Option 1: TENT -->
+<div class="truck-type-card selected cursor-pointer p-3 rounded-xl border border-primary-container bg-primary-container/10 flex flex-col justify-between transition-all" onclick="selectTypeCard(this, 'TENT (92 m³)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-primary text-xl">rv_hookup</span>
+<span class="w-3.5 h-3.5 rounded-full border border-primary-container bg-primary-container flex items-center justify-center radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">TENT (92 m³)</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">Standart tentli</div>
+</div>
+</div>
+<!-- Option 2: REF -->
+<div class="truck-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" onclick="selectTypeCard(this, 'REF (-20°C / +12°C)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-tertiary text-xl">ac_unit</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">REF (Sovutgich)</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">-20°C / +12°C</div>
+</div>
+</div>
+<!-- Option 3: MEGA -->
+<div class="truck-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" onclick="selectTypeCard(this, 'MEGA (105 m³)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-secondary text-xl">expand</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">MEGA (105 m³)</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">Katta sig'imli</div>
+</div>
+</div>
+<!-- Option 4: KONTEYNER -->
+<div class="truck-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" onclick="selectTypeCard(this, 'Konteynerovoz (40ft)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-amber-400 text-xl">inventory_2</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">Konteynerovoz</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">20ft / 40ft</div>
+</div>
+</div>
+</div>
+<input id="selectedTruckType" type="hidden" value="TENT (92 m³)"/>
+</div>
+<!-- Row 3: Capacity & Base location -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Yuk ko'tarish hajmi</label>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputCapacity" placeholder="masalan: 22 tonna" type="text" value="22 tonna"/>
+</div>
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Boshlang'ich joylashuv</label>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputLocation" placeholder="masalan: Toshkent Markaziy Baza" type="text" value="Toshkent Markaziy Baza"/>
+</div>
+</div>
+<!-- Row 4: Izoh / Notes -->
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Izoh yoki qo'shimcha ma'lumot</label>
+<textarea class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors resize-none" id="inputNotes" placeholder="Texnik xususiyatlar, GPS datchik raqami yoki boshqa qo'shimchalar..." rows="2"></textarea>
+</div>
+<!-- Modal Footer -->
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-end gap-3">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md transition-colors" onclick="closeAddTruckModal()" type="button">
+          Bekor qilish
+        </button>
+<button class="px-6 py-2.5 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md flex items-center gap-2 shadow-lg shadow-primary-container/30 transition-all hover:scale-[1.02] active:scale-[0.98]" type="submit">
+<span class="material-symbols-outlined text-lg">save</span>
+<span>+ Furani qo‘shish</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- END: Add Truck Modal -->
+<script>
+  // Quick dynamic interaction for selecting truck preview card
+  function selectTruck(plate, model, driver, phone, type, cap, location, status, fuel, odo, inspection, insurance, speed, coords) {
+    document.getElementById('panelPlate').innerText = plate;
+    document.getElementById('panelModel').innerText = model;
+    document.getElementById('panelDriver').innerText = driver;
+    document.getElementById('panelPhone').innerText = phone;
+    document.getElementById('panelBodyType').innerText = type;
+    document.getElementById('panelCapacity').innerText = cap;
+    document.getElementById('panelFuel').innerText = fuel;
+    document.getElementById('panelFuelBar').style.width = fuel;
+    document.getElementById('panelOdo').innerText = odo;
+    document.getElementById('panelInspection').innerText = inspection;
+    document.getElementById('panelInsurance').innerText = insurance + (insurance.includes('faol') ? '' : ' gacha faol');
+    document.getElementById('panelSpeed').innerText = speed;
+    document.getElementById('panelCoords').innerText = coords;
+
+    const badge = document.getElementById('panelStatusBadge');
+    badge.innerText = status;
+    
+    // Adjust status badge theme
+    if (status.includes("Yo'lda")) {
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary-container/20 text-primary-container";
+    } else if (status.includes("Bo'sh") || status.includes("Rezervda")) {
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-secondary/20 text-secondary";
+    } else if (status.includes("Yuklanmoqda")) {
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-400";
+    } else {
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-error-container/30 text-error";
+    }
+  }
+
+  // Filter & Search Functionality
+  function filterTruckTable() {
+    const searchVal = document.getElementById('truckSearchInput').value.toLowerCase();
+    const typeVal = document.getElementById('filterType').value.toUpperCase();
+    const statusVal = document.getElementById('filterStatus').value;
+
+    const rows = document.querySelectorAll('#fleetTableBody tr');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      const matchesSearch = text.includes(searchVal);
+      const matchesType = typeVal === 'ALL' || text.toUpperCase().includes(typeVal);
+      const matchesStatus = statusVal === 'ALL' || text.includes(statusVal);
+
+      if (matchesSearch && matchesType && matchesStatus) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    document.getElementById('truckCountBadge').innerText = visibleCount + " ta ko'rsatilmoqda";
+  }
+
+  function resetFilters() {
+    document.getElementById('truckSearchInput').value = '';
+    document.getElementById('filterType').value = 'ALL';
+    document.getElementById('filterStatus').value = 'ALL';
+    filterTruckTable();
+  }
+
+  function toggleFilterDrawer() {
+    const el = document.getElementById('truckSearchInput');
+    el.focus();
+    el.classList.add('ring-2', 'ring-primary-container');
+    setTimeout(() => el.classList.remove('ring-2', 'ring-primary-container'), 1000);
+  }
+
+  // ================= ADD TRUCK MODAL LOGIC ================= //
+  function openAddTruckModal() {
+    const modal = document.getElementById('addTruckModal');
+    const card = document.getElementById('modalDialogCard');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+      card.classList.remove('scale-95', 'opacity-0');
+      card.classList.add('scale-100', 'opacity-100');
+      document.getElementById('inputPlate').focus();
+    }, 10);
+  }
+
+  function closeAddTruckModal() {
+    const modal = document.getElementById('addTruckModal');
+    const card = document.getElementById('modalDialogCard');
+    card.classList.remove('scale-100', 'opacity-100');
+    card.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      // Reset errors
+      document.getElementById('inputPlate').classList.remove('border-error');
+      document.getElementById('plateError').classList.add('hidden');
+      document.getElementById('inputDriver').classList.remove('border-error');
+      document.getElementById('driverError').classList.add('hidden');
+    }, 200);
+  }
+
+  // Close modal when clicking backdrop
+  document.getElementById('addTruckModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeAddTruckModal();
+    }
+  });
+
+  // Select Truck Type Cards
+  function selectTypeCard(el, typeName) {
+    document.querySelectorAll('.truck-type-card').forEach(card => {
+      card.classList.remove('selected', 'border-primary-container', 'bg-primary-container/10');
+      card.classList.add('border-outline-variant/40', 'bg-surface-container-lowest');
+      const dot = card.querySelector('.radio-circle');
+      dot.className = "w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle";
+    });
+
+    el.classList.add('selected', 'border-primary-container', 'bg-primary-container/10');
+    el.classList.remove('border-outline-variant/40', 'bg-surface-container-lowest');
+    const dot = el.querySelector('.radio-circle');
+    dot.className = "w-3.5 h-3.5 rounded-full border border-primary-container bg-primary-container flex items-center justify-center radio-circle";
+    
+    document.getElementById('selectedTruckType').value = typeName;
+  }
+
+  // Handle Form Submission
+  function handleTruckSubmit(e) {
+    e.preventDefault();
+    const plateInput = document.getElementById('inputPlate');
+    const modelInput = document.getElementById('inputModel');
+    const driverInput = document.getElementById('inputDriver');
+    const phoneInput = document.getElementById('inputPhone');
+    const typeVal = document.getElementById('selectedTruckType').value;
+    const capacityInput = document.getElementById('inputCapacity');
+    const locationInput = document.getElementById('inputLocation');
+
+    let isValid = true;
+
+    // Validate plate
+    if (!plateInput.value.trim()) {
+      plateInput.classList.add('border-error');
+      document.getElementById('plateError').classList.remove('hidden');
+      isValid = false;
+    } else {
+      plateInput.classList.remove('border-error');
+      document.getElementById('plateError').classList.add('hidden');
+    }
+
+    // Validate driver
+    if (!driverInput.value.trim()) {
+      driverInput.classList.add('border-error');
+      document.getElementById('driverError').classList.remove('hidden');
+      isValid = false;
+    } else {
+      driverInput.classList.remove('border-error');
+      document.getElementById('driverError').classList.add('hidden');
+    }
+
+    if (!isValid) return;
+
+    const plate = plateInput.value.trim().toUpperCase();
+    const model = modelInput.value.trim() || 'Mercedes-Benz Actros 1845';
+    const driver = driverInput.value.trim();
+    const phone = phoneInput.value.trim() || '+998 90 000 00 00';
+    const capacity = capacityInput.value.trim() || '22 tonna';
+    const location = locationInput.value.trim() || 'Toshkent Markaziy Baza';
+
+    // Driver Initials
+    const initials = driver.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'TR';
+
+    // Insert row at top of tbody
+    const tbody = document.getElementById('fleetTableBody');
+    const newRow = document.createElement('tr');
+    newRow.className = "hover:bg-surface-container-high/60 transition-colors cursor-pointer group bg-primary-container/[0.04]";
+    newRow.setAttribute('onclick', `selectTruck('${plate}', '${model}', '${driver}', '${phone}', '${typeVal}', '${capacity}', '${location}', "Bo'sh", '100%', '0 km', '2027-01-01', '2027-12-31', '0 km/soat', '41.2995° N, 69.2401° E')`);
+
+    newRow.innerHTML = `
+      <td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider shadow-inner">
+          <span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+          ${plate}
+        </div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-lg">local_shipping</span>
+          <div>
+            <div class="font-headline-sm text-sm text-white">${model}</div>
+            <div class="font-label-sm text-on-surface-variant">2024 y. • Euro-6</div>
+          </div>
+        </div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-primary-container/30 text-primary flex items-center justify-center text-xs font-bold">${initials}</div>
+          <div>
+            <div class="font-label-md text-white">${driver}</div>
+            <div class="font-label-sm text-on-surface-variant">${phone}</div>
+          </div>
+        </div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="font-label-md text-white">${typeVal}</div>
+        <div class="font-label-sm text-on-surface-variant">Yuk: ${capacity}</div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="flex items-center gap-1.5 text-secondary">
+          <span class="material-symbols-outlined text-sm">home_pin</span>
+          <span class="font-label-md text-white">${location}</span>
+        </div>
+        <div class="font-label-sm text-on-surface-variant">Yangi qo'shildi • Tayyor</div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-secondary">
+          <span class="w-2 h-2 rounded-full bg-secondary"></span>
+          Bo'sh
+        </span>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="font-label-md text-white">2027-01-01</div>
+        <div class="font-label-sm text-secondary">Sug'urta: Faol</div>
+      </td>
+      <td class="py-3.5 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-end gap-1">
+          <button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Buyurtma biriktirish">
+            <span class="material-symbols-outlined text-base">assignment_turned_in</span>
+          </button>
+          <button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Tahrirlash">
+            <span class="material-symbols-outlined text-base">edit</span>
+          </button>
+          <button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-surface-container rounded" onclick="this.closest('tr').remove();" title="O'chirish">
+            <span class="material-symbols-outlined text-base">delete</span>
+          </button>
+        </div>
+      </td>
+    `;
+
+    tbody.prepend(newRow);
+
+    // Update Telemetry Panel to newly created truck
+    selectTruck(plate, model, driver, phone, typeVal, capacity, location, "Bo'sh", "100%", "0 km", "2027-01-01", "2027-12-31", "0 km/soat", "41.2995° N, 69.2401° E");
+
+    // Update counters
+    const totalStat = document.getElementById('totalTrucksStat');
+    if (totalStat) totalStat.innerText = parseInt(totalStat.innerText) + 1;
+    const idleStat = document.getElementById('idleTrucksStat');
+    if (idleStat) idleStat.innerText = parseInt(idleStat.innerText) + 1;
+
+    // Close Modal & Reset Form
+    closeAddTruckModal();
+    document.getElementById('addTruckForm').reset();
+    document.getElementById('inputPhone').value = "+998 ";
+
+    // Toast Alert
+    showToast("Muvaffaqiyatli!", `Yangi fura (${plate}) muvaffaqiyatli qo‘shildi!`);
+  }
+
+  // Toast Functionality
+  let toastTimer = null;
+  function showToast(title, msg) {
+    const toast = document.getElementById('toastNotification');
+    document.getElementById('toastTitle').innerText = title;
+    document.getElementById('toastMessage').innerText = msg;
+    
+    toast.classList.remove('translate-y-[-120%]', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      hideToast();
+    }, 3500);
+  }
+
+  function hideToast() {
+    const toast = document.getElementById('toastNotification');
+    toast.classList.remove('translate-y-0', 'opacity-100');
+    toast.classList.add('translate-y-[-120%]', 'opacity-0', 'pointer-events-none');
+  }
+</script>
+<script data-purpose="shell-keyboard-interactions">
+    // Global keyboard shortcut Ctrl+K
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const search = document.getElementById('global-search');
+        if (search) search.focus();
+      }
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('addTruckModal');
+        if (modal && !modal.classList.contains('hidden')) {
+          closeAddTruckModal();
+        }
+      }
+    });
+</script>
+</body></html>

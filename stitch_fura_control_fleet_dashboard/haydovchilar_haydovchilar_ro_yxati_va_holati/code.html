@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+
+<html class="dark h-full" lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FURA CONTROL - Logistika boshqaruv tizimi</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary": "#380094",
+            "on-tertiary-fixed": "#21005e",
+            "surface-bright": "#2e3a4d",
+            "on-primary": "#003060",
+            "error-container": "#93000a",
+            "on-surface-variant": "#c0c7d6",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#d5e3ff",
+            "background": "#071426",
+            "inverse-primary": "#005eb1",
+            "secondary-fixed": "#60fea5",
+            "primary-fixed-dim": "#a6c8ff",
+            "surface-container": "#142032",
+            "surface-tint": "#a6c8ff",
+            "on-secondary-fixed-variant": "#00522d",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#030e20",
+            "surface-container-low": "#0f1c2e",
+            "surface-container-highest": "#293549",
+            "inverse-on-surface": "#253144",
+            "on-background": "#d7e3fc",
+            "secondary": "#40e48d",
+            "secondary-fixed-dim": "#3be18b",
+            "tertiary-fixed": "#e8ddff",
+            "on-primary-fixed-variant": "#004787",
+            "primary-container": "#2d91ff",
+            "on-tertiary-container": "#300083",
+            "tertiary-fixed-dim": "#cebdff",
+            "tertiary-container": "#9b7aff",
+            "on-secondary": "#00391d",
+            "outline-variant": "#404753",
+            "on-secondary-container": "#004c29",
+            "surface-variant": "#293549",
+            "primary": "#a6c8ff",
+            "on-primary-container": "#002a54",
+            "inverse-surface": "#d7e3fc",
+            "surface-dim": "#071426",
+            "on-tertiary-fixed-variant": "#5114c5",
+            "on-secondary-fixed": "#00210f",
+            "on-error": "#690005",
+            "outline": "#8a919f",
+            "on-surface": "#d7e3fc",
+            "tertiary": "#cebdff",
+            "surface-container-high": "#1e2a3d",
+            "surface": "#071426",
+            "secondary-container": "#00c774",
+            "on-primary-fixed": "#001c3b"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem"
+          },
+          fontFamily: {
+            "table-header": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "kpi-stat": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "table-header": ["11px", { "lineHeight": "16px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "kpi-stat": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "800" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }]
+          }
+        }
+      }
+    };
+  </script>
+<style data-purpose="custom-styling">
+    @layer base {
+      html {
+        color-scheme: dark;
+      }
+      body {
+        overscroll-behavior: none;
+        min-height: 100vh;
+        background-color: #071426;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f1c2e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #293549;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2d91ff;
+    }
+    .truck-sidebar-bg {
+      background: linear-gradient(180deg, rgba(15,28,46,0) 0%, rgba(15,28,46,0.92) 75%, #0f1c2e 100%),
+                  url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=600&q=80') center bottom/cover no-repeat;
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-surface antialiased">
+<!-- BEGIN: LeftSidebar -->
+<aside class="fixed top-0 bottom-0 left-0 w-64 z-30 bg-surface-container-low border-r border-outline-variant/30 flex flex-col justify-between overflow-hidden shadow-2xl" data-purpose="sidebar">
+<div class="p-space-md flex flex-col h-full overflow-y-auto">
+<!-- Logo -->
+<div class="flex items-center gap-space-sm px-space-xs py-space-sm mb-space-md">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-inverse-primary to-primary-container flex items-center justify-center shadow-lg shadow-primary-container/25 flex-shrink-0">
+<span class="material-symbols-outlined text-white text-2xl">local_shipping</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-white leading-none tracking-tight">FURA CONTROL</h1>
+<p class="font-label-sm text-on-surface-variant/80 mt-1 uppercase tracking-wider">Logistika tizimi</p>
+</div>
+</div>
+<!-- Main Navigation Menu -->
+<nav class="space-y-1.5 mt-space-xs" data-active-classes="bg-primary-container text-white font-semibold shadow-md shadow-primary-container/30" id="sidebar-nav">
+<!-- 1. Bosh sahifa -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="bosh-sahifa" href="#">
+          Bosh sahifa
+        </a>
+<!-- 2. Furalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="furalar" href="#">
+          Furalar
+        </a>
+<!-- 3. Yuklar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="yuklar" href="#">
+          Yuklar
+        </a>
+<!-- 4. Haydovchilar -->
+<a aria-current="page" class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg transition-colors bg-primary-container text-white font-semibold shadow-md shadow-primary-container/30" data-path="haydovchilar" href="#">
+          Haydovchilar
+        </a>
+<!-- 5. Reyslar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="reyslar" href="#">
+          Reyslar
+        </a>
+<!-- 6. Kalendar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="kalendar" href="#">
+          Kalendar
+        </a>
+<!-- 7. Arxiv -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="arxiv" href="#">
+          Arxiv
+        </a>
+<!-- 8. Hisobotlar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="hisobotlar" href="#">
+          Hisobotlar
+        </a>
+<!-- 9. Sozlamalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md" data-path="sozlamalar" href="#">
+          Sozlamalar
+        </a>
+</nav>
+</div>
+<!-- Sidebar Bottom Graphic Card -->
+<div class="h-40 w-full truck-sidebar-bg flex flex-col justify-end p-space-md border-t border-outline-variant/20">
+<div class="p-space-sm rounded-lg bg-surface-container/90 backdrop-blur-sm border border-outline-variant/30 text-on-surface-variant">
+<p class="font-label-md text-white flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+          Avtopark nazorati
+        </p>
+<p class="font-label-sm text-on-surface-variant/80 mt-0.5">GPS &amp; Telematika faol</p>
+</div>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: TopHeader -->
+<header class="fixed top-0 right-0 left-64 z-20 h-16 bg-surface-container-low/90 backdrop-blur-md border-b border-outline-variant/30 px-space-lg flex items-center justify-between gap-space-md" data-purpose="top-navigation">
+<!-- Global Search Input with Shortcut -->
+<div class="relative w-96 max-w-lg">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant font-body-sm rounded-lg pl-9 pr-16 py-2 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="global-search" placeholder="Qidirish: fura, yuk, haydovchi, reys..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<span class="font-label-sm bg-surface-container text-on-surface-variant px-1.5 py-0.5 rounded border border-outline-variant/40">Ctrl + K</span>
+</div>
+</div>
+<!-- Header Controls -->
+<div class="flex items-center gap-space-md">
+<!-- Notifications Bell -->
+<button class="relative p-2 text-on-surface-variant hover:text-white bg-surface-container rounded-lg border border-outline-variant/30 hover:bg-surface-container-high transition-colors" title="Bildirishnomalar">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute -top-1 -right-1 bg-error-container text-white font-label-sm w-4 h-4 rounded-full flex items-center justify-center border-2 border-surface-container-low">3</span>
+</button>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-2.5 bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-white font-label-sm">
+          J
+        </div>
+<div class="text-left leading-tight">
+<div class="font-label-md text-white">Jasurbek</div>
+<div class="font-label-sm text-on-surface-variant/80">Bosh dispetcher</div>
+</div>
+<span class="material-symbols-outlined text-base text-on-surface-variant ml-0.5">expand_more</span>
+</div>
+<!-- Current System Date Pill -->
+<div class="hidden md:flex items-center gap-2 bg-surface-container border border-outline-variant/30 text-on-surface px-3 py-1.5 rounded-lg font-label-sm">
+<span class="material-symbols-outlined text-primary-container text-base">calendar_today</span>
+<span>16-noyabr, 2026 (Dushanba)</span>
+</div>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainContentWrapper -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="p-space-lg">
+<div class="flex flex-col w-full">
+<!-- Screen Context / Overline & Actions Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-label-sm uppercase tracking-widest text-primary-container">Kadrlar va reys xavfsizligi</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-on-surface-variant">Jonli telemetriya nazorati</span>
+</div>
+<h2 class="font-headline-xl text-white tracking-tight">Haydovchilar tarkibi</h2>
+<p class="font-body-md text-on-surface-variant mt-0.5 max-w-2xl">
+        Xalqaro va ichki reys haydovchilari, malaka toifalari, ADR sertifikatlari va litsenziyalar markaziy dispetcherlik nazorati.
+      </p>
+</div>
+<!-- Quick Actions Toolbar -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="h-10 px-4 rounded-lg bg-surface-container-high hover:bg-surface-variant text-white font-label-md transition-all flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-lg text-primary">article</span>
+<span>Smena jurnali</span>
+</button>
+<button class="h-10 px-4 rounded-lg bg-surface-container-high hover:bg-surface-variant text-white font-label-md transition-all flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-lg text-secondary">sms</span>
+<span>SMS xabarnoma</span>
+</button>
+<button class="h-10 px-5 rounded-lg bg-primary-container hover:bg-primary-container/90 text-white font-label-md font-semibold transition-all flex items-center gap-2 shadow-lg shadow-primary-container/25 active:scale-95" type="button">
+<span class="material-symbols-outlined text-lg">person_add</span>
+<span>+ Yangi haydovchi qo'shish</span>
+</button>
+</div>
+</div>
+<!-- KPI Metric Row with Micro Data Viz -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg">
+<!-- Stat 1: Total Fleet Drivers -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-5 shadow-lg group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-2xl">badge</span>
+</div>
+<span class="font-label-sm px-2 py-0.5 rounded-full bg-primary-container/15 text-primary-container font-semibold">100% litsenziyalangan</span>
+</div>
+<div class="mt-4">
+<span class="font-label-sm uppercase tracking-wider text-on-surface-variant">Jami haydovchilar</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-stat text-white">18</span>
+<span class="font-body-sm text-on-surface-variant">nafar shtatda</span>
+</div>
+</div>
+<!-- Ambient Truck Watermark Graphic -->
+<svg class="absolute -right-4 -bottom-3 w-28 h-28 text-white/5 pointer-events-none transform -rotate-6" fill="currentColor" viewbox="0 0 24 24">
+<path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
+</svg>
+</div>
+<!-- Stat 2: On Route -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-5 shadow-lg group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<div class="w-11 h-11 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-2xl animate-pulse">local_shipping</span>
+</div>
+<span class="inline-flex items-center gap-1 font-label-sm px-2 py-0.5 rounded-full bg-primary-container/20 text-primary-container font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+          61% yuk reysida
+        </span>
+</div>
+<div class="mt-4">
+<span class="font-label-sm uppercase tracking-wider text-on-surface-variant">Reysda / Yo'lda</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-stat text-primary-container">11</span>
+<span class="font-body-sm text-on-surface-variant">nafar faol tranzit</span>
+</div>
+</div>
+<!-- Mini Sparkline for Dispatch Intensity -->
+<div class="mt-3 flex items-end gap-1 h-3">
+<div class="w-2 bg-primary-container/40 rounded-t h-1.5"></div>
+<div class="w-2 bg-primary-container/60 rounded-t h-2"></div>
+<div class="w-2 bg-primary-container rounded-t h-3"></div>
+<div class="w-2 bg-primary-container rounded-t h-2.5"></div>
+<div class="w-2 bg-primary-container/80 rounded-t h-3"></div>
+<div class="w-2 bg-primary-container rounded-t h-2"></div>
+</div>
+</div>
+<!-- Stat 3: Rest / Standby -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-5 shadow-lg group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<div class="w-11 h-11 rounded-lg bg-surface-variant flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-2xl">hotel</span>
+</div>
+<span class="font-label-sm px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-semibold">Tayyor zaxira</span>
+</div>
+<div class="mt-4">
+<span class="font-label-sm uppercase tracking-wider text-on-surface-variant">Dam olishda / Bazada</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-stat text-secondary">5</span>
+<span class="font-body-sm text-on-surface-variant">nafar navbatchi</span>
+</div>
+</div>
+<svg class="absolute -right-3 -bottom-2 w-24 h-24 text-white/5 pointer-events-none" fill="currentColor" viewbox="0 0 24 24">
+<path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"></path>
+</svg>
+</div>
+<!-- Stat 4: On Leave / Medical -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-5 shadow-lg group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<div class="w-11 h-11 rounded-lg bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-2xl">event_busy</span>
+</div>
+<span class="font-label-sm px-2 py-0.5 rounded-full bg-error-container/30 text-error font-semibold">Vaqtincha nofaol</span>
+</div>
+<div class="mt-4">
+<span class="font-label-sm uppercase tracking-wider text-on-surface-variant">Mehnat ta'tilida</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-stat text-white">2</span>
+<span class="font-body-sm text-on-surface-variant">nafar xodim</span>
+</div>
+</div>
+<svg class="absolute -right-3 -bottom-2 w-24 h-24 text-white/5 pointer-events-none" fill="currentColor" viewbox="0 0 24 24">
+<path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"></path>
+</svg>
+</div>
+</div>
+<!-- Search, Filter & View Controls -->
+<div class="bg-surface-container rounded-xl p-space-md mb-space-lg shadow-md flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-md">
+<!-- Search Bar -->
+<div class="relative flex-1 max-w-xl">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant font-body-sm rounded-lg pl-10 pr-4 py-2.5 outline-none focus:bg-surface-container-low transition-colors" id="driver-search-input" placeholder="Haydovchi F.I.SH, telefon, passport yoki guvohnoma bo'yicha qidiruv..." type="text"/>
+</div>
+<!-- Filter Buttons (Pills) -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0" id="filter-container">
+<button class="filter-tab px-3.5 py-1.5 rounded-lg font-label-md transition-colors bg-primary-container text-white shadow-sm" data-filter="all">
+        Barchasi (18)
+      </button>
+<button class="filter-tab px-3.5 py-1.5 rounded-lg font-label-md transition-colors bg-surface-container-high text-on-surface-variant hover:text-white" data-filter="in-route">
+        Reysda (11)
+      </button>
+<button class="filter-tab px-3.5 py-1.5 rounded-lg font-label-md transition-colors bg-surface-container-high text-on-surface-variant hover:text-white" data-filter="standby">
+        Bo'sh / Navbatchi (5)
+      </button>
+<button class="filter-tab px-3.5 py-1.5 rounded-lg font-label-md transition-colors bg-surface-container-high text-on-surface-variant hover:text-white" data-filter="rest">
+        Dam olishda (2)
+      </button>
+</div>
+<!-- View Mode Switch -->
+<div class="hidden sm:flex items-center gap-1 bg-surface-container-lowest p-1 rounded-lg">
+<button class="p-1.5 rounded bg-surface-container text-primary-container" id="view-card-btn" title="Karta ko'rinishi">
+<span class="material-symbols-outlined text-lg leading-none">grid_view</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-white" id="view-table-btn" title="Jadval ko'rinishi">
+<span class="material-symbols-outlined text-lg leading-none">table_rows</span>
+</button>
+</div>
+</div>
+<!-- Main Split Layout: Driver Catalog + Expiration Telemetry Sidebar -->
+<div class="grid grid-cols-1 2xl:grid-cols-12 gap-space-lg items-start">
+<!-- Driver Catalog Column (8 cols in 2xl) -->
+<div class="2xl:col-span-8 flex flex-col gap-space-md">
+<!-- Driver Card 1: Akmalov Botir (Reysda) -->
+<div class="driver-card bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all relative overflow-hidden group" data-status="in-route">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pl-2">
+<!-- Avatar + Bio -->
+<div class="flex items-start sm:items-center gap-space-md">
+<div class="relative flex-shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover shadow" data-alt="Close up cinematic portrait of a professional middle-aged Uzbek truck driver wearing a clean dark navy uniform, confident look, logistics yard and modern trucks in soft blurred background, cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaDDVlgoDhhz22Ubch9Y5VvUbGXxBuGM1pnxibhd9Jag0ADHnG164y0KuGQm0YfRcMilYkLfG9xJYPHgb-lypXUJGSdo_FD4IkYFcf0FX8YnpbYpPLQ8JuGo86BLEazyjlA5_Za4tsKcg5IODwBOT5l6apCXdf3Ba2RCP8-SRdyyqKC-3JkvFHdHdV7Xat0RAX8JMKTTY2Tpg2qG-WhGhJawTm0JaoNIEc54iz-wk"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary-container ring-2 ring-surface-container flex items-center justify-center" title="Reysda">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+</span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-2">
+<h3 class="font-headline-sm text-white tracking-tight">Akmalov Botir Sherzodovich</h3>
+<span class="font-label-sm px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary-container font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Reysda
+                </span>
+<span class="font-label-sm px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface-variant">ID: HY-4402</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-on-surface-variant font-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary">call</span>
+                  +998 90 123 45 67
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-secondary">verified</span>
+                  Toifa: <b class="text-white font-medium">BCDE</b>
+</span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-base">star</span>
+                  4.9 / 5.0 (148 reys)
+                </span>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Menu -->
+<div class="flex items-center gap-2 self-end lg:self-center">
+<a class="h-9 px-3 rounded-lg bg-surface-container-lowest hover:bg-surface-variant text-on-surface font-label-md flex items-center gap-1 transition-colors" href="tel:+998901234567">
+<span class="material-symbols-outlined text-base text-secondary">phone_forwarded</span>
+<span>Qo'ng'iroq</span>
+</a>
+<button class="h-9 w-9 rounded-lg bg-surface-container-lowest hover:bg-surface-variant text-on-surface-variant hover:text-white flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Details Grid: Truck, Route, Experience, Licences -->
+<div class="mt-4 pt-4 bg-surface-container-lowest/60 rounded-lg p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-on-surface-variant font-body-sm">
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Biriktirilgan fura</span>
+<div class="flex items-center gap-1.5 text-white font-medium">
+<span class="material-symbols-outlined text-base text-primary">rv_hookup</span>
+<span>Volvo FH16 (01 A 123 UA)</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Hozirgi marshrut</span>
+<div class="text-white font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary-container">navigation</span>
+<span>Toshkent → Moskva</span>
+</div>
+<span class="font-label-sm text-primary-container">1,420 km qoldi (ETA: 2 kunda)</span>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Xalqaro litsenziyalar</span>
+<div class="flex items-center gap-1 flex-wrap">
+<span class="font-label-sm px-1.5 py-0.5 bg-surface-container rounded text-white font-semibold">TIR Carnet</span>
+<span class="font-label-sm px-1.5 py-0.5 bg-secondary-container/20 text-secondary rounded font-semibold">ADR xavfli yuk</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Tajriba / Staj</span>
+<div class="text-white font-medium">12 yil staj</div>
+<span class="font-label-sm text-on-surface-variant/80">Oxirgi dam: 2 kun oldin</span>
+</div>
+</div>
+</div>
+<!-- Driver Card 2: Rashidov Dilshod (Reysda) -->
+<div class="driver-card bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all relative overflow-hidden group" data-status="in-route">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pl-2">
+<!-- Avatar + Bio -->
+<div class="flex items-start sm:items-center gap-space-md">
+<div class="relative flex-shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover shadow" data-alt="Authentic portrait of a seasoned Uzbek commercial freight driver in black fleece sweater standing next to heavy MAN TGX truck at sunset, blue sky, cinematic logistics visual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-JspGIDzzHWXnV8m9bL97jexFfs2FbbiGGABwlvjtkbP3tpCf0kvhd7yIeBAJjUSTNmB6iXwdMb1qLNN2_Bd3Q-3PVsC3HUprElfKZ_Ib7Jb-hnCwEnDr6CnnU4ZQMVVx2ZDXdIW7R6neC_uY_W6LQ1G9CwQ_La3IWUMALSzeZ8e7k5OS6DymozliWr00dsft3tlr40Hf_FFubilWDTOG6D7_UzNPcK3mwT0lA5Q"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary-container ring-2 ring-surface-container flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+</span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-2">
+<h3 class="font-headline-sm text-white tracking-tight">Rashidov Dilshod Anvarovich</h3>
+<span class="font-label-sm px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary-container font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Reysda
+                </span>
+<span class="font-label-sm px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface-variant">ID: HY-3819</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-on-surface-variant font-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary">call</span>
+                  +998 97 734 11 22
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-secondary">verified</span>
+                  Toifa: <b class="text-white font-medium">BCDE</b>
+</span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-base">star</span>
+                  4.8 / 5.0 (92 reys)
+                </span>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Menu -->
+<div class="flex items-center gap-2 self-end lg:self-center">
+<a class="h-9 px-3 rounded-lg bg-surface-container-lowest hover:bg-surface-variant text-on-surface font-label-md flex items-center gap-1 transition-colors" href="tel:+998977341122">
+<span class="material-symbols-outlined text-base text-secondary">phone_forwarded</span>
+<span>Qo'ng'iroq</span>
+</a>
+<button class="h-9 w-9 rounded-lg bg-surface-container-lowest hover:bg-surface-variant text-on-surface-variant hover:text-white flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</div>
+<div class="mt-4 pt-4 bg-surface-container-lowest/60 rounded-lg p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-on-surface-variant font-body-sm">
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Biriktirilgan fura</span>
+<div class="flex items-center gap-1.5 text-white font-medium">
+<span class="material-symbols-outlined text-base text-primary">rv_hookup</span>
+<span>MAN TGX (10 B 777 BA)</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Hozirgi marshrut</span>
+<div class="text-white font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary-container">navigation</span>
+<span>Samarqand → Istanbul</span>
+</div>
+<span class="font-label-sm text-primary-container">2,890 km qoldi (Bojxonada)</span>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Xalqaro litsenziyalar</span>
+<div class="flex items-center gap-1 flex-wrap">
+<span class="font-label-sm px-1.5 py-0.5 bg-surface-container rounded text-white font-semibold">TIR Carnet</span>
+<span class="font-label-sm px-1.5 py-0.5 bg-surface-container rounded text-on-surface-variant">Oddiy yuk</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Tajriba / Staj</span>
+<div class="text-white font-medium">9 yil staj</div>
+<span class="font-label-sm text-on-surface-variant/80">Reys muddati: 4-kun</span>
+</div>
+</div>
+</div>
+<!-- Driver Card 3: Abdullayev Sanjar (Bo'sh / Navbatchi) -->
+<div class="driver-card bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all relative overflow-hidden group" data-status="standby">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pl-2">
+<!-- Avatar + Bio -->
+<div class="flex items-start sm:items-center gap-space-md">
+<div class="relative flex-shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover shadow" data-alt="Portrait of an experienced friendly Uzbek long-distance truck driver smiling in warehouse logistics terminal depot, warm twilight lighting, high detail realistic photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVDVPwCyvPtIE6yhKvY5Yj0pqif1mMv4UReOonhjoeyI-PFIqYjdqiq5lRFHhn65DVZJkeXiYZDB2Upu1JZht81_fp1RoiND94VVk7gT1tBupSDlLDnrJChxrGRqZ-AJtmHG6o01ORGeo45CvdANyxJk27RQKHgz6AGiEk6uNnGxOwITh4DJznbPcBrLoRxalptpEkwO96-mq6cYMmzJ9HQx_ritC9FwwZAFUqRac"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-secondary ring-2 ring-surface-container"></span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-2">
+<h3 class="font-headline-sm text-white tracking-tight">Abdullayev Sanjar Karimovich</h3>
+<span class="font-label-sm px-2.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Bo'sh / Navbatchi
+                </span>
+<span class="font-label-sm px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface-variant">ID: HY-2904</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-on-surface-variant font-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary">call</span>
+                  +998 93 456 78 90
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-secondary">verified</span>
+                  Toifa: <b class="text-white font-medium">BCE</b>
+</span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-base">star</span>
+                  5.0 / 5.0 (210 reys)
+                </span>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Reysga biriktirish -->
+<div class="flex items-center gap-2 self-end lg:self-center">
+<button class="h-9 px-3.5 rounded-lg bg-secondary text-on-secondary font-label-md font-semibold flex items-center gap-1.5 transition-transform active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-base">add_road</span>
+<span>Reysga biriktirish</span>
+</button>
+<button class="h-9 w-9 rounded-lg bg-surface-container-lowest hover:bg-surface-variant text-on-surface-variant hover:text-white flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</div>
+<div class="mt-4 pt-4 bg-surface-container-lowest/60 rounded-lg p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-on-surface-variant font-body-sm">
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Biriktirilgan fura</span>
+<div class="flex items-center gap-1.5 text-white font-medium">
+<span class="material-symbols-outlined text-base text-primary">rv_hookup</span>
+<span>Mercedes Actros (01 999 AAA)</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Joylashuv / Holat</span>
+<div class="text-secondary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-base">warehouse</span>
+<span>Toshkent Bosh Garaji</span>
+</div>
+<span class="font-label-sm text-on-surface-variant/80">Reysga jo'nashga tayyor</span>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Litsenziyalar &amp; Ruxsat</span>
+<div class="flex items-center gap-1 flex-wrap">
+<span class="font-label-sm px-1.5 py-0.5 bg-surface-container rounded text-white font-semibold">TIR Carnet</span>
+<span class="font-label-sm px-1.5 py-0.5 bg-surface-container rounded text-white font-semibold">CEMT ruxsat</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Tajriba / Staj</span>
+<div class="text-white font-medium">16 yil staj (Master)</div>
+<span class="font-label-sm text-secondary">Dam olish me'yori to'liq</span>
+</div>
+</div>
+</div>
+<!-- Driver Card 4: Karimov Mirzoxid Odilovich (Dam olishda) -->
+<div class="driver-card bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all relative overflow-hidden group" data-status="rest">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-on-surface-variant"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pl-2">
+<!-- Avatar + Bio -->
+<div class="flex items-start sm:items-center gap-space-md">
+<div class="relative flex-shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover shadow opacity-90" data-alt="Portrait photo of a young professional freight logistics vehicle driver in casual company polo shirt, looking into camera, clean modern dark navy lighting aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtGewGzGUf0Ri7UULnDVWwNtGMMq2XXSd7XQZYQAs9qRLBTesNqh0zNk1Aejy7iq1uJrtkguF6HUNB3k_z4aF7OmGCfH_Yrt1ITBtqCOGl9PjonWJCDUqZwvUoSsGnt25tYqk7RrzkhHuoBNVjxlNH9rFGU9Iy2aSoU62LieTi51OgiOEQe8wJoSz71nY7tkGssG5JWM2Ddd2J_NLFMBK6ZLRSIVS2rXd3MBfbHKY"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-surface-variant ring-2 ring-surface-container"></span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-2">
+<h3 class="font-headline-sm text-white tracking-tight">Karimov Mirzoxid Odilovich</h3>
+<span class="font-label-sm px-2.5 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                  Dam olishda (Smena tugadi)
+                </span>
+<span class="font-label-sm px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface-variant">ID: HY-1520</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-on-surface-variant font-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary">call</span>
+                  +998 91 987 65 43
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-secondary">verified</span>
+                  Toifa: <b class="text-white font-medium">BCDE</b>
+</span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-base">star</span>
+                  4.7 / 5.0 (64 reys)
+                </span>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Menu -->
+<div class="flex items-center gap-2 self-end lg:self-center">
+<a class="h-9 px-3 rounded-lg bg-surface-container-lowest hover:bg-surface-variant text-on-surface font-label-md flex items-center gap-1 transition-colors" href="tel:+998919876543">
+<span class="material-symbols-outlined text-base text-on-surface-variant">chat</span>
+<span>Xabar</span>
+</a>
+<button class="h-9 w-9 rounded-lg bg-surface-container-lowest hover:bg-surface-variant text-on-surface-variant hover:text-white flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</div>
+<div class="mt-4 pt-4 bg-surface-container-lowest/60 rounded-lg p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-on-surface-variant font-body-sm">
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Biriktirilgan fura</span>
+<div class="flex items-center gap-1.5 text-white font-medium">
+<span class="material-symbols-outlined text-base text-primary">rv_hookup</span>
+<span>DAF XF 480 (80 T 505 TA)</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Reys holati</span>
+<div class="text-white font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-secondary">check_circle</span>
+<span>Olmaota reysini topshirdi</span>
+</div>
+<span class="font-label-sm text-on-surface-variant">Navbatdagi smena: 18-noyabr</span>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Xalqaro litsenziyalar</span>
+<div class="flex items-center gap-1 flex-wrap">
+<span class="font-label-sm px-1.5 py-0.5 bg-surface-container rounded text-white font-semibold">TIR Carnet</span>
+<span class="font-label-sm px-1.5 py-0.5 bg-surface-container rounded text-on-surface-variant">ADR yo'q</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Tajriba / Staj</span>
+<div class="text-white font-medium">7 yil staj</div>
+<span class="font-label-sm text-primary">Texnik ko'rikdan o'tgan</span>
+</div>
+</div>
+</div>
+<!-- Driver Card 5: Usmonov Azizbek (Reysda) -->
+<div class="driver-card bg-surface-container rounded-xl p-space-md shadow-md hover:bg-surface-container-high transition-all relative overflow-hidden group" data-status="in-route">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pl-2">
+<!-- Avatar + Bio -->
+<div class="flex items-start sm:items-center gap-space-md">
+<div class="relative flex-shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover shadow" data-alt="Portrait photo of a determined Central Asian freight truck driver standing near cabin door of heavy articulated logistics vehicle, sharp dramatic side lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm-JeyVWgc68erigEkTKPn1DLu3sPDuDmhvuCo3p4hRJnhL520V_OZ4r5-YCuWjVA09-Hl0PaHGrPde7uwjUiA8rk29JnzgUXjdHSKOKp9_7ssoejZhYgvFhqbXpJpShEZOWt50aHdjaIq4OdAdifjkjHuQbKpEf3TAKiAuxts0qBX-vm9oS5z2SF6hfD_9n4R7KadcIKeph29Wf4ABuFgz0Bm86gDJbNTUPLywkk"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary-container ring-2 ring-surface-container flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+</span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-2">
+<h3 class="font-headline-sm text-white tracking-tight">Usmonov Azizbek Shuxratovich</h3>
+<span class="font-label-sm px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary-container font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Reysda
+                </span>
+<span class="font-label-sm px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface-variant">ID: HY-5108</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-on-surface-variant font-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary">call</span>
+                  +998 99 301 90 00
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-secondary">verified</span>
+                  Toifa: <b class="text-white font-medium">BCDE</b>
+</span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-base">star</span>
+                  4.95 / 5.0 (178 reys)
+                </span>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Menu -->
+<div class="flex items-center gap-2 self-end lg:self-center">
+<a class="h-9 px-3 rounded-lg bg-surface-container-lowest hover:bg-surface-variant text-on-surface font-label-md flex items-center gap-1 transition-colors" href="tel:+998993019000">
+<span class="material-symbols-outlined text-base text-secondary">phone_forwarded</span>
+<span>Qo'ng'iroq</span>
+</a>
+<button class="h-9 w-9 rounded-lg bg-surface-container-lowest hover:bg-surface-variant text-on-surface-variant hover:text-white flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</div>
+<div class="mt-4 pt-4 bg-surface-container-lowest/60 rounded-lg p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-on-surface-variant font-body-sm">
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Biriktirilgan fura</span>
+<div class="flex items-center gap-1.5 text-white font-medium">
+<span class="material-symbols-outlined text-base text-primary">rv_hookup</span>
+<span>Scania R500 (01 444 VIP)</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Hozirgi marshrut</span>
+<div class="text-white font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary-container">navigation</span>
+<span>Buxoro → Minsk</span>
+</div>
+<span class="font-label-sm text-primary-container">980 km qoldi (Yo'lda, tezlik: 78 km/s)</span>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Xalqaro litsenziyalar</span>
+<div class="flex items-center gap-1 flex-wrap">
+<span class="font-label-sm px-1.5 py-0.5 bg-surface-container rounded text-white font-semibold">TIR Carnet</span>
+<span class="font-label-sm px-1.5 py-0.5 bg-secondary-container/20 text-secondary rounded font-semibold">ADR 1-9 toifa</span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant/70 uppercase block mb-0.5">Tajriba / Staj</span>
+<div class="text-white font-medium">14 yil staj</div>
+<span class="font-label-sm text-on-surface-variant/80">Kafolatlangan dispetcherlik</span>
+</div>
+</div>
+</div>
+<!-- Pagination & Record count Footer -->
+<div class="flex items-center justify-between py-2 px-1 text-on-surface-variant font-body-sm">
+<span>Jami 18 nafar haydovchidan 5 nafari ko'rsatilmoqda</span>
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-1 rounded bg-surface-container hover:bg-surface-container-high text-white text-xs disabled:opacity-40" disabled="">Oldingi</button>
+<button class="px-2.5 py-1 rounded bg-primary-container text-white text-xs font-semibold">1</button>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-white text-xs">2</button>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-white text-xs">3</button>
+<button class="px-3 py-1 rounded bg-surface-container hover:bg-surface-container-high text-white text-xs">Keyingi</button>
+</div>
+</div>
+</div>
+<!-- Telemetry & Compliance Inspector Side Panel (4 cols in 2xl) -->
+<div class="2xl:col-span-4 flex flex-col gap-space-lg">
+<!-- Card: License & Document Expiry Warnings (Crucial Dispatcher Telematics) -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-xl border-t-2 border-primary-container">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl text-error">notification_important</span>
+<h3 class="font-headline-sm text-white">Muddati tugaydigan hujjatlar</h3>
+</div>
+<span class="font-label-sm px-2 py-0.5 rounded-full bg-error-container/30 text-error font-semibold">3 ta ogohlantirish</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-4">
+          Xalqaro reys xavfsizligi talablariga asosan muddati 30 kundan kam qolgan hujjatlar ro'yxati:
+        </p>
+<!-- Notification List -->
+<div class="space-y-3">
+<!-- Alert 1: TIR Carnet -->
+<div class="p-3 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-2">
+<div>
+<span class="font-label-sm text-error uppercase font-bold tracking-wide flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                  TIR Carnet muddati
+                </span>
+<p class="font-label-md text-white mt-0.5">Rashidov Dilshod Anvarovich</p>
+<p class="font-body-sm text-on-surface-variant">Fura: MAN TGX (10 B 777 BA)</p>
+</div>
+<span class="font-label-sm px-2 py-1 rounded bg-error-container/30 text-error font-bold whitespace-nowrap">
+                6 kun qoldi
+              </span>
+</div>
+<div class="mt-2.5 flex items-center justify-between pt-2">
+<span class="font-label-sm text-on-surface-variant/70">Muddat: 22-noyabr, 2026</span>
+<button class="font-label-sm text-primary hover:underline flex items-center gap-0.5">
+<span>Yangilash so'rovi</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Alert 2: Medical Checkup -->
+<div class="p-3 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-2">
+<div>
+<span class="font-label-sm text-primary uppercase font-bold tracking-wide flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Tibbiy ko'rik (083-shakl)
+                </span>
+<p class="font-label-md text-white mt-0.5">Karimov Mirzoxid Odilovich</p>
+<p class="font-body-sm text-on-surface-variant">Fura: DAF XF (80 T 505 TA)</p>
+</div>
+<span class="font-label-sm px-2 py-1 rounded bg-surface-container-high text-primary font-bold whitespace-nowrap">
+                14 kun qoldi
+              </span>
+</div>
+<div class="mt-2.5 flex items-center justify-between pt-2">
+<span class="font-label-sm text-on-surface-variant/70">Muddat: 30-noyabr, 2026</span>
+<button class="font-label-sm text-primary hover:underline flex items-center gap-0.5">
+<span>Yo'llanma berish</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Alert 3: ADR Certificate -->
+<div class="p-3 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-2">
+<div>
+<span class="font-label-sm text-tertiary uppercase font-bold tracking-wide flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  ADR Xavfli yuk guvohnomasi
+                </span>
+<p class="font-label-md text-white mt-0.5">Usmonov Azizbek Shuxratovich</p>
+<p class="font-body-sm text-on-surface-variant">Fura: Scania R500 (01 444 VIP)</p>
+</div>
+<span class="font-label-sm px-2 py-1 rounded bg-surface-container-high text-tertiary font-bold whitespace-nowrap">
+                25 kun qoldi
+              </span>
+</div>
+<div class="mt-2.5 flex items-center justify-between pt-2">
+<span class="font-label-sm text-on-surface-variant/70">Muddat: 11-dekabr, 2026</span>
+<button class="font-label-sm text-primary hover:underline flex items-center gap-0.5">
+<span>Sertifikat tekshirish</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 h-9 rounded-lg bg-surface-container-high hover:bg-surface-variant text-white font-label-md flex items-center justify-center gap-1 transition-colors">
+<span>Barcha hujjatlar monitoringi</span>
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+<!-- Quick Telemetry Map Card: Driver Geolocation Real-time -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-xl">
+<div class="flex items-center justify-between mb-3">
+<div>
+<h4 class="font-headline-sm text-white">Jonli haydovchilar xaritasi</h4>
+<p class="font-body-sm text-on-surface-variant">GPS telematika transponderlari</p>
+</div>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" title="GPS aloqasi faol"></span>
+</div>
+<!-- Static Map Simulation with data-location for backend API -->
+<div class="w-full h-48 bg-cover bg-center rounded-xl relative overflow-hidden flex items-end p-3 shadow-inner" data-location="Tashkent, Uzbekistan" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCUIKII5naTquuDlZnOf9UG2LWgn9-B0W0vuSTpR9TM4qlbsAeijDodq7ShlY1xk5BlD_RvCEBp_kwt7OPjGinrm08mD3-j8WZ4VcLh1A4rGOiE6NaFAnos4ahAM1EkiVMpDSATlC_wY_HsWp6d3oy7R2G62R4mWLx_xVa2aSh3j36iyDCGrHNOim6jX-ukJy6AvgE_dm5jQsy5Ucgus3etfCCZJianjPY90zxS5_A')">
+<!-- Ambient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<!-- Route Pin Badges on Map -->
+<div class="relative z-10 w-full flex items-center justify-between bg-surface-container-low/90 backdrop-blur-md p-2.5 rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-lg">share_location</span>
+<div class="text-xs">
+<p class="font-semibold text-white">11 ta fura harakatda</p>
+<p class="text-on-surface-variant">Toshkent, Samara, Orenburg, Buxoro</p>
+</div>
+</div>
+<button class="px-2 py-1 rounded bg-primary-container text-white text-xs font-semibold hover:bg-primary-container/90">
+              Kattalashtirish
+            </button>
+</div>
+</div>
+<!-- Driver Shift KPI Summary Box -->
+<div class="mt-4 grid grid-cols-2 gap-2 text-center">
+<div class="bg-surface-container-low p-2.5 rounded-lg">
+<span class="font-label-sm text-on-surface-variant block">O'rtacha tezlik</span>
+<span class="font-headline-sm text-white">74.2 <span class="text-xs font-normal text-on-surface-variant">km/soat</span></span>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-lg">
+<span class="font-label-sm text-on-surface-variant block">Yoqilg'i tejamkorlik</span>
+<span class="font-headline-sm text-secondary">96.4% <span class="text-xs font-normal text-on-surface-variant">ideal</span></span>
+</div>
+</div>
+</div>
+<!-- Quick Dispatch Helper Card -->
+<div class="bg-gradient-to-br from-surface-container to-surface-container-high rounded-xl p-space-md shadow-lg relative overflow-hidden">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 text-secondary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-2xl">support_agent</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-white">Dispetcherlik tezkor liniyasi</h4>
+<p class="font-body-sm text-on-surface-variant">Haydovchilar bilan tezkor aloqa radiosi</p>
+</div>
+</div>
+<p class="font-body-sm text-on-surface-variant/90 mt-3">
+          Favqulodda to'xtash, texnik nosozlik yoki bojxona kechikishlarida zudlik bilan barcha reysdagi haydovchilarga PTT radio aloqa kanalini ochish.
+        </p>
+<button class="mt-4 w-full h-9 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-white font-label-md flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-base text-secondary">mic</span>
+<span>Umumiy ovozli kanalni yoqish</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive JavaScript for Client Filter & Search Logic -->
+<script>
+    (function initDriverInteractions() {
+      // Filter tab toggling
+      const filterButtons = document.querySelectorAll('.filter-tab');
+      const driverCards = document.querySelectorAll('.driver-card');
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active pill styling
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-primary-container', 'text-white', 'shadow-sm');
+            b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+          });
+          btn.classList.add('bg-primary-container', 'text-white', 'shadow-sm');
+          btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+
+          const filterVal = btn.getAttribute('data-filter');
+
+          // Filter DOM cards
+          driverCards.forEach(card => {
+            const cardStatus = card.getAttribute('data-status');
+            if (filterVal === 'all' || cardStatus === filterVal) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Search input live filtration
+      const searchInput = document.getElementById('driver-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          driverCards.forEach(card => {
+            const textContent = card.innerText.toLowerCase();
+            if (textContent.includes(query)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      }
+
+      // Sync active state with sidebar navigation
+      const currentNav = document.querySelector('aside [data-path="haydovchilar"]');
+      if (currentNav) {
+        document.querySelectorAll('aside .nav-item').forEach(el => {
+          el.className = 'nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high transition-colors font-label-md';
+        });
+        currentNav.className = 'nav-item w-full flex items-center px-space-md py-2.5 rounded-lg bg-primary-container text-white font-semibold shadow-md shadow-primary-container/30 font-label-md';
+      }
+    })();
+  </script>
+</div>
+</div>
+</main>
+<!-- END: MainContentWrapper -->
+<script data-purpose="shell-keyboard-interactions">
+    // Global keyboard shortcut Ctrl+K
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const search = document.getElementById('global-search');
+        if (search) search.focus();
+      }
+    });
+  </script>
+</body></html>

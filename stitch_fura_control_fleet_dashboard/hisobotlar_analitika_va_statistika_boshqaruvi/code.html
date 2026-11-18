@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+
+<html class="dark h-full" lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FURA CONTROL - Logistika boshqaruv tizimi</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary": "#380094",
+            "on-tertiary-fixed": "#21005e",
+            "surface-bright": "#2e3a4d",
+            "on-primary": "#003060",
+            "error-container": "#93000a",
+            "on-surface-variant": "#c0c7d6",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#d5e3ff",
+            "background": "#071426",
+            "inverse-primary": "#005eb1",
+            "secondary-fixed": "#60fea5",
+            "primary-fixed-dim": "#a6c8ff",
+            "surface-container": "#142032",
+            "surface-tint": "#a6c8ff",
+            "on-secondary-fixed-variant": "#00522d",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#030e20",
+            "surface-container-low": "#0f1c2e",
+            "surface-container-highest": "#293549",
+            "inverse-on-surface": "#253144",
+            "on-background": "#d7e3fc",
+            "secondary": "#40e48d",
+            "secondary-fixed-dim": "#3be18b",
+            "tertiary-fixed": "#e8ddff",
+            "on-primary-fixed-variant": "#004787",
+            "primary-container": "#2d91ff",
+            "on-tertiary-container": "#300083",
+            "tertiary-fixed-dim": "#cebdff",
+            "tertiary-container": "#9b7aff",
+            "on-secondary": "#00391d",
+            "outline-variant": "#404753",
+            "on-secondary-container": "#004c29",
+            "surface-variant": "#293549",
+            "primary": "#a6c8ff",
+            "on-primary-container": "#002a54",
+            "inverse-surface": "#d7e3fc",
+            "surface-dim": "#071426",
+            "on-tertiary-fixed-variant": "#5114c5",
+            "on-secondary-fixed": "#00210f",
+            "on-error": "#690005",
+            "outline": "#8a919f",
+            "on-surface": "#d7e3fc",
+            "tertiary": "#cebdff",
+            "surface-container-high": "#1e2a3d",
+            "surface": "#071426",
+            "secondary-container": "#00c774",
+            "on-primary-fixed": "#001c3b"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem"
+          },
+          fontFamily: {
+            "table-header": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "kpi-stat": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "table-header": ["11px", { "lineHeight": "16px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "kpi-stat": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "800" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }]
+          }
+        }
+      }
+    };
+  </script>
+<style data-purpose="custom-styling">
+    @layer base {
+      html {
+        color-scheme: dark;
+      }
+      body {
+        overscroll-behavior: none;
+        min-height: 100vh;
+        background-color: #071426;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f1c2e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #293549;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2d91ff;
+    }
+    .full-sidebar-theme {
+      background: linear-gradient(180deg, rgba(7, 20, 38, 0.94) 0%, rgba(11, 27, 50, 0.88) 40%, rgba(7, 20, 38, 0.82) 80%, rgba(4, 13, 26, 0.96) 100%),
+                  url('https://lh3.googleusercontent.com/aida-public/AB6AXuAL-BgiIUdmmUOj-6CeBEeKvp6MbZQ2wkqjZKkFywfJiWcNKF7VqeN390Y0Zhw2ZLMiTmG-bVPYFeus5k7lssViRAv2Y4sLAt6E8VUp3wcMxyaVogBv-S_FlkoOmh8x9WCX2bA8XnqyPQ09KHTdLMnY8C-ngYZbdh-wLzc_qMNG6dpADFt5xJek2phNfeb8JacMYZ3A06LpZx2YInHd9tqDKwmarVpWmqG3W7qDOqA') 50% 70% / cover no-repeat;
+    }
+    .modal-backdrop-blur {
+      backdrop-filter: blur(8px);
+    }
+    .truck-type-card.selected {
+      border-color: #2d91ff;
+      background-color: rgba(45, 145, 255, 0.12);
+      box-shadow: 0 0 0 1px #2d91ff;
+    }
+    .truck-type-card.selected .radio-circle {
+      border-color: #2d91ff;
+      background-color: #2d91ff;
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-surface antialiased">
+<!-- Toast Notification Container -->
+<div class="fixed top-5 right-5 z-50 transition-all duration-300 transform translate-y-[-120%] opacity-0 pointer-events-none" id="toastNotification">
+<div class="flex items-center gap-3 px-4 py-3 bg-surface-container-high/95 backdrop-blur-md border border-secondary/40 text-on-surface rounded-xl shadow-2xl shadow-black/50">
+<div class="w-8 h-8 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-sm text-white" id="toastTitle">Muvaffaqiyatli!</h4>
+<p class="font-body-sm text-on-surface-variant text-xs" id="toastMessage">Yangi fura muvaffaqiyatli qo‘shildi!</p>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-white ml-2 rounded" onclick="hideToast()">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+</div>
+<!-- BEGIN: LeftSidebar -->
+<aside class="fixed top-0 bottom-0 left-0 w-64 z-30 full-sidebar-theme border-r border-outline-variant/30 flex flex-col justify-between overflow-hidden shadow-2xl backdrop-blur-[2px]" data-purpose="sidebar">
+<div class="p-space-md flex flex-col h-full overflow-y-auto z-10">
+<!-- Logo -->
+<div class="flex items-center gap-space-sm px-space-xs py-space-sm mb-space-md bg-surface-container-lowest/60 backdrop-blur-md rounded-xl border border-outline-variant/30">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-inverse-primary to-primary-container flex items-center justify-center shadow-lg shadow-primary-container/25 flex-shrink-0">
+<span class="material-symbols-outlined text-white text-2xl">local_shipping</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-white leading-none tracking-tight font-bold">FURA CONTROL</h1>
+<p class="font-label-sm text-on-surface-variant/80 mt-1 uppercase tracking-wider text-[10px]">Logistika tizimi</p>
+</div>
+</div>
+<!-- Main Navigation Menu -->
+<nav class="space-y-1.5 mt-space-xs" data-active-classes="bg-primary-container text-white font-semibold shadow-md shadow-primary-container/30" id="sidebar-nav">
+<!-- 1. Bosh sahifa -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="bosh-sahifa" href="#">
+          Bosh sahifa
+        </a>
+<!-- 2. Furalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="furalar" href="#">
+          Furalar
+        </a>
+<!-- 3. Yuklar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="yuklar" href="#">
+          Yuklar
+        </a>
+<!-- 4. Haydovchilar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="haydovchilar" href="#">
+          Haydovchilar
+        </a>
+<!-- 5. Reyslar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="reyslar" href="#">
+          Reyslar
+        </a>
+<!-- 6. Kalendar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="kalendar" href="#">
+          Kalendar
+        </a>
+<!-- 7. Arxiv -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="arxiv" href="#">
+          Arxiv
+        </a>
+<!-- 8. Hisobotlar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="hisobotlar" href="#">
+          Hisobotlar
+        </a>
+<!-- 9. Sozlamalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-path="sozlamalar" href="#">
+          Sozlamalar
+        </a>
+</nav>
+<!-- Sidebar Footer telemetry widget (neat integrated glass card) -->
+<div class="mt-auto pt-4">
+<div class="p-3 rounded-lg bg-surface-container-lowest/70 backdrop-blur-md border border-outline-variant/30 text-on-surface-variant">
+<p class="font-label-md text-white flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+      Avtopark nazorati
+    </p>
+<p class="font-label-sm text-on-surface-variant/80 mt-0.5 text-[11px]">GPS &amp; Telematika 24/7 faol</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: TopHeader -->
+<header class="fixed top-0 right-0 left-64 z-20 h-16 bg-surface-container-low/90 backdrop-blur-md border-b border-outline-variant/30 px-space-lg flex items-center justify-between gap-space-md" data-purpose="top-navigation">
+<!-- Global Search Input with Shortcut -->
+<div class="relative w-96 max-w-lg">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant font-body-sm rounded-lg pl-9 pr-16 py-2 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="global-search" placeholder="Qidirish: fura, yuk, haydovchi, reys..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<span class="font-label-sm bg-surface-container text-on-surface-variant px-1.5 py-0.5 rounded border border-outline-variant/40">Ctrl + K</span>
+</div>
+</div>
+<!-- Header Controls -->
+<div class="flex items-center gap-space-md">
+<!-- Notifications Bell -->
+<button class="relative p-2 text-on-surface-variant hover:text-white bg-surface-container rounded-lg border border-outline-variant/30 hover:bg-surface-container-high transition-colors" title="Bildirishnomalar">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute -top-1 -right-1 bg-error-container text-white font-label-sm w-4 h-4 rounded-full flex items-center justify-center border-2 border-surface-container-low">3</span>
+</button>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-2.5 bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-white font-label-sm">
+          J
+        </div>
+<div class="text-left leading-tight">
+<div class="font-label-md text-white">Jasurbek</div>
+<div class="font-label-sm text-on-surface-variant/80">Bosh dispetcher</div>
+</div>
+<span class="material-symbols-outlined text-base text-on-surface-variant ml-0.5">expand_more</span>
+</div>
+<!-- Current System Date Pill -->
+<div class="hidden md:flex items-center gap-2 bg-surface-container border border-outline-variant/30 text-on-surface px-3 py-1.5 rounded-lg font-label-sm">
+<span class="material-symbols-outlined text-primary-container text-base">calendar_today</span>
+<span>16-noyabr, 2026 (Dushanba)</span>
+</div>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainContentWrapper -->
+<main class="pl-64 pt-16 min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive View State Controller -->
+<div class="px-margin py-space-lg flex flex-col gap-space-lg max-w-[1680px] mx-auto w-full">
+<!-- Section 1: Breadcrumb, Header & Action Bar -->
+<section class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-md" data-purpose="report-header">
+<div class="flex flex-col gap-space-xs">
+<!-- Breadcrumb with Monospace Telemetry Details -->
+<div class="flex items-center gap-2 font-label-sm text-on-surface-variant uppercase tracking-wider">
+<span>Logistika</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Tahlil va monitoring</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-bold">Hisobotlar</span>
+<span class="ml-2 px-1.5 py-0.5 rounded bg-surface-container-high text-primary-fixed text-[10px] tracking-normal font-mono">v4.8-LIVE</span>
+</div>
+<!-- Title & Subtitle -->
+<div class="mt-1">
+<h1 class="font-headline-xl text-white tracking-tight">HISOBOTLAR VA ANALITIKA</h1>
+<p class="font-body-md text-on-surface-variant mt-1 max-w-3xl">
+            Avtopark faoliyati, reyslar unumdorligi va yoqilg‘i sarfi bo‘yicha batafsil statistik hisobotlar
+          </p>
+</div>
+</div>
+<!-- Action Group -->
+<div class="flex flex-wrap items-center gap-space-sm" data-purpose="dashboard-controls">
+<!-- Date Range Filter Pill -->
+<div class="relative">
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md shadow-sm transition-all" id="dateRangeBtn" onclick="toggleDateMenu()">
+<span class="material-symbols-outlined text-primary-container text-lg">calendar_month</span>
+<span id="selectedDateLabel">So‘nggi 30 kun (Okt - Noyabr 2026)</span>
+<span class="material-symbols-outlined text-base text-on-surface-variant">expand_more</span>
+</button>
+<!-- Floating Date Menu Dropdown -->
+<div class="hidden absolute right-0 mt-2 w-64 bg-surface-container-high border border-outline-variant/30 rounded-xl shadow-2xl z-30 p-2 space-y-1" id="dateMenuDropdown">
+<button class="w-full text-left px-3 py-2 rounded-lg text-white font-label-md hover:bg-surface-container flex items-center justify-between" onclick="selectDateRange('So‘nggi 7 kun', this)">
+<span>So‘nggi 7 kun</span>
+<span class="material-symbols-outlined text-xs text-secondary opacity-0">check</span>
+</button>
+<button class="w-full text-left px-3 py-2 rounded-lg text-white font-label-md bg-surface-container flex items-center justify-between" onclick="selectDateRange('So‘nggi 30 kun (Okt - Noyabr 2026)', this)">
+<span>So‘nggi 30 kun</span>
+<span class="material-symbols-outlined text-xs text-secondary opacity-100">check</span>
+</button>
+<button class="w-full text-left px-3 py-2 rounded-lg text-white font-label-md hover:bg-surface-container flex items-center justify-between" onclick="selectDateRange('Joriy chorak (Q4 2026)', this)">
+<span>Joriy chorak (Q4)</span>
+<span class="material-symbols-outlined text-xs text-secondary opacity-0">check</span>
+</button>
+<button class="w-full text-left px-3 py-2 rounded-lg text-white font-label-md hover:bg-surface-container flex items-center justify-between" onclick="selectDateRange('Yil boshidan (2026)', this)">
+<span>Yil boshidan</span>
+<span class="material-symbols-outlined text-xs text-secondary opacity-0">check</span>
+</button>
+</div>
+</div>
+<!-- Filter Toggle Button -->
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md shadow-sm transition-all" onclick="toggleTelemetryBar()">
+<span class="material-symbols-outlined text-lg">tune</span>
+<span>Filtrlar</span>
+</button>
+<!-- PDF Export Button -->
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-white font-label-md shadow-md transition-all active:scale-95" onclick="exportReport('PDF')">
+<span class="material-symbols-outlined text-error text-lg">picture_as_pdf</span>
+<span>PDF hisobot yuklash</span>
+</button>
+<!-- Excel Export Button -->
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md shadow-lg shadow-primary-container/25 transition-all hover:scale-[1.02] active:scale-95" onclick="exportReport('XLSX')">
+<span class="material-symbols-outlined text-secondary-fixed text-lg">table_chart</span>
+<span>Excel (XLSX) eksport</span>
+</button>
+</div>
+</section>
+<!-- Section 2: Top KPI Metrics (4 Bento Cards with Glowing Accent Highlights) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md" data-purpose="kpi-metrics-grid">
+<!-- Card 1: Jami yakunlangan reyslar -->
+<div class="relative bg-surface-container rounded-2xl p-5 overflow-hidden shadow-lg group hover:bg-surface-container-high transition-all duration-300">
+<!-- Ambient Radial Glow -->
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Truck Contour Silhouette (Watermark) -->
+<span class="material-symbols-outlined absolute -bottom-5 -right-3 text-7xl text-white/[0.04] pointer-events-none select-none">local_shipping</span>
+<div class="flex items-center justify-between mb-4">
+<div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-2xl">check_circle</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm bg-secondary/15 text-secondary font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+            +14.2%
+          </span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Jami yakunlangan reyslar</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h2 class="font-kpi-stat text-white font-black" id="counterReys">184</h2>
+<span class="font-label-lg text-primary font-semibold">ta reys</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-2 text-xs">O‘tgan oyga nisbatan +23 ta reys ko‘p</p>
+</div>
+</div>
+<!-- Card 2: Yetkazilgan jami yuk -->
+<div class="relative bg-surface-container rounded-2xl p-5 overflow-hidden shadow-lg group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-secondary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<span class="material-symbols-outlined absolute -bottom-5 -right-3 text-7xl text-white/[0.04] pointer-events-none select-none">inventory_2</span>
+<div class="flex items-center justify-between mb-4">
+<div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-secondary shadow-inner">
+<span class="material-symbols-outlined text-2xl">forklift</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm bg-secondary/15 text-secondary font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+            +8.5%
+          </span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Yetkazilgan jami yuk</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h2 class="font-kpi-stat text-white font-black">4,280</h2>
+<span class="font-label-lg text-secondary font-semibold">tonna</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-2 text-xs">O‘rtacha har bir reysga 23.2 t tovar</p>
+</div>
+</div>
+<!-- Card 3: Bosib o‘tilgan umumiy masofa -->
+<div class="relative bg-surface-container rounded-2xl p-5 overflow-hidden shadow-lg group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-tertiary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<span class="material-symbols-outlined absolute -bottom-5 -right-3 text-7xl text-white/[0.04] pointer-events-none select-none">route</span>
+<div class="flex items-center justify-between mb-4">
+<div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-tertiary shadow-inner">
+<span class="material-symbols-outlined text-2xl">distance</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm bg-primary-container/20 text-primary-container font-bold">
+<span class="material-symbols-outlined text-sm">navigation</span>
+            Aktiv
+          </span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Bosib o‘tilgan umumiy masofa</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h2 class="font-kpi-stat text-white font-black">412,650</h2>
+<span class="font-label-lg text-tertiary font-semibold">km</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-2 text-xs">O‘rtacha 17,190 km / fura hisobida</p>
+</div>
+</div>
+<!-- Card 4: O‘z vaqtidalik ko‘rsatkichi (SLA) -->
+<div class="relative bg-surface-container rounded-2xl p-5 overflow-hidden shadow-lg group hover:bg-surface-container-high transition-all duration-300">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-secondary/15 rounded-full blur-2xl pointer-events-none"></div>
+<span class="material-symbols-outlined absolute -bottom-5 -right-3 text-7xl text-white/[0.04] pointer-events-none select-none">timer</span>
+<div class="flex items-center justify-between mb-4">
+<div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-secondary-fixed shadow-inner">
+<span class="material-symbols-outlined text-2xl">schedule</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm bg-secondary/15 text-secondary font-bold">
+<span class="material-symbols-outlined text-sm">verified</span>
+            SLA A'lo
+          </span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider">O‘rtacha yetkazish tezligi</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h2 class="font-kpi-stat text-white font-black">98.6%</h2>
+<span class="font-label-lg text-secondary-fixed font-semibold">o‘z vaqtida</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-2 text-xs">Faqat 3 ta kechikish (bojxona navbati)</p>
+</div>
+</div>
+</section>
+<!-- Collapsible Advanced Filters Drawer -->
+<div class="hidden bg-surface-container-low rounded-xl p-4 shadow-xl flex-wrap items-center justify-between gap-4 transition-all" id="telemetryFilterBar">
+<div class="flex flex-wrap items-center gap-4 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant uppercase">Filtr:</span>
+<select class="bg-surface-container text-white text-xs font-label-md rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option>Barcha yo‘nalishlar (MDH &amp; Yevropa)</option>
+<option>Toshkent — Moskva</option>
+<option>Samarqand — Olmaota</option>
+<option>Andijon — Sankt-Peterburg</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant uppercase">Fura turi:</span>
+<select class="bg-surface-container text-white text-xs font-label-md rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option>Barcha turlar (TENT, REF, MEGA)</option>
+<option>Standart Tent (92 m³)</option>
+<option>Refrijerator (-20°C)</option>
+<option>Mega Tirkama (105 m³)</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant uppercase">Haydovchi guruhi:</span>
+<select class="bg-surface-container text-white text-xs font-label-md rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option>Barcha haydovchilar (1-toifa)</option>
+<option>Xalqaro reys ekipajlari</option>
+<option>Mahalliy logistika haydovchilari</option>
+</select>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-sm hover:text-white" onclick="toggleTelemetryBar()">
+        Yopish
+      </button>
+</div>
+<!-- Section 3: Dual Analytic Visualization Bento (Bar Chart + Fleet Utilization) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Chart Left Container (8 Cols): Oylik reyslar va yuk tashish statistikasi -->
+<div class="lg:col-span-8 bg-surface-container rounded-2xl p-6 shadow-xl flex flex-col justify-between" data-purpose="monthly-analytics-chart">
+<div>
+<!-- Header and Legend -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></span>
+<h3 class="font-headline-md text-white">Oylik reyslar va yuk tashish statistikasi</h3>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-0.5">So‘nggi 7 oylik yuk tashish ko‘rsatkichlari dinamikasi</p>
+</div>
+<!-- Interactive Legends -->
+<div class="flex items-center gap-4 text-xs font-label-md">
+<div class="flex items-center gap-2">
+<span class="w-3.5 h-3.5 rounded bg-primary-container shadow-sm"></span>
+<span class="text-on-surface">Reyslar soni (ta)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface">Yuk hajmi (ming t)</span>
+</div>
+</div>
+</div>
+<!-- Inline Custom SVG Dynamic Visualization -->
+<div class="relative w-full h-72 mt-4 flex flex-col justify-end">
+<!-- Background Grid Marks -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">200 reys / 5.0k t</div>
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">150 reys / 3.7k t</div>
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">100 reys / 2.5k t</div>
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">50 reys / 1.2k t</div>
+<div class="w-full border-b border-outline-variant flex justify-end text-[10px] text-on-surface-variant pr-1 pb-0.5">0</div>
+</div>
+<!-- SVG Data Layer (Curved Trend Line Overlay) -->
+<svg class="absolute inset-0 w-full h-full z-10 overflow-visible" preserveaspectratio="none" viewbox="0 0 700 240">
+<defs>
+<lineargradient id="cargoGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#40e48d" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#40e48d" stop-opacity="0.0"></stop>
+</lineargradient>
+<filter height="140%" id="glowSecondary" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+</defs>
+<!-- Filled Area below line -->
+<path d="M 50 135 L 140 120 L 230 102 L 320 84 L 410 65 L 500 56 L 620 48 L 620 230 L 50 230 Z" fill="url(#cargoGradient)"></path>
+<!-- Primary Line -->
+<path d="M 50 135 L 140 120 L 230 102 L 320 84 L 410 65 L 500 56 L 620 48" fill="none" filter="url(#glowSecondary)" stroke="#40e48d" stroke-linecap="round" stroke-width="3"></path>
+<!-- SVG Data Nodes with hover rings -->
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="50" cy="135" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="140" cy="120" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="230" cy="102" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="320" cy="84" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="410" cy="65" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="500" cy="56" fill="#071426" r="4.5" stroke="#40e48d" stroke-width="2.5"></circle>
+<circle class="hover:scale-125 transition-transform cursor-pointer" cx="620" cy="48" fill="#ffffff" r="5" stroke="#40e48d" stroke-width="3"></circle>
+</svg>
+<!-- HTML Bar Chart Columns Alignment -->
+<div class="relative z-0 w-full h-full flex items-end justify-between px-6 pt-6 pb-2">
+<!-- May: 120 reys (height 60%) -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">120</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 120px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white">May</span>
+</div>
+<!-- Iyun: 135 reys (height 67.5%) -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">135</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 135px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white">Iyun</span>
+</div>
+<!-- Iyul: 148 reys (height 74%) -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">148</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 148px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white">Iyul</span>
+</div>
+<!-- Avgust: 162 reys (height 81%) -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">162</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 162px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white">Avg</span>
+</div>
+<!-- Sentabr: 175 reys (height 87.5%) -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">175</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 175px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white">Sen</span>
+</div>
+<!-- Oktabr: 180 reys (height 90%) -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px] font-bold text-white shadow-lg pointer-events-none">180</div>
+<div class="w-8 rounded-t-lg bg-surface-container-high group-hover:bg-primary-container transition-all" style="height: 180px;"></div>
+<span class="font-label-sm text-on-surface-variant text-[11px] group-hover:text-white">Okt</span>
+</div>
+<!-- Noyabr: 184 reys (CURRENT PEAK) -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer w-12">
+<div class="bg-primary-container text-white px-2 py-0.5 rounded text-[11px] font-extrabold shadow-md shadow-primary-container/40">184</div>
+<div class="w-8 rounded-t-lg bg-gradient-to-t from-primary-container to-primary transition-all shadow-lg shadow-primary-container/30" style="height: 184px;"></div>
+<span class="font-label-sm text-primary font-bold text-[11px]">Noy (Joriy)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Metric Summary Breakdown Ribbon below chart -->
+<div class="mt-6 pt-4 border-t border-outline-variant/30 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+<div class="w-9 h-9 rounded-lg bg-primary-container/20 text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">hub</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-sm text-on-surface-variant uppercase text-[10px]">Eng serqatnov marshrut</div>
+<div class="font-headline-sm text-sm text-white truncate font-bold">Toshkent — Moskva yo‘nalishi</div>
+<div class="font-body-sm text-[11px] text-secondary">38% umumiy xalqaro reyslar ulushi</div>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+<div class="w-9 h-9 rounded-lg bg-tertiary-container/20 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">avg_pace</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-sm text-on-surface-variant uppercase text-[10px]">O‘rtacha safar muddati</div>
+<div class="font-headline-sm text-sm text-white truncate font-bold">6.4 kun / reys davomiyligi</div>
+<div class="font-body-sm text-[11px] text-primary">Normal me'yordan 14 soat tezroq</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Chart Right Container (4 Cols): Furalardan foydalanish koeffitsiyenti -->
+<div class="lg:col-span-4 bg-surface-container rounded-2xl p-6 shadow-xl flex flex-col justify-between" data-purpose="fleet-utilization-donut">
+<div>
+<!-- Header -->
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-white">Avtoparkdan foydalanish</h3>
+<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-secondary/20 text-secondary">24 ta fura</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-1 text-xs">Joriy operatsion holat taqsimoti</p>
+<!-- Circular Donut Visual Representation (Custom SVG with Central Score) -->
+<div class="relative w-48 h-48 mx-auto my-6 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 160 160">
+<!-- Background Ring -->
+<circle cx="80" cy="80" fill="none" r="64" stroke="#0f1c2e" stroke-width="18"></circle>
+<!-- Segment 1: Yo'lda 58% (Circumference = 2 * PI * 64 ≈ 402.1) -> 402.1 * 0.58 = 233.2 -->
+<circle cx="80" cy="80" fill="none" r="64" stroke="#2d91ff" stroke-dasharray="233.2 402.1" stroke-dashoffset="0" stroke-linecap="round" stroke-width="18"></circle>
+<!-- Segment 2: Bo'sh 25% -> 402.1 * 0.25 = 100.5 -->
+<circle cx="80" cy="80" fill="none" r="64" stroke="#40e48d" stroke-dasharray="100.5 402.1" stroke-dashoffset="-237" stroke-linecap="round" stroke-width="18"></circle>
+<!-- Segment 3: Yuklanmoqda 10% -> 402.1 * 0.10 = 40.2 -->
+<circle cx="80" cy="80" fill="none" r="64" stroke="#ffb4ab" stroke-dasharray="40.2 402.1" stroke-dashoffset="-340" stroke-linecap="round" stroke-width="18"></circle>
+<!-- Segment 4: Ta'mirda 7% -> 402.1 * 0.07 = 28.1 -->
+<circle cx="80" cy="80" fill="none" r="64" stroke="#93000a" stroke-dasharray="28.1 402.1" stroke-dashoffset="-382" stroke-linecap="round" stroke-width="18"></circle>
+</svg>
+<!-- Center Telemetry Text -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-headline-lg text-white font-extrabold text-2xl">88.4%</span>
+<span class="font-label-sm text-secondary uppercase tracking-wider text-[10px]">Unumdorlik</span>
+</div>
+</div>
+<!-- Breakdown List with glowing status pills -->
+<div class="space-y-2.5">
+<!-- 1. Yo'lda -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-primary-container shadow-sm shadow-primary-container"></span>
+<span class="font-label-md text-white text-xs">Yo‘lda / Faol reysda</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant text-[11px]">14 ta</span>
+<span class="font-label-md text-primary font-bold text-xs">58%</span>
+</div>
+</div>
+<!-- 2. Bo'sh / Rezervda -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-secondary shadow-sm shadow-secondary"></span>
+<span class="font-label-md text-white text-xs">Bo‘sh / Rezervda</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant text-[11px]">6 ta</span>
+<span class="font-label-md text-secondary font-bold text-xs">25%</span>
+</div>
+</div>
+<!-- 3. Yuklanmoqda / Tushirilmoqda -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-tertiary-container shadow-sm shadow-tertiary-container"></span>
+<span class="font-label-md text-white text-xs">Yuklanmoqda / Omborda</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant text-[11px]">2 ta</span>
+<span class="font-label-md text-tertiary font-bold text-xs">10%</span>
+</div>
+</div>
+<!-- 4. Texnik ko'rik / Ta'mirda -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-error shadow-sm shadow-error"></span>
+<span class="font-label-md text-white text-xs">Texnik ko‘rik / Servisda</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface-variant text-[11px]">2 ta</span>
+<span class="font-label-md text-error font-bold text-xs">7%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Efficiency Card Footnote -->
+<div class="mt-4 p-3 bg-secondary/10 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-2xl">verified_user</span>
+<div class="text-xs">
+<p class="font-label-md text-white font-bold">Avtopark holati: A'lo darajada</p>
+<p class="font-body-sm text-on-surface-variant text-[11px]">Texnik shaylik koeffitsiyenti normadan 3.2% yuqori</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Auxiliary Operational Insight Grid (Fuel telemetry & Route Efficiency) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-space-md" data-purpose="efficiency-insights">
+<!-- Fuel & Environmental Card -->
+<div class="bg-surface-container rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider">Yoqilg‘i monitoringi</span>
+<span class="material-symbols-outlined text-primary-container text-xl">local_gas_station</span>
+</div>
+<h4 class="font-headline-sm text-white">31.05 litr / 100 km</h4>
+<p class="font-body-sm text-on-surface-variant mt-1 text-xs">Avtopark bo‘yicha o‘rtacha yoqilg‘i sarfi ko‘rsatkichi</p>
+<!-- Fuel Eco Bar -->
+<div class="mt-4">
+<div class="flex justify-between font-label-sm text-[11px] mb-1">
+<span class="text-secondary font-bold">Tejamkorlik rejimi</span>
+<span class="text-white">Norma: 33.0 l</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-low overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 82%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs text-on-surface-variant">
+<span>Oylik tejalgan yoqilg‘i:</span>
+<span class="text-secondary font-bold font-mono">+1,850 litr</span>
+</div>
+</div>
+<!-- Turnaround Time Card -->
+<div class="bg-surface-container rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider">Bojxona &amp; Terminal vaqti</span>
+<span class="material-symbols-outlined text-tertiary text-xl">timelapse</span>
+</div>
+<h4 class="font-headline-sm text-white">4 soat 20 daqiqa</h4>
+<p class="font-body-sm text-on-surface-variant mt-1 text-xs">O‘rtacha chegara postlari va bojxona tozalash vaqti</p>
+<!-- Terminal Progress -->
+<div class="mt-4">
+<div class="flex justify-between font-label-sm text-[11px] mb-1">
+<span class="text-primary font-bold">Elektron deklaratsiyalash</span>
+<span class="text-white">94% avtomatlashgan</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-low overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 94%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs text-on-surface-variant">
+<span>O‘tgan oydan qisqarish:</span>
+<span class="text-primary font-bold font-mono">-1.8 soat</span>
+</div>
+</div>
+<!-- Safety & Maintenance Score Card -->
+<div class="bg-surface-container rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider">Xavfsiz haydash indeksi</span>
+<span class="material-symbols-outlined text-secondary text-xl">shield</span>
+</div>
+<h4 class="font-headline-sm text-white">99.1 ball / 100</h4>
+<p class="font-body-sm text-on-surface-variant mt-1 text-xs">Tezlik me'yori, keskin tormozlanishlar va dam olish qoidalari</p>
+<!-- Driver Score Bar -->
+<div class="mt-4">
+<div class="flex justify-between font-label-sm text-[11px] mb-1">
+<span class="text-secondary font-bold">Telematika datchiklari</span>
+<span class="text-white">Nol hodisa</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-low overflow-hidden">
+<div class="h-full bg-secondary-fixed rounded-full" style="width: 99%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs text-on-surface-variant">
+<span>Sug‘urta chegirmasi:</span>
+<span class="text-secondary font-bold font-mono">-15% bonus</span>
+</div>
+</div>
+</section>
+<!-- Section 5: Data Table: Top 5 Eng Samarali Furalar Kesimidagi Unumdorlik -->
+<section class="bg-surface-container rounded-2xl p-6 shadow-2xl overflow-hidden" data-purpose="fleet-performance-table">
+<!-- Table Header & Controls -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-2xl">leaderboard</span>
+<h3 class="font-headline-md text-white">Furalar kesimidagi unumdorlik hisoboti</h3>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-0.5">Top-samarador transport vositalari reytingi va texnik parametrlari</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-full text-xs font-semibold bg-surface-container-high text-primary-fixed">Jami: 24 ta fura</span>
+<button class="p-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-white transition-colors" onclick="refreshTableData()" title="Jadvalni yangilash">
+<span class="material-symbols-outlined text-base">refresh</span>
+</button>
+</div>
+</div>
+<!-- Modern Responsive Data Table Wrapper -->
+<div class="overflow-x-auto rounded-xl">
+<table class="w-full text-left border-collapse" id="reportsPerformanceTable">
+<thead>
+<tr class="bg-surface-container-lowest text-on-surface-variant font-table-header uppercase tracking-wider text-[11px]">
+<th class="py-3 px-4 rounded-l-lg">Reyting &amp; Fura</th>
+<th class="py-3 px-4">Biriktirilgan haydovchi</th>
+<th class="py-3 px-4 text-center">Bajarilgan reyslar</th>
+<th class="py-3 px-4 text-right">Bosib o‘tilgan masofa</th>
+<th class="py-3 px-4 text-right">Yoqilg‘i tejamkorligi</th>
+<th class="py-3 px-4">Unumdorlik reytingi</th>
+<th class="py-3 px-4 rounded-r-lg text-right">Amallar</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/40 text-sm">
+<!-- Row 1: 01 A 123 UA (Top 1) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-secondary/20 text-secondary font-black text-xs flex items-center justify-center">1</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                      01 A 123 UA
+                    </div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">Volvo FH16 (540 HP)</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-xs">SR</div>
+<div>
+<div class="font-label-md text-white">Sobir Rahimov</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 90 123 45 67</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container">
+                  16 ta reys
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+                42,100 km
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+                30.8 l/100km
+              </td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 96%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">96%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" onclick="openTruckTelemetry('01 A 123 UA')">
+                  Batafsil
+                </button>
+</td>
+</tr>
+<!-- Row 2: 40 B 456 UA (Top 2) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-primary-container/20 text-primary-container font-black text-xs flex items-center justify-center">2</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                      40 B 456 UA
+                    </div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">Scania R500 V8</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-bold text-xs">JM</div>
+<div>
+<div class="font-label-md text-white">Jasurbek M.</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 93 456 78 90</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container">
+                  14 ta reys
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+                38,400 km
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+                31.4 l/100km
+              </td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 94%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">94%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" onclick="openTruckTelemetry('40 B 456 UA')">
+                  Batafsil
+                </button>
+</td>
+</tr>
+<!-- Row 3: 30 C 789 UA (Top 3) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-white font-black text-xs flex items-center justify-center">3</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                      30 C 789 UA
+                    </div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">Mercedes Actros 1845</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-tertiary/20 text-tertiary flex items-center justify-center font-bold text-xs">FA</div>
+<div>
+<div class="font-label-md text-white">Farhod Aliyev</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 94 987 65 43</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container">
+                  13 ta reys
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+                35,900 km
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+                29.9 l/100km
+              </td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 92%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">92%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" onclick="openTruckTelemetry('30 C 789 UA')">
+                  Batafsil
+                </button>
+</td>
+</tr>
+<!-- Row 4: 50 D 321 UA (Top 4) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-white font-black text-xs flex items-center justify-center">4</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                      50 D 321 UA
+                    </div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">MAN TGX 18.500</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center font-bold text-xs">AQ</div>
+<div>
+<div class="font-label-md text-white">Alisher Qodirov</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 97 555 44 33</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container">
+                  12 ta reys
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+                33,200 km
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+                32.1 l/100km
+              </td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 89%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">89%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" onclick="openTruckTelemetry('50 D 321 UA')">
+                  Batafsil
+                </button>
+</td>
+</tr>
+<!-- Row 5: 10 E 654 UA (Top 5) -->
+<tr class="hover:bg-surface-container-high/70 transition-colors group">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-white font-black text-xs flex items-center justify-center">5</span>
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+                      10 E 654 UA
+                    </div>
+<div class="font-body-sm text-xs text-on-surface-variant mt-0.5">DAF XF 480 Super Space</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-bold text-xs">BU</div>
+<div>
+<div class="font-label-md text-white">Bobur Usmonov</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">+998 91 888 12 34</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary-container/15 text-primary-container">
+                  11 ta reys
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-white">
+                31,850 km
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap font-mono text-secondary font-semibold">
+                30.4 l/100km
+              </td>
+<td class="py-3.5 px-4 whitespace-nowrap min-w-[140px]">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-low rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 87%;"></div>
+</div>
+<span class="font-mono text-xs font-bold text-white">87%</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-primary-container hover:text-white text-xs font-label-md text-on-surface-variant transition-colors" onclick="openTruckTelemetry('10 E 654 UA')">
+                  Batafsil
+                </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer Table Summary Bar -->
+<div class="mt-4 pt-4 border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between text-xs text-on-surface-variant gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">info</span>
+<span>Unumdorlik indeksi: GPS marshrut vaqti, yuk hajmi koeffitsiyenti va yoqilg‘i tejamkorligi asosida hisoblanadi.</span>
+</div>
+<div class="flex items-center gap-4">
+<span>Oxirgi avtomatik yangilanish: Bugun, 18:45</span>
+<button class="text-primary hover:underline font-label-md text-xs" onclick="exportReport('XLSX-TOP')">Barcha 24 furani yuklab olish</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script>
+  // Ensure Sidebar Active Item reflects "Hisobotlar"
+  document.addEventListener('DOMContentLoaded', () => {
+    const navItems = document.querySelectorAll('#sidebar-nav .nav-item');
+    navItems.forEach(item => {
+      const path = item.getAttribute('data-path');
+      if (path === 'hisobotlar') {
+        item.classList.add('bg-primary-container', 'text-white', 'font-semibold', 'shadow-md', 'shadow-primary-container/30');
+      } else {
+        item.classList.remove('bg-primary-container', 'text-white', 'font-semibold', 'shadow-md', 'shadow-primary-container/30');
+      }
+    });
+  });
+
+  // Date Range Dropdown Toggle
+  function toggleDateMenu() {
+    const menu = document.getElementById('dateMenuDropdown');
+    menu.classList.toggle('hidden');
+  }
+
+  function selectDateRange(label, el) {
+    document.getElementById('selectedDateLabel').innerText = label;
+    const items = document.querySelectorAll('#dateMenuDropdown button');
+    items.forEach(btn => {
+      btn.classList.remove('bg-surface-container');
+      const check = btn.querySelector('.material-symbols-outlined');
+      if (check) check.classList.add('opacity-0');
+    });
+    el.classList.add('bg-surface-container');
+    const check = el.querySelector('.material-symbols-outlined');
+    if (check) check.classList.remove('opacity-0');
+    
+    toggleDateMenu();
+    
+    if (typeof showToast === 'function') {
+      showToast("Davr yangilandi", `${label} bo‘yicha tahliliy ko‘rsatkichlar yuklandi.`);
+    }
+  }
+
+  // Filter Drawer Toggle
+  function toggleTelemetryBar() {
+    const bar = document.getElementById('telemetryFilterBar');
+    bar.classList.toggle('hidden');
+    bar.classList.toggle('flex');
+  }
+
+  // Report Export Handler
+  function exportReport(format) {
+    if (typeof showToast === 'function') {
+      showToast("Eksport boshlandi", `${format} formatidagi analitik hisobot shakllantirilmoqda...`);
+    } else {
+      alert(`${format} formatidagi hisobot yuklanmoqda...`);
+    }
+  }
+
+  // Table Refresh simulation
+  function refreshTableData() {
+    if (typeof showToast === 'function') {
+      showToast("Yangilandi", "Furalar kesimidagi statistik ko‘rsatkichlar yangilandi!");
+    }
+  }
+
+  // Row Details View Action
+  function openTruckTelemetry(plate) {
+    if (typeof showToast === 'function') {
+      showToast("Fura telematikasi", `${plate} bo‘yicha to‘liq hisobot va marshrut ochilmoqda.`);
+    }
+  }
+
+  // Click outside to close dropdown
+  window.addEventListener('click', (e) => {
+    const btn = document.getElementById('dateRangeBtn');
+    const menu = document.getElementById('dateMenuDropdown');
+    if (menu && !menu.classList.contains('hidden')) {
+      if (!btn.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.add('hidden');
+      }
+    }
+  });
+</script></main>
+<!-- END: MainContentWrapper -->
+<!-- BEGIN: Add Truck Modal Backdrop & Dialog -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-background/80 modal-backdrop-blur p-4 overflow-y-auto" id="addTruckModal">
+<div class="relative w-full max-w-2xl bg-surface-container border border-outline-variant/50 rounded-2xl shadow-2xl overflow-hidden transition-all transform duration-300 scale-95 opacity-0 my-auto" id="modalDialogCard">
+<!-- Modal Header -->
+<div class="px-6 py-5 bg-surface-container-low border-b border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">add_box</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-lg text-white">Yangi fura qo'shish</h3>
+<p class="font-body-sm text-xs text-on-surface-variant">Avtopark tizimiga yangi transport vositasini ro'yxatdan o'tkazish</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high flex items-center justify-center transition-colors" id="close-modal-btn" onclick="closeAddTruckModal()">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Modal Form Body -->
+<form class="p-6 space-y-5" id="addTruckForm" onsubmit="handleTruckSubmit(event)">
+<!-- Row 1: Davlat raqami & Model -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">
+            Davlat raqami <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-3 top-2.5 font-bold font-mono text-[10px] bg-primary-container text-white px-1.5 py-0.5 rounded">UZ</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-mono font-bold placeholder-on-surface-variant text-sm rounded-lg pl-12 pr-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors uppercase" id="inputPlate" placeholder="masalan: 01 A 772 UA" required="" type="text"/>
+</div>
+<p class="font-label-sm text-[11px] text-error hidden mt-1" id="plateError">Davlat raqamini kiritish shart</p>
+</div>
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">
+            Rusumi va modeli <span class="text-error">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputModel" placeholder="masalan: Volvo FH 540 Globetrotter" required="" type="text"/>
+</div>
+</div>
+<!-- Row 2: Driver & Phone -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">
+            Biriktirilgan haydovchi <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-base">person</span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg pl-9 pr-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputDriver" placeholder="Ism va familiya" required="" type="text"/>
+</div>
+<p class="font-label-sm text-[11px] text-error hidden mt-1" id="driverError">Haydovchi ismini kiriting</p>
+</div>
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Telefon raqami</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-base">call</span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg pl-9 pr-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputPhone" placeholder="+998 90 000 00 00" type="text" value="+998 "/>
+</div>
+</div>
+</div>
+<!-- Truck Type Selection Cards -->
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-2">Fura turi (korpus turi)</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="truckTypeSelector">
+<!-- Option 1: TENT -->
+<div class="truck-type-card selected cursor-pointer p-3 rounded-xl border border-primary-container bg-primary-container/10 flex flex-col justify-between transition-all" onclick="selectTypeCard(this, 'TENT (92 m³)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-primary text-xl">rv_hookup</span>
+<span class="w-3.5 h-3.5 rounded-full border border-primary-container bg-primary-container flex items-center justify-center radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">TENT (92 m³)</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">Standart tentli</div>
+</div>
+</div>
+<!-- Option 2: REF -->
+<div class="truck-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" onclick="selectTypeCard(this, 'REF (-20°C / +12°C)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-tertiary text-xl">ac_unit</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">REF (Sovutgich)</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">-20°C / +12°C</div>
+</div>
+</div>
+<!-- Option 3: MEGA -->
+<div class="truck-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" onclick="selectTypeCard(this, 'MEGA (105 m³)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-secondary text-xl">expand</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">MEGA (105 m³)</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">Katta sig'imli</div>
+</div>
+</div>
+<!-- Option 4: KONTEYNER -->
+<div class="truck-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" onclick="selectTypeCard(this, 'Konteynerovoz (40ft)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-amber-400 text-xl">inventory_2</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">Konteynerovoz</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">20ft / 40ft</div>
+</div>
+</div>
+</div>
+<input id="selectedTruckType" type="hidden" value="TENT (92 m³)"/>
+</div>
+<!-- Row 3: Capacity & Base location -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Yuk ko'tarish hajmi</label>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputCapacity" placeholder="masalan: 22 tonna" type="text" value="22 tonna"/>
+</div>
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Boshlang'ich joylashuv</label>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="inputLocation" placeholder="masalan: Toshkent Markaziy Baza" type="text" value="Toshkent Markaziy Baza"/>
+</div>
+</div>
+<!-- Row 4: Izoh / Notes -->
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Izoh yoki qo'shimcha ma'lumot</label>
+<textarea class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors resize-none" id="inputNotes" placeholder="Texnik xususiyatlar, GPS datchik raqami yoki boshqa qo'shimchalar..." rows="2"></textarea>
+</div>
+<!-- Modal Footer -->
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-end gap-3">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md transition-colors" onclick="closeAddTruckModal()" type="button">
+          Bekor qilish
+        </button>
+<button class="px-6 py-2.5 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md flex items-center gap-2 shadow-lg shadow-primary-container/30 transition-all hover:scale-[1.02] active:scale-[0.98]" type="submit">
+<span class="material-symbols-outlined text-lg">save</span>
+<span>+ Furani qo‘shish</span>
+</button>
+</div>
+</form>
+</div>
+</div><!-- BEGIN: Edit Truck Modal Backdrop & Dialog -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-background/80 modal-backdrop-blur p-4 overflow-y-auto" id="editTruckModal">
+<div class="relative w-full max-w-2xl bg-surface-container border border-outline-variant/50 rounded-2xl shadow-2xl overflow-hidden transition-all transform duration-300 scale-95 opacity-0 my-auto" id="editModalDialogCard">
+<!-- Modal Header -->
+<div class="px-6 py-5 bg-surface-container-low border-b border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">edit_document</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-lg text-white">Avtomobil ma'lumotlarini tahrirlash</h3>
+<p class="font-body-sm text-xs text-on-surface-variant">Fura parametrlari, biriktirilgan haydovchi va operatsion holatini yangilash</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high flex items-center justify-center transition-colors" id="close-edit-modal-btn" onclick="closeEditTruckModal()">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Modal Form Body -->
+<form class="p-6 space-y-5" id="editTruckForm" onsubmit="handleEditSubmit(event)">
+<input id="editRowIndex" type="hidden" value=""/>
+<!-- Row 1: Davlat raqami & Model -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">
+            Davlat raqami <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-3 top-2.5 font-bold font-mono text-[10px] bg-primary-container text-white px-1.5 py-0.5 rounded">UZ</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-mono font-bold placeholder-on-surface-variant text-sm rounded-lg pl-12 pr-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors uppercase" id="editPlate" required="" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">
+            Rusumi va modeli <span class="text-error">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="editModel" required="" type="text"/>
+</div>
+</div>
+<!-- Row 2: Driver & Phone -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">
+            Haydovchi F.I.Sh. <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-base">person</span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg pl-9 pr-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="editDriver" required="" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Telefon raqami</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-base">call</span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg pl-9 pr-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="editPhone" type="text"/>
+</div>
+</div>
+</div>
+<!-- Truck Type Selection Cards -->
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-2">Fura turi (korpus turi)</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="editTruckTypeSelector">
+<div class="edit-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" data-type="TENT" onclick="selectEditTypeCard(this, 'TENT (92 m³)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-primary text-xl">rv_hookup</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">TENT (92 m³)</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">Standart tentli</div>
+</div>
+</div>
+<div class="edit-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" data-type="REF" onclick="selectEditTypeCard(this, 'REF (-20°C / +12°C)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-tertiary text-xl">ac_unit</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">REF (Sovutgich)</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">Sovutiladigan</div>
+</div>
+</div>
+<div class="edit-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" data-type="MEGA" onclick="selectEditTypeCard(this, 'MEGA (105 m³)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-secondary text-xl">expand</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">MEGA (105 m³)</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">Katta hajm</div>
+</div>
+</div>
+<div class="edit-type-card cursor-pointer p-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest hover:border-primary/50 flex flex-col justify-between transition-all" data-type="KONTEYNER" onclick="selectEditTypeCard(this, 'Konteynerovoz (40ft)')">
+<div class="flex items-center justify-between mb-1.5">
+<span class="material-symbols-outlined text-amber-400 text-xl">inventory_2</span>
+<span class="w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle"></span>
+</div>
+<div>
+<div class="font-label-md text-xs text-white">Konteynerovoz</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">20ft / 40ft</div>
+</div>
+</div>
+</div>
+<input id="editSelectedTruckType" type="hidden" value="TENT (92 m³)"/>
+</div>
+<!-- Row 3: Capacity & Status Selector -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Yuk ko'tarish sig'imi</label>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="editCapacity" placeholder="masalan: 22 tonna" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Holati (Operatsion status)</label>
+<select class="w-full bg-surface-container-lowest text-on-surface font-label-md rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors cursor-pointer" id="editStatus">
+<option value="Yo'lda">Yo'lda (Faol reys)</option>
+<option value="Bo'sh">Bo'sh (Rezerv / Tayyor)</option>
+<option value="Yuklanmoqda">Yuklanmoqda (Omborda)</option>
+<option value="Ta'mirda">Ta'mirda (Xizmat ko'rsatish)</option>
+</select>
+</div>
+</div>
+<!-- Row 4: Izoh / Notes -->
+<div>
+<label class="block font-label-md text-xs text-on-surface mb-1.5">Qo'shimcha izoh</label>
+<textarea class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant text-sm rounded-lg px-3 py-2.5 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors resize-none" id="editNotes" placeholder="Texnik holat, ta'mirlash sanasi yoki haydovchi haqida izohlar..." rows="2"></textarea>
+</div>
+<!-- Modal Footer -->
+<div class="pt-4 border-t border-outline-variant/30 flex items-center justify-end gap-3">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md transition-colors" onclick="closeEditTruckModal()" type="button">
+          Bekor qilish
+        </button>
+<button class="px-6 py-2.5 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md flex items-center gap-2 shadow-lg shadow-primary-container/30 transition-all hover:scale-[1.02] active:scale-[0.98]" type="submit">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+<span>Saqlash</span>
+</button>
+</div>
+</form>
+</div>
+</div><!-- BEGIN: Delete Truck Confirmation Modal Backdrop & Dialog -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-background/80 modal-backdrop-blur p-4 overflow-y-auto" id="deleteTruckModal">
+<div class="relative w-full max-w-lg bg-surface-container border border-error/40 rounded-2xl shadow-2xl overflow-hidden transition-all transform duration-300 scale-95 opacity-0 my-auto" id="deleteModalDialogCard">
+<!-- Modal Header with Warning Glow -->
+<div class="px-6 py-5 bg-surface-container-low border-b border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-error-container/30 text-error flex items-center justify-center shrink-0 border border-error/30">
+<span class="material-symbols-outlined text-2xl">warning</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-lg text-white">Furani o‘chirish</h3>
+<p class="font-body-sm text-xs text-on-surface-variant">Avtotransport vositasini tizimdan chiqarish</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container-high flex items-center justify-center transition-colors" onclick="closeDeleteTruckModal()" title="Yopish">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-6 space-y-4">
+<p class="font-headline-sm text-base text-white font-semibold">
+        Haqiqatan ham ushbu furani o‘chirmoqchimisiz?
+      </p>
+<!-- Target Truck Highlight Card -->
+<div class="p-3.5 bg-surface-container-lowest/90 rounded-xl border border-outline-variant/40 flex items-center gap-3 shadow-inner">
+<div class="w-10 h-10 rounded-lg bg-error-container/20 text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">local_shipping</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider mb-1">
+<span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+<span id="deleteModalPlate">01 A 123 UA</span>
+</div>
+<div class="font-body-md text-sm text-white font-medium truncate" id="deleteModalModel">Volvo FH16 540</div>
+</div>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+        Bu amal qaytarib bo'lmaydi. Barcha biriktirilgan telematika va operatsion ma'lumotlar ro'yxatdan chiqariladi.
+      </p>
+</div>
+<!-- Modal Footer Actions -->
+<div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant/30 flex items-center justify-end gap-3">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md transition-colors" onclick="closeDeleteTruckModal()" type="button">
+        Bekor qilish
+      </button>
+<button class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-error-container to-error hover:bg-error text-white font-label-md flex items-center gap-2 shadow-lg shadow-black/40 transition-all hover:scale-[1.02] active:scale-[0.98]" id="confirmDeleteBtn" onclick="confirmDeleteTruck()" type="button">
+<span class="material-symbols-outlined text-lg">delete_forever</span>
+<span>O‘chirish</span>
+</button>
+</div>
+</div>
+</div>
+<!-- END: Delete Truck Confirmation Modal -->
+<script>
+  // Delete Modal state
+  let currentDeleteRow = null;
+  let currentDeletePlate = '';
+
+  function openDeleteTruckModal(plate, model, rowElement) {
+    currentDeleteRow = rowElement;
+    currentDeletePlate = plate;
+    document.getElementById('deleteModalPlate').innerText = plate;
+    document.getElementById('deleteModalModel').innerText = model;
+    
+    const modal = document.getElementById('deleteTruckModal');
+    const card = document.getElementById('deleteModalDialogCard');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+      card.classList.remove('scale-95', 'opacity-0');
+      card.classList.add('scale-100', 'opacity-100');
+    }, 10);
+  }
+
+  function closeDeleteTruckModal() {
+    const modal = document.getElementById('deleteTruckModal');
+    const card = document.getElementById('deleteModalDialogCard');
+    card.classList.remove('scale-100', 'opacity-100');
+    card.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      currentDeleteRow = null;
+      currentDeletePlate = '';
+    }, 200);
+  }
+
+  function confirmDeleteTruck() {
+    if (currentDeleteRow) {
+      currentDeleteRow.remove();
+      
+      // Update visible count in table badge
+      const rows = document.querySelectorAll('#fleetTableBody tr');
+      const countBadge = document.getElementById('truckCountBadge');
+      if (countBadge) {
+        countBadge.innerText = rows.length + " ta ko'rsatilmoqda";
+      }
+      
+      // Update total counter if present
+      const totalStat = document.getElementById('totalTrucksStat');
+      if (totalStat && parseInt(totalStat.innerText) > 0) {
+        totalStat.innerText = parseInt(totalStat.innerText) - 1;
+      }
+    }
+    
+    const deletedPlate = currentDeletePlate;
+    closeDeleteTruckModal();
+    showToast("Muvaffaqiyatli!", `Fura (${deletedPlate}) muvaffaqiyatli o‘chirildi!`);
+  }
+
+  // Backdrop click listener for delete modal
+  document.getElementById('deleteTruckModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeDeleteTruckModal();
+    }
+  });
+</script>
+<!-- END: Edit Truck Modal -->
+<!-- END: Add Truck Modal -->
+<script>
+  // Quick dynamic interaction for selecting truck preview card
+  function selectTruck(plate, model, driver, phone, type, cap, location, status, fuel, odo, inspection, insurance, speed, coords) {
+    document.getElementById('panelPlate').innerText = plate;
+    document.getElementById('panelModel').innerText = model;
+    document.getElementById('panelDriver').innerText = driver;
+    document.getElementById('panelPhone').innerText = phone;
+    document.getElementById('panelBodyType').innerText = type;
+    document.getElementById('panelCapacity').innerText = cap;
+    document.getElementById('panelFuel').innerText = fuel;
+    document.getElementById('panelFuelBar').style.width = fuel;
+    document.getElementById('panelOdo').innerText = odo;
+    document.getElementById('panelInspection').innerText = inspection;
+    document.getElementById('panelInsurance').innerText = insurance + (insurance.includes('faol') ? '' : ' gacha faol');
+    document.getElementById('panelSpeed').innerText = speed;
+    document.getElementById('panelCoords').innerText = coords;
+
+    const badge = document.getElementById('panelStatusBadge');
+    badge.innerText = status;
+    
+    // Adjust status badge theme
+    if (status.includes("Yo'lda")) {
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary-container/20 text-primary-container";
+    } else if (status.includes("Bo'sh") || status.includes("Rezervda")) {
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-secondary/20 text-secondary";
+    } else if (status.includes("Yuklanmoqda")) {
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-400";
+    } else {
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-error-container/30 text-error";
+    }
+  }
+
+  // Filter & Search Functionality
+  function filterTruckTable() {
+    const searchVal = document.getElementById('truckSearchInput').value.toLowerCase();
+    const typeVal = document.getElementById('filterType').value.toUpperCase();
+    const statusVal = document.getElementById('filterStatus').value;
+
+    const rows = document.querySelectorAll('#fleetTableBody tr');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      const matchesSearch = text.includes(searchVal);
+      const matchesType = typeVal === 'ALL' || text.toUpperCase().includes(typeVal);
+      const matchesStatus = statusVal === 'ALL' || text.includes(statusVal);
+
+      if (matchesSearch && matchesType && matchesStatus) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    document.getElementById('truckCountBadge').innerText = visibleCount + " ta ko'rsatilmoqda";
+  }
+
+  function resetFilters() {
+    document.getElementById('truckSearchInput').value = '';
+    document.getElementById('filterType').value = 'ALL';
+    document.getElementById('filterStatus').value = 'ALL';
+    filterTruckTable();
+  }
+
+  function toggleFilterDrawer() {
+    const el = document.getElementById('truckSearchInput');
+    el.focus();
+    el.classList.add('ring-2', 'ring-primary-container');
+    setTimeout(() => el.classList.remove('ring-2', 'ring-primary-container'), 1000);
+  }
+
+  // ================= ADD TRUCK MODAL LOGIC ================= //
+  function openAddTruckModal() {
+    const modal = document.getElementById('addTruckModal');
+    const card = document.getElementById('modalDialogCard');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+      card.classList.remove('scale-95', 'opacity-0');
+      card.classList.add('scale-100', 'opacity-100');
+      document.getElementById('inputPlate').focus();
+    }, 10);
+  }
+
+  function closeAddTruckModal() {
+    const modal = document.getElementById('addTruckModal');
+    const card = document.getElementById('modalDialogCard');
+    card.classList.remove('scale-100', 'opacity-100');
+    card.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      // Reset errors
+      document.getElementById('inputPlate').classList.remove('border-error');
+      document.getElementById('plateError').classList.add('hidden');
+      document.getElementById('inputDriver').classList.remove('border-error');
+      document.getElementById('driverError').classList.add('hidden');
+    }, 200);
+  }
+
+  // Close modal when clicking backdrop
+  document.getElementById('addTruckModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeAddTruckModal();
+    }
+  });
+
+  // Select Truck Type Cards
+  function selectTypeCard(el, typeName) {
+    document.querySelectorAll('.truck-type-card').forEach(card => {
+      card.classList.remove('selected', 'border-primary-container', 'bg-primary-container/10');
+      card.classList.add('border-outline-variant/40', 'bg-surface-container-lowest');
+      const dot = card.querySelector('.radio-circle');
+      dot.className = "w-3.5 h-3.5 rounded-full border border-outline-variant radio-circle";
+    });
+
+    el.classList.add('selected', 'border-primary-container', 'bg-primary-container/10');
+    el.classList.remove('border-outline-variant/40', 'bg-surface-container-lowest');
+    const dot = el.querySelector('.radio-circle');
+    dot.className = "w-3.5 h-3.5 rounded-full border border-primary-container bg-primary-container flex items-center justify-center radio-circle";
+    
+    document.getElementById('selectedTruckType').value = typeName;
+  }
+
+  // Handle Form Submission
+  function handleTruckSubmit(e) {
+    e.preventDefault();
+    const plateInput = document.getElementById('inputPlate');
+    const modelInput = document.getElementById('inputModel');
+    const driverInput = document.getElementById('inputDriver');
+    const phoneInput = document.getElementById('inputPhone');
+    const typeVal = document.getElementById('selectedTruckType').value;
+    const capacityInput = document.getElementById('inputCapacity');
+    const locationInput = document.getElementById('inputLocation');
+
+    let isValid = true;
+
+    // Validate plate
+    if (!plateInput.value.trim()) {
+      plateInput.classList.add('border-error');
+      document.getElementById('plateError').classList.remove('hidden');
+      isValid = false;
+    } else {
+      plateInput.classList.remove('border-error');
+      document.getElementById('plateError').classList.add('hidden');
+    }
+
+    // Validate driver
+    if (!driverInput.value.trim()) {
+      driverInput.classList.add('border-error');
+      document.getElementById('driverError').classList.remove('hidden');
+      isValid = false;
+    } else {
+      driverInput.classList.remove('border-error');
+      document.getElementById('driverError').classList.add('hidden');
+    }
+
+    if (!isValid) return;
+
+    const plate = plateInput.value.trim().toUpperCase();
+    const model = modelInput.value.trim() || 'Mercedes-Benz Actros 1845';
+    const driver = driverInput.value.trim();
+    const phone = phoneInput.value.trim() || '+998 90 000 00 00';
+    const capacity = capacityInput.value.trim() || '22 tonna';
+    const location = locationInput.value.trim() || 'Toshkent Markaziy Baza';
+
+    // Driver Initials
+    const initials = driver.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'TR';
+
+    // Insert row at top of tbody
+    const tbody = document.getElementById('fleetTableBody');
+    const newRow = document.createElement('tr');
+    newRow.className = "hover:bg-surface-container-high/60 transition-colors cursor-pointer group bg-primary-container/[0.04]";
+    newRow.setAttribute('onclick', `selectTruck('${plate}', '${model}', '${driver}', '${phone}', '${typeVal}', '${capacity}', '${location}', "Bo'sh", '100%', '0 km', '2027-01-01', '2027-12-31', '0 km/soat', '41.2995° N, 69.2401° E')`);
+
+    newRow.innerHTML = `
+      <td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-highest text-primary-fixed font-mono font-bold text-xs tracking-wider shadow-inner">
+          <span class="text-[9px] bg-primary-container text-white px-1 py-0.2 rounded font-sans">UZ</span>
+          ${plate}
+        </div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-lg">local_shipping</span>
+          <div>
+            <div class="font-headline-sm text-sm text-white">${model}</div>
+            <div class="font-label-sm text-on-surface-variant">2024 y. • Euro-6</div>
+          </div>
+        </div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-primary-container/30 text-primary flex items-center justify-center text-xs font-bold">${initials}</div>
+          <div>
+            <div class="font-label-md text-white">${driver}</div>
+            <div class="font-label-sm text-on-surface-variant">${phone}</div>
+          </div>
+        </div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="font-label-md text-white">${typeVal}</div>
+        <div class="font-label-sm text-on-surface-variant">Yuk: ${capacity}</div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="flex items-center gap-1.5 text-secondary">
+          <span class="material-symbols-outlined text-sm">home_pin</span>
+          <span class="font-label-md text-white">${location}</span>
+        </div>
+        <div class="font-label-sm text-on-surface-variant">Yangi qo'shildi • Tayyor</div>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-secondary">
+          <span class="w-2 h-2 rounded-full bg-secondary"></span>
+          Bo'sh
+        </span>
+      </td>
+      <td class="py-3.5 px-4 whitespace-nowrap">
+        <div class="font-label-md text-white">2027-01-01</div>
+        <div class="font-label-sm text-secondary">Sug'urta: Faol</div>
+      </td>
+      <td class="py-3.5 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-end gap-1">
+          <button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Buyurtma biriktirish">
+            <span class="material-symbols-outlined text-base">assignment_turned_in</span>
+          </button>
+          <button class="p-1.5 text-on-surface-variant hover:text-white hover:bg-surface-container rounded" title="Tahrirlash">
+            <span class="material-symbols-outlined text-base">edit</span>
+          </button>
+          <button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-surface-container rounded" onclick="this.closest('tr').remove();" title="O'chirish">
+            <span class="material-symbols-outlined text-base">delete</span>
+          </button>
+        </div>
+      </td>
+    `;
+
+    tbody.prepend(newRow);
+
+    // Update Telemetry Panel to newly created truck
+    selectTruck(plate, model, driver, phone, typeVal, capacity, location, "Bo'sh", "100%", "0 km", "2027-01-01", "2027-12-31", "0 km/soat", "41.2995° N, 69.2401° E");
+
+    // Update counters
+    const totalStat = document.getElementById('totalTrucksStat');
+    if (totalStat) totalStat.innerText = parseInt(totalStat.innerText) + 1;
+    const idleStat = document.getElementById('idleTrucksStat');
+    if (idleStat) idleStat.innerText = parseInt(idleStat.innerText) + 1;
+
+    // Close Modal & Reset Form
+    closeAddTruckModal();
+    document.getElementById('addTruckForm').reset();
+    document.getElementById('inputPhone').value = "+998 ";
+
+    // Toast Alert
+    showToast("Muvaffaqiyatli!", `Yangi fura (${plate}) muvaffaqiyatli qo‘shildi!`);
+  }
+
+  // Toast Functionality
+  let toastTimer = null;
+  function showToast(title, msg) {
+    const toast = document.getElementById('toastNotification');
+    document.getElementById('toastTitle').innerText = title;
+    document.getElementById('toastMessage').innerText = msg;
+    
+    toast.classList.remove('translate-y-[-120%]', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      hideToast();
+    }, 3500);
+  }
+
+  function hideToast() {
+    const toast = document.getElementById('toastNotification');
+    toast.classList.remove('translate-y-0', 'opacity-100');
+    toast.classList.add('translate-y-[-120%]', 'opacity-0', 'pointer-events-none');
+  }
+</script>
+<script data-purpose="shell-keyboard-interactions">
+    // Global keyboard shortcut Ctrl+K
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const search = document.getElementById('global-search');
+        if (search) search.focus();
+      }
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('addTruckModal');
+        if (modal && !modal.classList.contains('hidden')) {
+          closeAddTruckModal();
+        }
+      }
+    });
+</script>
+</body></html>

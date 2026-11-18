@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+
+<html class="dark h-full" lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FURA CONTROL - Logistika boshqaruv tizimi</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary": "#380094",
+            "on-tertiary-fixed": "#21005e",
+            "surface-bright": "#2e3a4d",
+            "on-primary": "#003060",
+            "error-container": "#93000a",
+            "on-surface-variant": "#c0c7d6",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#d5e3ff",
+            "background": "#071426",
+            "inverse-primary": "#005eb1",
+            "secondary-fixed": "#60fea5",
+            "primary-fixed-dim": "#a6c8ff",
+            "surface-container": "#142032",
+            "surface-tint": "#a6c8ff",
+            "on-secondary-fixed-variant": "#00522d",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#030e20",
+            "surface-container-low": "#0f1c2e",
+            "surface-container-highest": "#293549",
+            "inverse-on-surface": "#253144",
+            "on-background": "#d7e3fc",
+            "secondary": "#40e48d",
+            "secondary-fixed-dim": "#3be18b",
+            "tertiary-fixed": "#e8ddff",
+            "on-primary-fixed-variant": "#004787",
+            "primary-container": "#2d91ff",
+            "on-tertiary-container": "#300083",
+            "tertiary-fixed-dim": "#cebdff",
+            "tertiary-container": "#9b7aff",
+            "on-secondary": "#00391d",
+            "outline-variant": "#404753",
+            "on-secondary-container": "#004c29",
+            "surface-variant": "#293549",
+            "primary": "#a6c8ff",
+            "on-primary-container": "#002a54",
+            "inverse-surface": "#d7e3fc",
+            "surface-dim": "#071426",
+            "on-tertiary-fixed-variant": "#5114c5",
+            "on-secondary-fixed": "#00210f",
+            "on-error": "#690005",
+            "outline": "#8a919f",
+            "on-surface": "#d7e3fc",
+            "tertiary": "#cebdff",
+            "surface-container-high": "#1e2a3d",
+            "surface": "#071426",
+            "secondary-container": "#00c774",
+            "on-primary-fixed": "#001c3b"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem"
+          },
+          fontFamily: {
+            "table-header": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "kpi-stat": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "table-header": ["11px", { "lineHeight": "16px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "kpi-stat": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "800" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }]
+          }
+        }
+      }
+    };
+  </script>
+<style data-purpose="custom-styling">
+    @layer base {
+      html {
+        color-scheme: dark;
+      }
+      body {
+        overscroll-behavior: none;
+        min-height: 100vh;
+        background-color: #071426;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f1c2e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #293549;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2d91ff;
+    }
+    .full-sidebar-theme {
+      background: linear-gradient(180deg, rgba(7, 20, 38, 0.94) 0%, rgba(11, 27, 50, 0.88) 40%, rgba(7, 20, 38, 0.82) 80%, rgba(4, 13, 26, 0.96) 100%),
+                  url('https://lh3.googleusercontent.com/aida-public/AB6AXuAL-BgiIUdmmUOj-6CeBEeKvp6MbZQ2wkqjZKkFywfJiWcNKF7VqeN390Y0Zhw2ZLMiTmG-bVPYFeus5k7lssViRAv2Y4sLAt6E8VUp3wcMxyaVogBv-S_FlkoOmh8x9WCX2bA8XnqyPQ09KHTdLMnY8C-ngYZbdh-wLzc_qMNG6dpADFt5xJek2phNfeb8JacMYZ3A06LpZx2YInHd9tqDKwmarVpWmqG3W7qDOqA') 50% 70% / cover no-repeat;
+    }
+    .modal-backdrop-blur {
+      backdrop-filter: blur(8px);
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-surface antialiased">
+<!-- Toast Notification Container -->
+<div class="fixed top-5 right-5 z-50 transition-all duration-300 transform translate-y-[-120%] opacity-0 pointer-events-none" id="toastNotification">
+<div class="flex items-center gap-3 px-4 py-3 bg-surface-container-high/95 backdrop-blur-md border border-secondary/40 text-on-surface rounded-xl shadow-2xl shadow-black/50">
+<div class="w-8 h-8 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-sm text-white" id="toastTitle">Muvaffaqiyatli!</h4>
+<p class="font-body-sm text-on-surface-variant text-xs" id="toastMessage">Yangi fura muvaffaqiyatli qo‘shildi!</p>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-white ml-2 rounded" onclick="hideToast()">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+</div>
+<!-- BEGIN: LeftSidebar -->
+<aside class="fixed top-0 bottom-0 left-0 w-64 z-30 full-sidebar-theme border-r border-outline-variant/30 flex flex-col justify-between overflow-hidden shadow-2xl backdrop-blur-[2px]" data-purpose="sidebar">
+<div class="p-space-md flex flex-col h-full overflow-y-auto z-10">
+<!-- Logo -->
+<div class="flex items-center gap-space-sm px-space-xs py-space-sm mb-space-md bg-surface-container-lowest/60 backdrop-blur-md rounded-xl border border-outline-variant/30">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-inverse-primary to-primary-container flex items-center justify-center shadow-lg shadow-primary-container/25 flex-shrink-0">
+<span class="material-symbols-outlined text-white text-2xl">local_shipping</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-white leading-none tracking-tight font-bold">FURA CONTROL</h1>
+<p class="font-label-sm text-on-surface-variant/80 mt-1 uppercase tracking-wider text-[10px]" data-i18n="nav_system_subtitle">Logistika tizimi</p>
+</div>
+</div>
+<!-- Main Navigation Menu -->
+<nav class="space-y-1.5 mt-space-xs" data-active-classes="bg-primary-container text-white font-semibold shadow-md shadow-primary-container/30" id="sidebar-nav">
+<!-- 1. Bosh sahifa -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_home" data-path="bosh-sahifa" href="#">
+          Bosh sahifa
+        </a>
+<!-- 2. Furalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_trucks" data-path="furalar" href="#">
+          Furalar
+        </a>
+<!-- 3. Yuklar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_cargo" data-path="yuklar" href="#">
+          Yuklar
+        </a>
+<!-- 4. Haydovchilar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_drivers" data-path="haydovchilar" href="#">
+          Haydovchilar
+        </a>
+<!-- 5. Reyslar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_trips" data-path="reyslar" href="#">
+          Reyslar
+        </a>
+<!-- 6. Kalendar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_calendar" data-path="kalendar" href="#">
+          Kalendar
+        </a>
+<!-- 7. Arxiv -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_archive" data-path="arxiv" href="#">
+          Arxiv
+        </a>
+<!-- 8. Hisobotlar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_reports" data-path="hisobotlar" href="#">
+          Hisobotlar
+        </a>
+<!-- 9. Sozlamalar -->
+<a class="nav-item w-full flex items-center px-space-md py-2.5 rounded-lg text-on-surface hover:text-white hover:bg-surface-container-high/70 backdrop-blur-sm transition-colors font-label-md font-medium" data-i18n="nav_settings" data-path="sozlamalar" href="#">
+          Sozlamalar
+        </a>
+</nav>
+<!-- Sidebar Footer telemetry widget (neat integrated glass card) -->
+<div class="mt-auto pt-4">
+<div class="p-3 rounded-lg bg-surface-container-lowest/70 backdrop-blur-md border border-outline-variant/30 text-on-surface-variant">
+<p class="font-label-md text-white flex items-center gap-1.5" data-i18n="sidebar_fleet_ctrl">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+      Avtopark nazorati
+    </p>
+<p class="font-label-sm text-on-surface-variant/80 mt-0.5 text-[11px]" data-i18n="sidebar_telematics_active">GPS &amp; Telematika 24/7 faol</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: TopHeader -->
+<header class="fixed top-0 right-0 left-64 z-20 h-16 bg-surface-container-low/90 backdrop-blur-md border-b border-outline-variant/30 px-space-lg flex items-center justify-between gap-space-md" data-purpose="top-navigation">
+<!-- Global Search Input with Shortcut -->
+<div class="relative w-96 max-w-lg">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant font-body-sm rounded-lg pl-9 pr-16 py-2 border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" data-i18n-placeholder="search_placeholder" id="global-search" placeholder="Qidirish: fura, yuk, haydovchi, reys..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<span class="font-label-sm bg-surface-container text-on-surface-variant px-1.5 py-0.5 rounded border border-outline-variant/40">Ctrl + K</span>
+</div>
+</div>
+<!-- Header Controls -->
+<div class="flex items-center gap-3">
+<!-- Header Global Language Switcher Pills -->
+<div class="flex items-center bg-surface-container border border-outline-variant/30 p-1 rounded-lg">
+<button class="px-2.5 py-1 text-xs font-bold rounded font-mono transition-all bg-primary-container text-white shadow-sm" id="headerLangUzBtn" onclick="selectAppLanguage('uz')" title="O‘zbekcha (Lotin)" type="button">UZ</button>
+<button class="px-2.5 py-1 text-xs font-bold rounded font-mono transition-all text-on-surface-variant hover:text-white" id="headerLangRuBtn" onclick="selectAppLanguage('ru')" title="Русский язык" type="button">RU</button>
+</div>
+<!-- Notifications Bell -->
+<button class="relative p-2 text-on-surface-variant hover:text-white bg-surface-container rounded-lg border border-outline-variant/30 hover:bg-surface-container-high transition-colors" title="Bildirishnomalar">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute -top-1 -right-1 bg-error-container text-white font-label-sm w-4 h-4 rounded-full flex items-center justify-center border-2 border-surface-container-low">3</span>
+</button>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-2.5 bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-white font-label-sm">
+          J
+        </div>
+<div class="text-left leading-tight">
+<div class="font-label-md text-white">Jasurbek</div>
+<div class="font-label-sm text-on-surface-variant/80" data-i18n="user_role_header">Bosh dispetcher</div>
+</div>
+<span class="material-symbols-outlined text-base text-on-surface-variant ml-0.5">expand_more</span>
+</div>
+<!-- Current System Date Pill -->
+<div class="hidden md:flex items-center gap-2 bg-surface-container border border-outline-variant/30 text-on-surface px-3 py-1.5 rounded-lg font-label-sm">
+<span class="material-symbols-outlined text-primary-container text-base">calendar_today</span>
+<span data-i18n="header_date">16-noyabr, 2026 (Dushanba)</span>
+</div>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainContentWrapper -->
+<main class="pl-64 pt-16 min-h-screen"><div class="flex flex-col w-full">
+<!-- Toast Notification Dynamic Feedback -->
+<div class="fixed bottom-8 right-8 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="settingsToast">
+<div class="flex items-center gap-3 px-5 py-3.5 bg-surface-container-high text-on-surface rounded-xl shadow-2xl border border-outline-variant/30">
+<div class="w-7 h-7 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-white" id="toastHeading">Saqlandi</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="toastDesc">Sozlamalar muvaffaqiyatli saqlandi!</p>
+</div>
+</div>
+</div>
+<!-- Main Settings Container -->
+<div class="px-space-xl py-space-lg space-y-space-lg max-w-[1600px] w-full mx-auto">
+<!-- Top Breadcrumb & Page Header -->
+<div class="flex flex-col gap-2">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">
+<span class="hover:text-primary transition-colors cursor-pointer" data-i18n="bc_logistics">LOGISTIKA</span>
+<span class="text-on-surface-variant/40">/</span>
+<span class="hover:text-primary transition-colors cursor-pointer" data-i18n="bc_settings">SOZLAMALAR &amp; PROFIL</span>
+<span class="text-on-surface-variant/40">/</span>
+<span class="text-primary-fixed font-bold" data-i18n="bc_main_settings">ASOSIY SOZLAMALAR</span>
+</nav>
+<!-- Headline Block & Quick Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-1">
+<div>
+<div class="flex items-center gap-3">
+<h1 class="font-headline-xl text-headline-xl text-white tracking-tight uppercase" data-i18n="page_title">TIZIM VA PROFIL SOZLAMALARI</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-primary-container/20 text-primary-fixed text-label-sm font-label-sm">v2.4 Pro</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1" data-i18n="page_subtitle">
+            Foydalanuvchi hisobi, dastur tili va interfeys parametrlarini boshqarish
+          </p>
+</div>
+<div class="flex items-center gap-3 self-start md:self-auto">
+<button class="h-10 px-4 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface hover:text-white font-label-md text-label-md transition-all" onclick="resetFormChanges()" type="button">
+<span data-i18n="btn_reset">Asliga qaytarish</span>
+</button>
+<button class="h-10 px-5 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md text-label-md flex items-center gap-2 shadow-lg shadow-primary-container/30 transition-all active:scale-[0.98]" onclick="triggerSaveSettings(i18n[currentLang].saved_all)" type="button">
+<span class="material-symbols-outlined text-lg">save</span>
+<span data-i18n="btn_save_changes">O‘zgarishlarni saqlash</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Telemetry System Status Ribbon -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface-container p-4 rounded-xl flex items-center justify-between relative overflow-hidden shadow-sm">
+<div class="space-y-0.5 z-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant" data-i18n="stat_account_status">Hisob holati</span>
+<p class="font-headline-sm text-headline-sm text-white flex items-center gap-1.5" data-i18n="stat_account_val">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+            Faol (Premium Boshqaruv)
+          </p>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+</div>
+<span class="material-symbols-outlined absolute -right-3 -bottom-3 text-7xl text-white/[0.03] select-none pointer-events-none">shield_person</span>
+</div>
+<div class="bg-surface-container p-4 rounded-xl flex items-center justify-between relative overflow-hidden shadow-sm">
+<div class="space-y-0.5 z-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant" data-i18n="stat_sync">Sinxronizatsiya</span>
+<p class="font-headline-sm text-headline-sm text-white" data-i18n="stat_sync_val">Avtomatik (Jonli rejim)</p>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">sync_saved_locally</span>
+</div>
+<span class="material-symbols-outlined absolute -right-3 -bottom-3 text-7xl text-white/[0.03] select-none pointer-events-none">sync</span>
+</div>
+<div class="bg-surface-container p-4 rounded-xl flex items-center justify-between relative overflow-hidden shadow-sm">
+<div class="space-y-0.5 z-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant" data-i18n="stat_branch">Dispetcherlik filiali</span>
+<p class="font-headline-sm text-headline-sm text-white" data-i18n="stat_branch_val">Toshkent Markaziy</p>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">domain</span>
+</div>
+<span class="material-symbols-outlined absolute -right-3 -bottom-3 text-7xl text-white/[0.03] select-none pointer-events-none">location_city</span>
+</div>
+<div class="bg-surface-container p-4 rounded-xl flex items-center justify-between relative overflow-hidden shadow-sm">
+<div class="space-y-0.5 z-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant" data-i18n="stat_security">Xavfsizlik darajasi</span>
+<p class="font-headline-sm text-headline-sm text-white" data-i18n="stat_security_val">2FA Himoyalangan</p>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">lock_clock</span>
+</div>
+<span class="material-symbols-outlined absolute -right-3 -bottom-3 text-7xl text-white/[0.03] select-none pointer-events-none">lock</span>
+</div>
+</div>
+<!-- Settings Grid Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- ================= LEFT COLUMN: PROFILE & SESSIONS ================= -->
+<div class="lg:col-span-7 space-y-space-lg">
+<!-- SECTION 1: Profil ma'lumotlari -->
+<div class="bg-surface-container rounded-2xl p-6 shadow-md relative overflow-hidden">
+<!-- Section Heading -->
+<div class="flex items-center justify-between pb-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">badge</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-white" data-i18n="card_profile_title">Profil ma'lumotlari</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="card_profile_subtitle">Dispetcher akkaunt shaxsiy ma'lumotlari va vakolatlari</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-highest text-primary-fixed px-3 py-1 rounded-full uppercase tracking-wider" data-i18n="badge_dispatcher_id">Dispetcher #04</span>
+</div>
+<!-- Avatar & Identity Bar -->
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+<div class="flex items-center gap-4">
+<div class="relative group cursor-pointer">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-inverse-primary to-primary-container flex items-center justify-center text-white font-headline-lg text-2xl shadow-lg shadow-primary-container/20">
+                  JM
+                </div>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-white" id="displayProfileName">Jasurbek Mahmudov</h3>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1.5 mt-0.5" data-i18n="avatar_role">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                  Bosh dispetcher / Fleet Manager
+                </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" data-i18n="avatar_sub">ID: FURA-UZ-9024 • Markaziy Avtopark</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-9 px-3.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-white font-label-md text-label-md flex items-center gap-1.5 transition-colors" onclick="uploadAvatarMock()" type="button">
+<span class="material-symbols-outlined text-base">photo_camera</span>
+<span data-i18n="btn_change_photo">Rasmni almashtirish</span>
+</button>
+</div>
+</div>
+<!-- Form Fields Grid -->
+<form class="space-y-4" id="profileForm" onsubmit="handleProfileSubmit(event)">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Full Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" for="fullNameInput">
+<span data-i18n="field_fullname">F.I.Sh. (To‘liq ism-familiya)</span> <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">person</span>
+<input class="w-full bg-surface-container-lowest text-white font-body-md text-body-md rounded-lg pl-9 pr-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary-container transition-all" id="fullNameInput" required="" type="text" value="Jasurbek Mahmudov"/>
+</div>
+</div>
+<!-- Email -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" for="emailInput">
+<span data-i18n="field_email">Ishchi elektron pochta</span> <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">alternate_email</span>
+<input class="w-full bg-surface-container-lowest text-white font-body-md text-body-md rounded-lg pl-9 pr-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary-container transition-all" id="emailInput" required="" type="email" value="j.mahmudov@furacontrol.uz"/>
+</div>
+</div>
+<!-- Phone -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" data-i18n="field_phone" for="phoneInput">
+                  Aloqa telefon raqami
+                </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">phone_iphone</span>
+<input class="w-full bg-surface-container-lowest text-white font-body-md text-body-md rounded-lg pl-9 pr-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary-container transition-all" id="phoneInput" type="text" value="+998 93 456 78 90"/>
+</div>
+</div>
+<!-- Role -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" data-i18n="field_role" for="roleInput">
+                  Tizimdagi lavozim / Rol
+                </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">engineering</span>
+<input class="w-full bg-surface-container-low text-on-surface-variant font-body-md text-body-md rounded-lg pl-9 pr-3 py-2.5 cursor-not-allowed" id="roleInput" readonly="" type="text" value="Bosh logist-dispetcher"/>
+</div>
+</div>
+</div>
+<!-- Department & Base -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" data-i18n="field_dept" for="departmentInput">
+                Biriktirilgan bo‘lim va logistika bazasi
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">warehouse</span>
+<input class="w-full bg-surface-container-low text-on-surface-variant font-body-md text-body-md rounded-lg pl-9 pr-3 py-2.5 cursor-not-allowed" id="departmentInput" readonly="" type="text" value="Markaziy avtopark (Toshkent, Sergeli logistika habi)"/>
+</div>
+</div>
+<!-- Save CTA for Profile -->
+<div class="pt-3 flex items-center justify-end">
+<button class="h-10 px-5 rounded-lg bg-primary-container hover:bg-inverse-primary text-white font-label-md text-label-md flex items-center gap-2 shadow-md shadow-primary-container/20 transition-all" type="submit">
+<span class="material-symbols-outlined text-base">check</span>
+<span data-i18n="btn_save_changes">O‘zgarishlarni saqlash</span>
+</button>
+</div>
+</form>
+</div>
+<!-- SECTION 4: Xavfsizlik va sessiyalar -->
+<div class="bg-surface-container rounded-2xl p-6 shadow-md">
+<div class="flex items-center justify-between pb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">security</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-white" data-i18n="card_security_title">Xavfsizlik va sessiyalar</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="card_security_subtitle">Hisob himoyasi, kirish jurnali va faol ulanishlar</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary/10 px-2.5 py-1 rounded-md" data-i18n="badge_protect_active">Himoya faol</span>
+</div>
+<div class="space-y-4 pt-2">
+<!-- 2-Step Auth Card -->
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">phonelink_lock</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-white" data-i18n="sec_2fa_title">2 bosqichli autentifikatsiya (2FA)</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="sec_2fa_desc">Tizimga kirishda SMS-tasdiq kodini kiritish talab etiladi (+998 93 *** ** 90)</div>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary/15 text-secondary font-label-sm text-label-sm self-start sm:self-auto" data-i18n="badge_2fa_status">Faol / SMS</span>
+</div>
+<!-- Password Reset Trigger -->
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">password</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-white" data-i18n="sec_pwd_title">Tizim paroli</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="sec_pwd_desc">Oxirgi marta 28 kun oldin o‘zgartirilgan</div>
+</div>
+</div>
+<button class="h-9 px-4 rounded-lg bg-surface-container-high hover:bg-surface-variant text-white font-label-md text-label-md transition-colors self-start sm:self-auto" onclick="triggerPasswordPrompt()" type="button">
+<span data-i18n="btn_change_pwd">Parolni yangilash</span>
+</button>
+</div>
+<!-- Active Sessions Item -->
+<div class="p-4 rounded-xl bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">laptop_mac</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-white" data-i18n="sec_session_name">Chrome Desktop (Toshkent, UZ)</span>
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse" title="Hozirgi sessiya"></span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="sec_session_info">Oxirgi faollik: Bugun, 18:45 • IP 84.54.120.42</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2.5 py-1 rounded" data-i18n="badge_current_session">Joriy sessiya</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= RIGHT COLUMN: REGION & INTERFACE PREFERENCES ================= -->
+<div class="lg:col-span-5 space-y-space-lg">
+<!-- SECTION 2: Dastur tili va mintaqaviy sozlamalar -->
+<div class="bg-surface-container rounded-2xl p-6 shadow-md border border-primary/20">
+<div class="flex items-center gap-3 pb-5">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container/20 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">translate</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-white" data-i18n="card_lang_title">Dastur tili va mintaqaviy sozlamalar</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="card_lang_subtitle">Mahalliylashtirish, vaqt va o‘lchov birliklari</p>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Language Cards -->
+<div>
+<div class="flex items-center justify-between mb-2.5">
+<label class="block font-label-md text-label-md text-on-surface" data-i18n="field_ui_lang">
+                  Tizim interfeys tili
+                </label>
+<span class="text-xs text-secondary flex items-center gap-1 font-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span data-i18n="badge_instant_mode">Tezkor almashish (Instant)</span>
+</span>
+</div>
+<div class="grid grid-cols-2 gap-3" id="languageSelectorGrid">
+<!-- Option 1: Uzbek (Active by default) -->
+<div class="cursor-pointer p-3.5 rounded-xl bg-primary-container/15 border border-primary/50 text-white shadow-sm flex items-center justify-between transition-all" id="langUzCard" onclick="selectAppLanguage('uz')">
+<div class="flex items-center gap-2.5">
+<span class="text-base font-bold font-mono px-2 py-0.5 rounded bg-primary-container text-white" id="uzBadge">UZ</span>
+<div>
+<div class="font-headline-sm text-headline-sm text-white">O‘zbekcha</div>
+<div class="font-label-sm text-label-sm text-primary-fixed" data-i18n="lang_uz_sub">Lotin alifbosida</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary-container text-xl" id="langUzCheck" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Option 2: Russian -->
+<div class="cursor-pointer p-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/30 text-on-surface-variant hover:text-white transition-all flex items-center justify-between" id="langRuCard" onclick="selectAppLanguage('ru')">
+<div class="flex items-center gap-2.5">
+<span class="text-base font-bold font-mono px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant" id="ruBadge">RU</span>
+<div>
+<div class="font-headline-sm text-headline-sm text-white">Русский</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant" data-i18n="lang_ru_sub">Кириллица</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40 text-xl" id="langRuCheck">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+<!-- Timezone Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" data-i18n="field_tz" for="timeZoneSelect">
+                Vaqt mintaqasi (Timezone)
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">schedule</span>
+<select class="w-full bg-surface-container-lowest text-white font-body-md text-body-md rounded-lg pl-9 pr-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary-container cursor-pointer transition-all" id="timeZoneSelect">
+<option id="tzOpt1" selected="" value="Asia/Tashkent">Toshkent (UTC+5:00 O‘zbekiston vaqti)</option>
+<option id="tzOpt2" value="Asia/Samarkand">Samarqand (UTC+5:00)</option>
+<option id="tzOpt3" value="Asia/Almaty">Almati (UTC+5:00 Qozog‘iston)</option>
+<option id="tzOpt4" value="Europe/Moscow">Moskva (UTC+3:00 Rossiya)</option>
+</select>
+</div>
+</div>
+<!-- Date Format -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" data-i18n="field_date_fmt" for="dateFormatSelect">
+                Sana va vaqt formati
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">calendar_month</span>
+<select class="w-full bg-surface-container-lowest text-white font-body-md text-body-md rounded-lg pl-9 pr-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary-container cursor-pointer transition-all" id="dateFormatSelect">
+<option id="dfOpt1" selected="" value="DD.MM.YYYY">DD.MM.YYYY (masalan, 16.11.2026)</option>
+<option id="dfOpt2" value="YYYY-MM-DD">YYYY-MM-DD (masalan, 2026-11-16)</option>
+<option id="dfOpt3" value="DD/MM/YYYY">DD/MM/YYYY (masalan, 16/11/2026)</option>
+</select>
+</div>
+</div>
+<!-- Currency & Weight Measurement Units -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" data-i18n="field_units" for="unitsSelect">
+                Valyuta va o‘lchov birliklari
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg">scale</span>
+<select class="w-full bg-surface-container-lowest text-white font-body-md text-body-md rounded-lg pl-9 pr-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary-container cursor-pointer transition-all" id="unitsSelect">
+<option id="unitOpt1" selected="" value="UZS_METRIC">UZS (So‘m) / Tonnalar va Kilometrlar (Metrik)</option>
+<option id="unitOpt2" value="USD_METRIC">USD ($) / Tonnalar va Kilometrlar</option>
+<option id="unitOpt3" value="RUB_METRIC">RUB (₽) / Tonnalar va Kilometrlar</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 3: Interfeys va ko‘rinish afzalliklari -->
+<div class="bg-surface-container rounded-2xl p-6 shadow-md">
+<div class="flex items-center gap-3 pb-5">
+<div class="w-10 h-10 rounded-xl bg-secondary-container/20 text-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">palette</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-white" data-i18n="card_ui_title">Interfeys va ko‘rinish afzalliklari</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="card_ui_subtitle">Tizim mavzusi va telematika vizual filtrlari</p>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Theme Preference (Dark Navy Fixed Premium) -->
+<div class="p-3.5 rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">dark_mode</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-white" data-i18n="theme_dark_title">Dark Navy (Tungi ko‘k rejim)</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="theme_dark_desc">Logistika monitoringi uchun optimallashtirilgan</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-primary-container/20 text-primary-fixed flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">lock</span>
+<span data-i18n="theme_locked">Qulflangan</span>
+</span>
+</div>
+<!-- Toggles List -->
+<div class="space-y-3 pt-1">
+<!-- Toggle 1: Traffic & Customs overlay -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high transition-colors">
+<div class="pr-3">
+<label class="font-headline-sm text-headline-sm text-white cursor-pointer block" data-i18n="toggle_traffic_title" for="toggleTraffic">
+                    Tirbandlik va bojxona kutish vaqti
+                  </label>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="toggle_traffic_desc">Xaritada chegara postlaridagi kutish soatlarini avtomatik ko‘rsatish</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggleTraffic" onchange="handleToggleChange(this, 'toggle_traffic_title')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 2: Fast delay & maintenance warnings -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high transition-colors">
+<div class="pr-3">
+<label class="font-headline-sm text-headline-sm text-white cursor-pointer block" data-i18n="toggle_delays_title" for="toggleDelays">
+                    Kechikishlar va texnik xizmat
+                  </label>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="toggle_delays_desc">Marshrutdan og‘ish va favqulodda to‘xtashlar bo‘yicha tezkor eslatmalar</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggleDelays" onchange="handleToggleChange(this, 'toggle_delays_title')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 3: Telemetry Auto-refresh 60 sec -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high transition-colors">
+<div class="pr-3">
+<label class="font-headline-sm text-headline-sm text-white cursor-pointer block" data-i18n="toggle_telematics_title" for="toggleTelematics">
+                    Jonli telematika yangilanishi
+                  </label>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="toggle_telematics_desc">Har 60 soniyada fura GPS koordinatalari va yonilg‘i qoldig‘ini yangilash</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggleTelematics" onchange="handleToggleChange(this, 'toggle_telematics_title')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 4: Compact table view -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high transition-colors">
+<div class="pr-3">
+<label class="font-headline-sm text-headline-sm text-white cursor-pointer block" data-i18n="toggle_compact_title" for="toggleCompact">
+                    Jadvallarni ixcham ko‘rinishda ko‘rsatish
+                  </label>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="toggle_compact_desc">Katta hajmdagi reyslar ro‘yxatida qatorlar balandligini qisqartirish</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input class="sr-only peer" id="toggleCompact" onchange="handleToggleChange(this, 'toggle_compact_title')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Extra Dispatch Audit & System Log Footprint -->
+<div class="bg-surface-container rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container text-2xl">admin_panel_settings</span>
+<div>
+<span class="font-headline-sm text-headline-sm text-white" data-i18n="sec_protocol_title">Xavfsizlik protokoli va ma'lumotlar shifrlanishi</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="sec_protocol_desc">Fura Control barcha telematika va GPS datchik oqimlarini AES-256 shifrlash orqali himoya qiladi.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-mono text-label-sm font-label-sm text-on-surface-variant" data-i18n="ssl_active">SSL/TLS 1.3 Faol</span>
+<button class="h-9 px-4 rounded-lg bg-surface-container-high hover:bg-surface-variant text-white font-label-md text-label-md transition-colors" onclick="triggerSaveSettings(i18n[currentLang].protocol_sync_msg)" type="button">
+<span data-i18n="btn_verify">Tekshirish</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Centralized client-side dictionary for zero-reload instant language switching
+  const i18n = {
+    uz: {
+      doc_title: "FURA CONTROL - Logistika boshqaruv tizimi",
+      nav_system_subtitle: "Logistika tizimi",
+      nav_home: "Bosh sahifa",
+      nav_trucks: "Furalar",
+      nav_cargo: "Yuklar",
+      nav_drivers: "Haydovchilar",
+      nav_trips: "Reyslar",
+      nav_calendar: "Kalendar",
+      nav_archive: "Arxiv",
+      nav_reports: "Hisobotlar",
+      nav_settings: "Sozlamalar",
+      sidebar_fleet_ctrl: "Avtopark nazorati",
+      sidebar_telematics_active: "GPS & Telematika 24/7 faol",
+      search_placeholder: "Qidirish: fura, yuk, haydovchi, reys...",
+      user_role_header: "Bosh dispetcher",
+      header_date: "16-noyabr, 2026 (Dushanba)",
+      bc_logistics: "LOGISTIKA",
+      bc_settings: "SOZLAMALAR & PROFIL",
+      bc_main_settings: "ASOSIY SOZLAMALAR",
+      page_title: "TIZIM VA PROFIL SOZLAMALARI",
+      page_subtitle: "Foydalanuvchi hisobi, dastur tili va interfeys parametrlarini boshqarish",
+      btn_reset: "Asliga qaytarish",
+      btn_save_changes: "O‘zgarishlarni saqlash",
+      stat_account_status: "Hisob holati",
+      stat_account_val: "Faol (Premium Boshqaruv)",
+      stat_sync: "Sinxronizatsiya",
+      stat_sync_val: "Avtomatik (Jonli rejim)",
+      stat_branch: "Dispetcherlik filiali",
+      stat_branch_val: "Toshkent Markaziy",
+      stat_security: "Xavfsizlik darajasi",
+      stat_security_val: "2FA Himoyalangan",
+      card_profile_title: "Profil ma'lumotlari",
+      card_profile_subtitle: "Dispetcher akkaunt shaxsiy ma'lumotlari va vakolatlari",
+      badge_dispatcher_id: "Dispetcher #04",
+      avatar_role: "Bosh dispetcher / Fleet Manager",
+      avatar_sub: "ID: FURA-UZ-9024 • Markaziy Avtopark",
+      btn_change_photo: "Rasmni almashtirish",
+      field_fullname: "F.I.Sh. (To‘liq ism-familiya)",
+      field_email: "Ishchi elektron pochta",
+      field_phone: "Aloqa telefon raqami",
+      field_role: "Tizimdagi lavozim / Rol",
+      role_value: "Bosh logist-dispetcher",
+      field_dept: "Biriktirilgan bo‘lim va logistika bazasi",
+      dept_value: "Markaziy avtopark (Toshkent, Sergeli logistika habi)",
+      card_security_title: "Xavfsizlik va sessiyalar",
+      card_security_subtitle: "Hisob himoyasi, kirish jurnali va faol ulanishlar",
+      badge_protect_active: "Himoya faol",
+      sec_2fa_title: "2 bosqichli autentifikatsiya (2FA)",
+      sec_2fa_desc: "Tizimga kirishda SMS-tasdiq kodini kiritish talab etiladi (+998 93 *** ** 90)",
+      badge_2fa_status: "Faol / SMS",
+      sec_pwd_title: "Tizim paroli",
+      sec_pwd_desc: "Oxirgi marta 28 kun oldin o‘zgartirilgan",
+      btn_change_pwd: "Parolni yangilash",
+      sec_session_name: "Chrome Desktop (Toshkent, UZ)",
+      sec_session_info: "Oxirgi faollik: Bugun, 18:45 • IP 84.54.120.42",
+      badge_current_session: "Joriy sessiya",
+      card_lang_title: "Dastur tili va mintaqaviy sozlamalar",
+      card_lang_subtitle: "Mahalliylashtirish, vaqt va o‘lchov birliklari",
+      field_ui_lang: "Tizim interfeys tili",
+      badge_instant_mode: "Tezkor almashish (Instant)",
+      lang_uz_sub: "Lotin alifbosida",
+      lang_ru_sub: "Кириллица",
+      field_tz: "Vaqt mintaqasi (Timezone)",
+      tz_1: "Toshkent (UTC+5:00 O‘zbekiston vaqti)",
+      tz_2: "Samarqand (UTC+5:00)",
+      tz_3: "Almati (UTC+5:00 Qozog‘iston)",
+      tz_4: "Moskva (UTC+3:00 Rossiya)",
+      field_date_fmt: "Sana va vaqt formati",
+      df_1: "DD.MM.YYYY (masalan, 16.11.2026)",
+      df_2: "YYYY-MM-DD (masalan, 2026-11-16)",
+      df_3: "DD/MM/YYYY (masalan, 16/11/2026)",
+      field_units: "Valyuta va o‘lchov birliklari",
+      unit_1: "UZS (So‘m) / Tonnalar va Kilometrlar (Metrik)",
+      unit_2: "USD ($) / Tonnalar va Kilometrlar",
+      unit_3: "RUB (₽) / Tonnalar va Kilometrlar",
+      card_ui_title: "Interfeys va ko‘rinish afzalliklari",
+      card_ui_subtitle: "Tizim mavzusi va telematika vizual filtrlari",
+      theme_dark_title: "Dark Navy (Tungi ko‘k rejim)",
+      theme_dark_desc: "Logistika monitoringi uchun optimallashtirilgan",
+      theme_locked: "Qulflangan",
+      toggle_traffic_title: "Tirbandlik va bojxona kutish vaqti",
+      toggle_traffic_desc: "Xaritada chegara postlaridagi kutish soatlarini avtomatik ko‘rsatish",
+      toggle_delays_title: "Kechikishlar va texnik xizmat",
+      toggle_delays_desc: "Marshrutdan og‘ish va favqulodda to‘xtashlar bo‘yicha tezkor eslatmalar",
+      toggle_telematics_title: "Jonli telematika yangilanishi",
+      toggle_telematics_desc: "Har 60 soniyada fura GPS koordinatalari va yonilg‘i qoldig‘ini yangilash",
+      toggle_compact_title: "Jadvallarni ixcham ko‘rinishda ko‘rsatish",
+      toggle_compact_desc: "Katta hajmdagi reyslar ro‘yxatida qatorlar balandligini qisqartirish",
+      sec_protocol_title: "Xavfsizlik protokoli va ma'lumotlar shifrlanishi",
+      sec_protocol_desc: "Fura Control barcha telematika va GPS datchik oqimlarini AES-256 shifrlash orqali himoya qiladi.",
+      ssl_active: "SSL/TLS 1.3 Faol",
+      btn_verify: "Tekshirish",
+      saved_all: "Barcha parametrlar yangilandi",
+      profile_saved: "Profil ma'lumotlari muvaffaqiyatli saqlandi!",
+      lang_switched_toast: "Til muvaffaqiyatli almashtirildi: O‘zbekcha (Lotin)",
+      protocol_sync_msg: "Logistika protokoli sinxronlashtirildi",
+      avatar_updated: "Profil fotosurati yangilandi",
+      pwd_updated: "Parol muvaffaqiyatli yangilandi!",
+      pwd_short: "Parol juda qisqa! Kamida 8 belgi bo‘lishi lozim.",
+      pwd_prompt: "Yangi xavfsiz parolni kiriting (kamida 8 belgi):",
+      reset_toast: "Barcha parametrlar boshlang‘ich holatga qaytarildi"
+    },
+    ru: {
+      doc_title: "FURA CONTROL - Система управления логистикой",
+      nav_system_subtitle: "Система логистики",
+      nav_home: "Главная",
+      nav_trucks: "Автопарк (Фуры)",
+      nav_cargo: "Грузы",
+      nav_drivers: "Водители",
+      nav_trips: "Рейсы",
+      nav_calendar: "Календарь",
+      nav_archive: "Архив",
+      nav_reports: "Отчеты",
+      nav_settings: "Настройки",
+      sidebar_fleet_ctrl: "Контроль автопарка",
+      sidebar_telematics_active: "GPS и Телематика активны 24/7",
+      search_placeholder: "Поиск: фура, груз, водитель, рейс...",
+      user_role_header: "Главный диспетчер",
+      header_date: "16 ноября, 2026 (Понедельник)",
+      bc_logistics: "ЛОГИСТИКА",
+      bc_settings: "НАСТРОЙКИ И ПРОФИЛЬ",
+      bc_main_settings: "ОСНОВНЫЕ НАСТРОЙКИ",
+      page_title: "НАСТРОЙКИ СИСТЕМЫ И ПРОФИЛЯ",
+      page_subtitle: "Управление аккаунтом пользователя, языком интерфейса и параметрами системы",
+      btn_reset: "Сбросить",
+      btn_save_changes: "Сохранить изменения",
+      stat_account_status: "Статус аккаунта",
+      stat_account_val: "Активен (Премиум Управление)",
+      stat_sync: "Синхронизация",
+      stat_sync_val: "Автоматическая (Live-режим)",
+      stat_branch: "Диспетчерский филиал",
+      stat_branch_val: "Ташкент Центральный",
+      stat_security: "Уровень безопасности",
+      stat_security_val: "2FA Защищено",
+      card_profile_title: "Данные профиля",
+      card_profile_subtitle: "Личные данные и операционные полномочия диспетчера",
+      badge_dispatcher_id: "Диспетчер #04",
+      avatar_role: "Главный диспетчер / Fleet Manager",
+      avatar_sub: "ID: FURA-UZ-9024 • Центральный автопарк",
+      btn_change_photo: "Сменить фото",
+      field_fullname: "Ф.И.О. (Полное имя)",
+      field_email: "Рабочая электронная почта",
+      field_phone: "Контактный телефон",
+      field_role: "Должность в системе / Роль",
+      role_value: "Главный логист-диспетчер",
+      field_dept: "Закрепленный отдел / логистическая база",
+      dept_value: "Центральный автопарк (Ташкент, логистический хаб Сергели)",
+      card_security_title: "Безопасность и сессии",
+      card_security_subtitle: "Защита аккаунта, журнал входов и активные подключения",
+      badge_protect_active: "Защита активна",
+      sec_2fa_title: "Двухфакторная аутентификация (2FA)",
+      sec_2fa_desc: "При входе в систему запрашивается SMS-код (+998 93 *** ** 90)",
+      badge_2fa_status: "Активно / SMS",
+      sec_pwd_title: "Пароль учетной записи",
+      sec_pwd_desc: "Последнее изменение 28 дней назад",
+      btn_change_pwd: "Сменить пароль",
+      sec_session_name: "Chrome Desktop (Ташкент, UZ)",
+      sec_session_info: "Последняя активность: Сегодня, 18:45 • IP 84.54.120.42",
+      badge_current_session: "Текущая сессия",
+      card_lang_title: "Язык интерфейса и региональные настройки",
+      card_lang_subtitle: "Локализация, часовой пояс и единицы измерения",
+      field_ui_lang: "Язык интерфейса системы",
+      badge_instant_mode: "Мгновенное переключение",
+      lang_uz_sub: "Латиница",
+      lang_ru_sub: "Кириллица",
+      field_tz: "Часовой пояс (Timezone)",
+      tz_1: "Ташкент (UTC+5:00 Время Узбекистана)",
+      tz_2: "Самарканд (UTC+5:00)",
+      tz_3: "Алматы (UTC+5:00 Казахстан)",
+      tz_4: "Москва (UTC+3:00 Россия)",
+      field_date_fmt: "Формат даты и времени",
+      df_1: "DD.MM.YYYY (например, 16.11.2026)",
+      df_2: "YYYY-MM-DD (например, 2026-11-16)",
+      df_3: "DD/MM/YYYY (например, 16/11/2026)",
+      field_units: "Валюта и единицы измерения",
+      unit_1: "UZS (Сум) / Тонны и Километры (Метрическая)",
+      unit_2: "USD ($) / Тонны и Километры",
+      unit_3: "RUB (₽) / Тонны и Километры",
+      card_ui_title: "Интерфейс и оформление",
+      card_ui_subtitle: "Тема системы и визуальные фильтры телематики",
+      theme_dark_title: "Dark Navy (Темно-синий режим)",
+      theme_dark_desc: "Оптимизировано для логистического мониторинга",
+      theme_locked: "Зафиксировано",
+      toggle_traffic_title: "Пробки и время ожидания на таможне",
+      toggle_traffic_desc: "Автоматическое отображение очередей на границах на карте",
+      toggle_delays_title: "Задержки и техобслуживание",
+      toggle_delays_desc: "Быстрые уведомления об отклонении от маршрута и аварийных остановках",
+      toggle_telematics_title: "Онлайн-обновление телематики",
+      toggle_telematics_desc: "Обновление GPS координат и уровня топлива каждые 60 секунд",
+      toggle_compact_title: "Компактный вид таблиц",
+      toggle_compact_desc: "Уменьшение высоты строк в больших реестрах рейсов",
+      sec_protocol_title: "Протокол безопасности и шифрование данных",
+      sec_protocol_desc: "Fura Control защищает все телематические и GPS потоки с помощью шифрования AES-256.",
+      ssl_active: "SSL/TLS 1.3 Активен",
+      btn_verify: "Проверить",
+      saved_all: "Все параметры успешно сохранены",
+      profile_saved: "Данные профиля успешно сохранены!",
+      lang_switched_toast: "Язык интерфейса изменен: Русский",
+      protocol_sync_msg: "Протокол безопасности синхронизирован",
+      avatar_updated: "Фотография профиля обновлена",
+      pwd_updated: "Пароль успешно обновлен!",
+      pwd_short: "Пароль слишком короткий! Минимум 8 символов.",
+      pwd_prompt: "Введите новый безопасный пароль (минимум 8 символов):",
+      reset_toast: "Все параметры сброшены к начальным значениям"
+    }
+  };
+
+  let currentLang = 'uz';
+
+  function applyLanguage(lang, showNotification = true) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    const dict = i18n[lang];
+
+    // 1. Update Document Title
+    document.title = dict.doc_title;
+
+    // 2. Update text of all elements with data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) {
+        // Keep potential child icons/pulses if present
+        const pulseDot = el.querySelector('.rounded-full');
+        if (pulseDot) {
+          el.innerHTML = '';
+          el.appendChild(pulseDot);
+          el.appendChild(document.createTextNode(' ' + dict[key]));
+        } else {
+          el.textContent = dict[key];
+        }
+      }
+    });
+
+    // 3. Update input placeholders with data-i18n-placeholder
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (dict[key]) {
+        el.placeholder = dict[key];
+      }
+    });
+
+    // 4. Update readonly system fields (preserving user input like fullName, email, phone)
+    const roleInput = document.getElementById('roleInput');
+    if (roleInput) roleInput.value = dict.role_value;
+    const deptInput = document.getElementById('departmentInput');
+    if (deptInput) deptInput.value = dict.dept_value;
+
+    // 5. Update Select Options
+    const optTz1 = document.getElementById('tzOpt1');
+    if (optTz1) optTz1.text = dict.tz_1;
+    const optTz2 = document.getElementById('tzOpt2');
+    if (optTz2) optTz2.text = dict.tz_2;
+    const optTz3 = document.getElementById('tzOpt3');
+    if (optTz3) optTz3.text = dict.tz_3;
+    const optTz4 = document.getElementById('tzOpt4');
+    if (optTz4) optTz4.text = dict.tz_4;
+
+    const optDf1 = document.getElementById('dfOpt1');
+    if (optDf1) optDf1.text = dict.df_1;
+    const optDf2 = document.getElementById('dfOpt2');
+    if (optDf2) optDf2.text = dict.df_2;
+    const optDf3 = document.getElementById('dfOpt3');
+    if (optDf3) optDf3.text = dict.df_3;
+
+    const optUnit1 = document.getElementById('unitOpt1');
+    if (optUnit1) optUnit1.text = dict.unit_1;
+    const optUnit2 = document.getElementById('unitOpt2');
+    if (optUnit2) optUnit2.text = dict.unit_2;
+    const optUnit3 = document.getElementById('unitOpt3');
+    if (optUnit3) optUnit3.text = dict.unit_3;
+
+    // 6. Update Top Header Pill buttons
+    const headerUz = document.getElementById('headerLangUzBtn');
+    const headerRu = document.getElementById('headerLangRuBtn');
+    if (lang === 'uz') {
+      headerUz.className = "px-2.5 py-1 text-xs font-bold rounded font-mono transition-all bg-primary-container text-white shadow-sm";
+      headerRu.className = "px-2.5 py-1 text-xs font-bold rounded font-mono transition-all text-on-surface-variant hover:text-white";
+    } else {
+      headerRu.className = "px-2.5 py-1 text-xs font-bold rounded font-mono transition-all bg-primary-container text-white shadow-sm";
+      headerUz.className = "px-2.5 py-1 text-xs font-bold rounded font-mono transition-all text-on-surface-variant hover:text-white";
+    }
+
+    // 7. Update Settings Card visual selections
+    const uzCard = document.getElementById('langUzCard');
+    const ruCard = document.getElementById('langRuCard');
+    const uzCheck = document.getElementById('langUzCheck');
+    const ruCheck = document.getElementById('langRuCheck');
+    const uzBadge = document.getElementById('uzBadge');
+    const ruBadge = document.getElementById('ruBadge');
+
+    if (lang === 'uz') {
+      uzCard.className = "cursor-pointer p-3.5 rounded-xl bg-primary-container/15 border border-primary/50 text-white shadow-sm flex items-center justify-between transition-all";
+      uzCheck.innerText = "check_circle";
+      uzCheck.className = "material-symbols-outlined text-primary-container text-xl";
+      uzCheck.style.fontVariationSettings = "'FILL' 1";
+      uzBadge.className = "text-base font-bold font-mono px-2 py-0.5 rounded bg-primary-container text-white";
+
+      ruCard.className = "cursor-pointer p-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/30 text-on-surface-variant hover:text-white transition-all flex items-center justify-between";
+      ruCheck.innerText = "radio_button_unchecked";
+      ruCheck.className = "material-symbols-outlined text-on-surface-variant/40 text-xl";
+      ruCheck.style.fontVariationSettings = "'FILL' 0";
+      ruBadge.className = "text-base font-bold font-mono px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant";
+    } else {
+      ruCard.className = "cursor-pointer p-3.5 rounded-xl bg-primary-container/15 border border-primary/50 text-white shadow-sm flex items-center justify-between transition-all";
+      ruCheck.innerText = "check_circle";
+      ruCheck.className = "material-symbols-outlined text-primary-container text-xl";
+      ruCheck.style.fontVariationSettings = "'FILL' 1";
+      ruBadge.className = "text-base font-bold font-mono px-2 py-0.5 rounded bg-primary-container text-white";
+
+      uzCard.className = "cursor-pointer p-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/30 text-on-surface-variant hover:text-white transition-all flex items-center justify-between";
+      uzCheck.innerText = "radio_button_unchecked";
+      uzCheck.className = "material-symbols-outlined text-on-surface-variant/40 text-xl";
+      uzCheck.style.fontVariationSettings = "'FILL' 0";
+      uzBadge.className = "text-base font-bold font-mono px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant";
+    }
+
+    if (showNotification) {
+      triggerSaveSettings(dict.lang_switched_toast);
+    }
+  }
+
+  // Language selector handler
+  function selectAppLanguage(lang) {
+    if (lang === currentLang) return;
+    applyLanguage(lang, true);
+  }
+
+  // Ensure active sidebar item highlights 'Sozlamalar'
+  document.addEventListener('DOMContentLoaded', () => {
+    const navItems = document.querySelectorAll('#sidebar-nav .nav-item');
+    navItems.forEach(item => {
+      const path = item.getAttribute('data-path');
+      if (path === 'sozlamalar') {
+        item.classList.add('bg-primary-container', 'text-white', 'font-semibold', 'shadow-md', 'shadow-primary-container/30');
+      } else {
+        item.classList.remove('bg-primary-container', 'text-white', 'font-semibold', 'shadow-md', 'shadow-primary-container/30');
+      }
+    });
+  });
+
+  // Handle Profile Form submit
+  function handleProfileSubmit(e) {
+    e.preventDefault();
+    const nameVal = document.getElementById('fullNameInput').value;
+    document.getElementById('displayProfileName').innerText = nameVal;
+    triggerSaveSettings(i18n[currentLang].profile_saved);
+  }
+
+  // Toggle feedback
+  function handleToggleChange(checkbox, labelKey) {
+    const label = i18n[currentLang][labelKey] || labelKey;
+    const state = currentLang === 'uz' ? (checkbox.checked ? "yoqildi" : "o‘chirildi") : (checkbox.checked ? "включено" : "отключено");
+    triggerSaveSettings(`${label}: ${state}`);
+  }
+
+  // Password Prompt mock
+  function triggerPasswordPrompt() {
+    const newPass = prompt(i18n[currentLang].pwd_prompt);
+    if (newPass && newPass.length >= 8) {
+      triggerSaveSettings(i18n[currentLang].pwd_updated);
+    } else if (newPass) {
+      alert(i18n[currentLang].pwd_short);
+    }
+  }
+
+  // Avatar upload mock
+  function uploadAvatarMock() {
+    triggerSaveSettings(i18n[currentLang].avatar_updated);
+  }
+
+  // Reset Form
+  function resetFormChanges() {
+    document.getElementById('profileForm').reset();
+    document.getElementById('fullNameInput').value = "Jasurbek Mahmudov";
+    document.getElementById('displayProfileName').innerText = "Jasurbek Mahmudov";
+    document.getElementById('emailInput').value = "j.mahmudov@furacontrol.uz";
+    document.getElementById('phoneInput').value = "+998 93 456 78 90";
+    applyLanguage('uz', false);
+    triggerSaveSettings(i18n.uz.reset_toast);
+  }
+
+  // Toast Trigger function
+  let toastTimer = null;
+  function triggerSaveSettings(msg = "Sozlamalar muvaffaqiyatli saqlandi!") {
+    const toast = document.getElementById('settingsToast');
+    const desc = document.getElementById('toastDesc');
+    const heading = document.getElementById('toastHeading');
+    
+    if (heading) {
+      heading.innerText = currentLang === 'uz' ? 'Saqlandi' : 'Сохранено';
+    }
+    desc.innerText = msg;
+    toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+    }, 3200);
+  }
+
+  // Shell keyboard shortcut Ctrl+K
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      const search = document.getElementById('global-search');
+      if (search) search.focus();
+    }
+  });
+
+  function hideToast() {
+    const toast = document.getElementById('toastNotification');
+    if (toast) {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-[-120%]', 'opacity-0', 'pointer-events-none');
+    }
+  }
+</script>
+</main>
+<!-- END: MainContentWrapper -->
+</body></html>
