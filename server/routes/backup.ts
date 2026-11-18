@@ -1,17 +1,13 @@
 import { Router } from 'express';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { prisma } from '../db.js';
 
 const router = Router();
-const BACKUPS_DIR = path.resolve(process.cwd(), 'backups');
-
-function getDbFilePath(): string {
-  const prismaDb = path.resolve(process.cwd(), 'prisma', 'dev.db');
-  if (fs.existsSync(prismaDb)) return prismaDb;
-  const rootDb = path.resolve(process.cwd(), 'dev.db');
-  return rootDb;
-}
+const BACKUPS_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), 'fura-backups')
+  : path.resolve(process.cwd(), 'backups');
 
 function ensureBackupsDir() {
   if (!fs.existsSync(BACKUPS_DIR)) {
@@ -24,7 +20,7 @@ router.get('/', (_req, res) => {
     ensureBackupsDir();
     const files = fs
       .readdirSync(BACKUPS_DIR)
-      .filter((f) => f.endsWith('.db'))
+      .filter((f) => f.endsWith('.json'))
       .map((name) => {
         const full = path.join(BACKUPS_DIR, name);
         const stat = fs.statSync(full);
@@ -46,20 +42,30 @@ router.get('/', (_req, res) => {
 router.post('/', async (_req, res) => {
   try {
     ensureBackupsDir();
-    const dbPath = getDbFilePath();
-    if (!fs.existsSync(dbPath)) {
-      return res.status(404).json({ error: 'Database file not found' });
-    }
+    const [settings, drivers, vehicles, cargos, trips] = await Promise.all([
+      prisma.applicationSettings.findMany(),
+      prisma.driver.findMany(),
+      prisma.vehicle.findMany(),
+      prisma.cargo.findMany(),
+      prisma.trip.findMany(),
+    ]);
+
+    const snapshot = {
+      createdAt: new Date().toISOString(),
+      settings,
+      drivers,
+      vehicles,
+      cargos,
+      trips,
+    };
 
     const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `fura-backup-${stamp}.db`;
+    const filename = `fura-backup-${stamp}.json`;
     const dest = path.join(BACKUPS_DIR, filename);
 
-    // Flush WAL if SQLite is in WAL mode
-    await prisma.$queryRawUnsafe('PRAGMA wal_checkpoint(TRUNCATE);').catch(() => {});
-    fs.copyFileSync(dbPath, dest);
-
+    fs.writeFileSync(dest, JSON.stringify(snapshot, null, 2), 'utf-8');
     const stat = fs.statSync(dest);
+
     res.status(201).json({
       name: filename,
       sizeBytes: stat.size,
@@ -75,7 +81,7 @@ router.post('/restore', async (req, res) => {
   try {
     ensureBackupsDir();
     const filename = path.basename(String(req.body.filename ?? ''));
-    if (!filename || !filename.endsWith('.db')) {
+    if (!filename || !filename.endsWith('.json')) {
       return res.status(400).json({ error: 'Invalid backup filename' });
     }
 
@@ -84,17 +90,32 @@ router.post('/restore', async (req, res) => {
       return res.status(404).json({ error: 'Backup file not found' });
     }
 
-    const dbPath = getDbFilePath();
-    // Never overwrite the only state without saving a pre-restore safety snapshot
-    if (fs.existsSync(dbPath)) {
-      const safetyStamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const safetyName = `pre-restore-${safetyStamp}.db`;
-      fs.copyFileSync(dbPath, path.join(BACKUPS_DIR, safetyName));
-    }
+    const raw = fs.readFileSync(source, 'utf-8');
+    const snapshot = JSON.parse(raw);
 
-    await prisma.$disconnect();
-    fs.copyFileSync(source, dbPath);
-    await prisma.$connect();
+    await prisma.$transaction(async (tx) => {
+      await tx.trip.deleteMany();
+      await tx.cargo.deleteMany();
+      await tx.vehicle.deleteMany();
+      await tx.driver.deleteMany();
+      await tx.applicationSettings.deleteMany();
+
+      if (Array.isArray(snapshot.settings) && snapshot.settings.length > 0) {
+        await tx.applicationSettings.createMany({ data: snapshot.settings });
+      }
+      if (Array.isArray(snapshot.drivers) && snapshot.drivers.length > 0) {
+        await tx.driver.createMany({ data: snapshot.drivers });
+      }
+      if (Array.isArray(snapshot.vehicles) && snapshot.vehicles.length > 0) {
+        await tx.vehicle.createMany({ data: snapshot.vehicles });
+      }
+      if (Array.isArray(snapshot.cargos) && snapshot.cargos.length > 0) {
+        await tx.cargo.createMany({ data: snapshot.cargos });
+      }
+      if (Array.isArray(snapshot.trips) && snapshot.trips.length > 0) {
+        await tx.trip.createMany({ data: snapshot.trips });
+      }
+    });
 
     res.json({ success: true, restoredFrom: filename });
   } catch (err) {

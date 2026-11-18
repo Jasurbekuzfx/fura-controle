@@ -5,6 +5,7 @@
   "description": "FURA CONTROL — Logistika va avtopark boshqaruv tizimi",
   "type": "module",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "concurrently -k \"npm:dev:server\" \"npm:dev:client\"",
     "dev:server": "tsx watch server/index.ts",
     "dev:client": "vite",
